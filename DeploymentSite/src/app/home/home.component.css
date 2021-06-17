@@ -1,0 +1,36 @@
+.block {
+    display: block;
+    cursor: pointer;
+}
+
+.block:hover {
+    background: #fff;
+    transition: background .5s;
+}
+
+.img-container {
+    margin-top: 200px;
+    width: 40%;
+    height: 40%;
+    margin: 200px auto 0 auto;
+}
+
+.img-container img { width: 100% }
+
+.left-div {
+    position: absolute;
+    top: 30px;
+    right: 51%;
+    bottom: 30px;
+    left: 10px;
+    background: #e8e4e4;
+}
+
+.right-div {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    bottom: 30px;
+    left: 51%;
+    background: #e8e4e4;
+}
