@@ -1,0 +1,17 @@
+.sysbrij-auth-container {
+    width: 50%;
+    margin: 150px auto 0 auto;
+    background: #fff;
+}
+
+.sysbrij-auth-container-title {
+    font-size: 22px;
+    background: #337ab7;
+    margin: 0;
+    color: #fff;
+    padding: 10px 29px;
+}
+
+.sysbrij-auth-sub-container {
+    padding: 30px;
+}

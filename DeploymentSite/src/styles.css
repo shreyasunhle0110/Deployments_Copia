@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background: #c5c5c5;
+    overflow-x: hidden;
+}
+
+ul { padding: 0 }
+
+ul, li {
+    list-style-type: none;
+}
