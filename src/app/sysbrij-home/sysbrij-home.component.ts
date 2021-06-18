@@ -14,7 +14,7 @@ export class SysbrijHomeComponent implements OnInit {
   }
 
   Authorization() {
-    this.router.navigate(["/sysbrijMaster"]);
+    this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
   }
 
 }
