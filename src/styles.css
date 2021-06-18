@@ -14,3 +14,7 @@ ul, li {
     margin: 15px 0 30px 0;
     font-size: 25px;
 }
+
+.report-list-container {
+    background: #fff;
+}
