@@ -1,0 +1,27 @@
+.left-div {
+    position: absolute;
+    top: 30px;
+    right: 51%;
+    bottom: 30px;
+    left: 10px;
+}
+.right-div{
+     position: absolute;
+    top: 30px;
+    right: 10px;
+    bottom: 30px;
+    left: 51%;
+}
+.table{
+    margin-top: 200px;
+    width: 40%;
+    height: 40%;
+    margin: 200px auto 0 auto;
+}
+.table-2{
+     position: absolute;
+    top: 30px;
+    right: 10px;
+    bottom: 30px;
+    left: 51%;
+}
