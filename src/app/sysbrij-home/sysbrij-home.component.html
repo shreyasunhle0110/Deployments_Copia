@@ -2,22 +2,12 @@
     <div class="sysbrij-auth-container">
         <h1 class="sysbrij-auth-container-title">Sysbrij Deployment</h1>
         <div class="sysbrij-auth-sub-container">
-            <form [FormGroup] = "loginForm">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="useremail">Email Address</label>
-                        <input formControlName="userEmail" type="text" id="email" [ngClass]="{'form-control': true,
-                              'is-invalid':!getUserFormRef.userEmail.valid && getUserFormRef.userEmail.touched,
-                              'is-valid': getUserFormRef.userEmail.valid}" />
-                            <p *ngIf="getUserFormRef.userEmail.errors?.required && getUserFormRef.userEmail.touched" class="text-danger">
-                                Email field
-                                is required
-                            </p>
-                            <p *ngIf="getUserFormRef.userEmail.errors?.pattern && getUserFormRef.userEmail.touched" class="text-danger">
-                                Enter valid
-                                email address
-                            </p>
+                        <label for="">Email Address</label>
+                        <input  type="text" id="email" [ngClass]="{'form-control': true}" />
+                            
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -35,7 +25,6 @@
                     </div>
                 </div>
             </div>
-            </form>
         </div>
     </div>
 </div>

@@ -5,7 +5,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
 import { BaseComponent } from '../model/base.component';
 import { BehaviorSubject } from 'rxjs';
-import { Console } from 'console';
 @Component({
   selector: 'app-sysbrij-home',
   templateUrl: './sysbrij-home.component.html',
@@ -34,6 +33,7 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
   }
   get getUserFormRef() { return this.loginForm.controls }
   ngOnInit() {
+    debugger;
   }
   auth() {
     debugger;
@@ -44,11 +44,11 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
     debugger
     this.LoginService.authenticate(this.myusername,this.authCode).subscribe((response) => {
       console.log("Login Successfull")
-
       // this.commonService.setLocalStorageItem('isLoggedIn', '1');
       // this.commonService.setLocalStorageItem('AccessCode', response.resultData.AccessCode);
        debugger;
-      window.location.href = '/sysbrijDeploymentDashboard'
+      // window.location.href = '/sysbrijDeploymentDashboard'
+      this.router.navigate(['sysbrijMaster/sysbrijDeploymentDashboard'])
     }, (error) => {
       debugger;
       console.log('Invalid credentials', error);
