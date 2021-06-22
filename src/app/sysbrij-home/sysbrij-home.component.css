@@ -15,3 +15,8 @@
 .sysbrij-auth-sub-container {
     padding: 30px;
 }
+.eye-icon {
+    position: absolute;
+    right: 14px;
+    bottom: 10px;
+}

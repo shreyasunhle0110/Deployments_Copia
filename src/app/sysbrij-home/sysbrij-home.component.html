@@ -2,26 +2,40 @@
     <div class="sysbrij-auth-container">
         <h1 class="sysbrij-auth-container-title">Sysbrij Deployment</h1>
         <div class="sysbrij-auth-sub-container">
+            <form [FormGroup] = "loginForm">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="">Email Address</label>
-                        <input type="text" class="form-control" />
+                        <label for="useremail">Email Address</label>
+                        <input formControlName="userEmail" type="text" id="email" [ngClass]="{'form-control': true,
+                              'is-invalid':!getUserFormRef.userEmail.valid && getUserFormRef.userEmail.touched,
+                              'is-valid': getUserFormRef.userEmail.valid}" />
+                            <p *ngIf="getUserFormRef.userEmail.errors?.required && getUserFormRef.userEmail.touched" class="text-danger">
+                                Email field
+                                is required
+                            </p>
+                            <p *ngIf="getUserFormRef.userEmail.errors?.pattern && getUserFormRef.userEmail.touched" class="text-danger">
+                                Enter valid
+                                email address
+                            </p>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Authorization Code</label>
-                        <input type="text" class="form-control" />
+                        <input formControlName="userPassword"  id="userPassword" class="form-control" />
+                        <a href="#"><i class="fa fa-eye eye-icon"></i></a>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input (click)="Authorization()" type="submit" class="btn btn-primary" value="Enter" />&nbsp;
+                        <button type="submit" (click)="auth()" class="btn btn-primary">Submit</button>;
                         <input type="submit" class="btn btn-danger" value="Cancel" />
+                        <span *ngIf="$IsInvalidCredentials | async">Invalid Credentials</span>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
