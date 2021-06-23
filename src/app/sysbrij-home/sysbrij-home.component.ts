@@ -36,6 +36,7 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
       if(response.Result.LoginStatus == true) {
         this.commonService.setLocalStorageItem('isLoggedIn', '1');
         this.commonService.setLocalStorageItem('AccessCode', response.Result.AccessCode);
+        this.commonService.setLocalStorageItem('UserId', response.Result.UserId);
         this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
       }
       else {
@@ -44,7 +45,7 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
     }, 
     (error) => {
       debugger;
-      console.log('Invalid credentials', error);
+      console.log('Server Error - ', error);
     });
   }
 }

@@ -18,10 +18,8 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
 
   workflowRegister() {
     debugger;
-    
     this.workflowRegisterModel.status= "1";
-    this.workflowRegisterModel.createdBy= "1",
-    
+    this.workflowRegisterModel.createdBy= "1";
     this.workflowService.workflowRegister(this.workflowRegisterModel).subscribe(
       (response: any) => {
         debugger;
