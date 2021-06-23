@@ -5,7 +5,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
 import { BaseComponent } from '../model/base.component';
 import { BehaviorSubject } from 'rxjs';
-import { Console } from 'console';
 @Component({
   selector: 'app-sysbrij-home',
   templateUrl: './sysbrij-home.component.html',
@@ -32,7 +31,7 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
     //   this.commonService.redirectToPath('/sysbrijDeploymentDashboard', true);
     // }
   }
-  get getUserFormRef() { return this.loginForm.controls }
+  //get getUserFormRef() { return this.loginForm.controls }
   ngOnInit() {
   }
   auth() {
@@ -43,12 +42,13 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
     console.log(this.myusername)
     debugger
     this.LoginService.authenticate(this.myusername,this.authCode).subscribe((response) => {
+      debugger;
       console.log("Login Successfull")
 
-      // this.commonService.setLocalStorageItem('isLoggedIn', '1');
-      // this.commonService.setLocalStorageItem('AccessCode', response.resultData.AccessCode);
-       debugger;
-      window.location.href = '/sysbrijDeploymentDashboard'
+       this.commonService.setLocalStorageItem('isLoggedIn', '1');
+       this.commonService.setLocalStorageItem('AccessCode', response.resultData.AccessCode);
+      this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
+      //window.location.href = '/sysbrijDeploymentDashboard'
     }, (error) => {
       debugger;
       console.log('Invalid credentials', error);
