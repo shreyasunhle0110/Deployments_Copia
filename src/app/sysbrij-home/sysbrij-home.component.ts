@@ -30,6 +30,7 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
 
   }
   auth() {
+    
     debugger
     this.LoginService.authenticate(this.myusername, this.authCode).subscribe((response) => {
       debugger;
