@@ -12,16 +12,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SysbrijHomeComponent extends BaseComponent implements OnInit {
 
-  myusername : string  = '';
+  myusername: string = '';
   authCode: string = '';
-  PageStatus: string = "loginPage"
-  SharedVariable: string = "shared";
   private emailRegEx = '^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$'
-  $IsInvalidCredentials = new BehaviorSubject(false);
-  loginForm = new FormGroup({
-    userEmail: new FormControl(null, [Validators.required, Validators.pattern(this.emailRegEx)]),
-    userPassword: new FormControl(null, [Validators.required]),
-  });
+
   constructor(private router: Router, private LoginService: LoginService, private commonService: CommonService) {
     super();
     this.init();
@@ -31,31 +25,26 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
     //   this.commonService.redirectToPath('/sysbrijDeploymentDashboard', true);
     // }
   }
-  get getUserFormRef() { return this.loginForm.controls }
+  //get getUserFormRef() { return this.loginForm.controls }
   ngOnInit() {
-    debugger;
+
   }
   auth() {
-    debugger;
-    this.$IsInvalidCredentials.next(false);
-    this.myusername = (<HTMLInputElement>document.getElementById("email")).value;
-    this.authCode = (<HTMLInputElement>document.getElementById("userPassword")).value;
-    console.log(this.myusername)
     debugger
-    this.LoginService.authenticate(this.myusername,this.authCode).subscribe((response) => {
-      console.log("Login Successfull")
-      // this.commonService.setLocalStorageItem('isLoggedIn', '1');
-      // this.commonService.setLocalStorageItem('AccessCode', response.resultData.AccessCode);
-       debugger;
-      // window.location.href = '/sysbrijDeploymentDashboard'
-      this.router.navigate(['sysbrijMaster/sysbrijDeploymentDashboard'])
-    }, (error) => {
+    this.LoginService.authenticate(this.myusername, this.authCode).subscribe((response) => {
+      debugger;
+      if(response.Result.LoginStatus == true) {
+        this.commonService.setLocalStorageItem('isLoggedIn', '1');
+        this.commonService.setLocalStorageItem('AccessCode', response.Result.AccessCode);
+        this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
+      }
+      else {
+        alert("Invalid Credentials!");
+      }
+    }, 
+    (error) => {
       debugger;
       console.log('Invalid credentials', error);
-      if (error.status === 401) {
-        this.$IsInvalidCredentials.next(true);
-      }
-   
     });
   }
- }
+}

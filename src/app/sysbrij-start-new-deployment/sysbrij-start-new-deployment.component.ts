@@ -21,8 +21,6 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     
     this.workflowRegisterModel.status= "1";
     this.workflowRegisterModel.createdBy= "1",
-    this.workflowRegisterModel.assignWorkflowToCompanyContact = true;
-    this.workflowRegisterModel.sendEmailWithAuthCode= true;
     
     this.workflowService.workflowRegister(this.workflowRegisterModel).subscribe(
       (response: any) => {
