@@ -6,22 +6,19 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Email Address</label>
-                        <input  type="text" id="email" [ngClass]="{'form-control': true}" />
-                            
+                        <input  type="text" [(ngModel)]="myusername" [ngClass]="{'form-control': true}" />
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Authorization Code</label>
-                        <input formControlName="userPassword"  id="userPassword" class="form-control" />
-                        <a href="#"><i class="fa fa-eye eye-icon"></i></a>
+                        <input [(ngModel)]="authCode" type="number" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <button type="submit" (click)="auth()" class="btn btn-primary">Submit</button>;
                         <input type="submit" class="btn btn-danger" value="Cancel" />
-                        <span *ngIf="$IsInvalidCredentials | async">Invalid Credentials</span>
                     </div>
                 </div>
             </div>

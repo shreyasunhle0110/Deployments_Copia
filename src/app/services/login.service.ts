@@ -20,6 +20,7 @@ export class LoginService extends BaseService{
         // let params1 = new HttpParams().set('UserEmail',userEmail)
         // let params2 = new HttpParams().set('AuthCode',AuthCode)
         this.userResponse = this.service.get("http://localhost:62770/api/GetUserDetails",{params:params})
+        debugger;
         return this.userResponse
     }
 }
