@@ -39,8 +39,13 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
         if(response.Result.LoginStatus == true) {
           this.commonService.setLocalStorageItem('isLoggedIn', '1');
           this.commonService.setLocalStorageItem('AccessCode', response.Result.AccessCode);
-          this.commonService.setLocalStorageItem('UserId', response.Result.UserId);
-          this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
+          this.commonService.setLocalStorageItem('CompanyId', response.Result.UserId);
+          if(response.Result.AccessCode == "70") {
+            this.router.navigate(["/sysbrijMaster/sysbrijStartNewDeployment"]);
+          }
+          else {
+            this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
+          }
         }
         else {
           alert("Invalid Credentials!");
