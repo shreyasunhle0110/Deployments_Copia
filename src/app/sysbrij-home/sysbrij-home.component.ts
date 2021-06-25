@@ -40,6 +40,8 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
           this.commonService.setLocalStorageItem('isLoggedIn', '1');
           this.commonService.setLocalStorageItem('AccessCode', response.Result.AccessCode);
           this.commonService.setLocalStorageItem('CompanyId', response.Result.UserId);
+          this.commonService.setLocalStorageItem('workflowId', response.Result.workflowId);
+          this.commonService.setLocalStorageItem('workflowNo', response.Result.workflowNo);
           if(response.Result.AccessCode == "70") {
             this.router.navigate(["/sysbrijMaster/sysbrijStartNewDeployment"]);
           }

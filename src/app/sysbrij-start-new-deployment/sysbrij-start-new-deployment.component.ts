@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkflowService } from '../services/workflow.service';
-import { WorkflowRegisterModel, SysbrijUserModel } from '../model/workflow.model';
+import { WorkflowRegisterModel, SysbrijUserModel, customerDataModel, customerContatModel, customerEntitiesModel, customerERPDetailsModel, customerRequirnmentsModel, installationMachineDetailsModel, senderEmailDataModel, batchJobDetailsModel, workflowFormModel } from '../model/workflow.model';
 import { Router } from '../../../node_modules/@angular/router';
 import { CommonService } from '../services/common.service';
 
@@ -12,35 +12,57 @@ import { CommonService } from '../services/common.service';
 export class SysbrijStartNewDeploymentComponent implements OnInit {
   workflowRegisterModel: WorkflowRegisterModel;
   sysbrijUserListModel: SysbrijUserModel[] = [];
-  loaderActive:boolean = false;
-  companyId: string = "";
+  customerDataModel: customerDataModel;
+  customerContatModel: customerContatModel;
+  customerEntitiesModel: customerEntitiesModel;
+  customerERPDetailsModel: customerERPDetailsModel;
+  customerRequirnmentsModel: customerRequirnmentsModel;
+  installationMachineDetailsUATModel: installationMachineDetailsModel;
+  installationMachineDetailsProductionModel: installationMachineDetailsModel;
+  senderEmailDataModel: senderEmailDataModel;
+  batchJobDetailsModel: batchJobDetailsModel;
+  workflowFormModel: workflowFormModel;
+  loaderActive: boolean = false;
+  workflowId: string = "";
+  userId: string = "";
   monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   constructor(
-    private workflowService:WorkflowService, 
+    private workflowService: WorkflowService,
     private router: Router,
     private commonService: CommonService
   ) {
     this.workflowRegisterModel = new WorkflowRegisterModel();
-   }
+    this.customerDataModel = new customerDataModel();
+    this.customerContatModel = new customerContatModel();
+    this.customerEntitiesModel = new customerEntitiesModel();
+    this.customerERPDetailsModel = new customerERPDetailsModel();
+    this.customerRequirnmentsModel = new customerRequirnmentsModel();
+    this.installationMachineDetailsUATModel = new installationMachineDetailsModel();
+    this.installationMachineDetailsProductionModel = new installationMachineDetailsModel();
+    this.senderEmailDataModel = new senderEmailDataModel();
+    this.batchJobDetailsModel = new batchJobDetailsModel();
+    this.workflowFormModel = new workflowFormModel();
+  }
 
   ngOnInit(): void {
     var registerDate = new Date();
     this.workflowRegisterModel.date = registerDate.getDate() + " " + this.monthNames[registerDate.getMonth()] + " " + registerDate.getFullYear();
-    this.companyId = this.commonService.getLocalStorageItem("CompanyId");
+    this.workflowId = this.commonService.getLocalStorageItem("workflowId");
+    this.userId = this.commonService.getLocalStorageItem("CompanyId");
 
-    if(this.companyId != "") {
-      this.workflowDetails(this.companyId);
+    if (this.workflowId != "") {
+      this.workflowDetails(this.workflowId);
     }
   }
 
   workflowRegister() {
     this.loaderActive = true;
-    this.workflowRegisterModel.status= "1";
-    this.workflowRegisterModel.createdBy= "1";
+    this.workflowRegisterModel.status = "1";
+    this.workflowRegisterModel.createdBy = "1";
     this.workflowService.workflowRegister(this.workflowRegisterModel).subscribe(
       (response: any) => {
         debugger;
-        if(response.Result == true) {
+        if (response.Result == true) {
           this.loaderActive = false;
           alert("Company Register Successfull!");
           this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
@@ -69,12 +91,48 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.sysbrijUserListModel.splice(index, 1);
   }
 
-  workflowDetails(companyId) {
-    this.workflowService.workflowDetails(companyId).subscribe(
+  workflowDetails(workflowId) {
+    this.workflowService.workflowDetails(workflowId).subscribe(
       (response: any) => {
+        debugger;
         console.log("The result is - ");
         console.log(response);
-        this.workflowRegisterModel = response.Result;
+        this.workflowRegisterModel = response.Result.workflowForm1;
+        this.customerDataModel = response.Result.workflowForm2.customerData;
+        this.customerContatModel = response.Result.workflowForm2.customerContat;
+        this.customerEntitiesModel = response.Result.workflowForm2.customerEntities;
+        this.customerERPDetailsModel = response.Result.workflowForm2.customerERPDetails;
+        this.customerRequirnmentsModel = response.Result.workflowForm2.customerRequirnments;
+        this.installationMachineDetailsUATModel = response.Result.workflowForm2.installationMachineUATDetails;
+        this.installationMachineDetailsProductionModel = response.Result.workflowForm2.installationMachineProductionDetails;
+        this.senderEmailDataModel = response.Result.workflowForm2.senderEmailData;
+        this.batchJobDetailsModel = response.Result.workflowForm2.batchJobDetails;
+        this.workflowFormModel.workflowStatusNotes = response.Result.workflowForm2.workflowStatusNotes;
+      }
+    )
+  }
+
+  workflowSaveOnly() {
+    debugger;
+    this.workflowFormModel.modifiedBy = this.userId;
+    this.workflowFormModel.workflowId = this.workflowId;
+    this.workflowFormModel.workflowStatusId = "1";
+    this.workflowFormModel.customerData = this.customerDataModel;
+    this.workflowFormModel.customerContat = this.customerContatModel;
+    this.workflowFormModel.customerEntities = this.customerEntitiesModel;
+    this.workflowFormModel.customerERPDetails = this.customerERPDetailsModel;
+    this.workflowFormModel.customerRequirnments = this.customerRequirnmentsModel;
+    this.workflowFormModel.installationMachineUATDetails = this.installationMachineDetailsUATModel;
+    this.workflowFormModel.installationMachineProductionDetails = this.installationMachineDetailsProductionModel;
+    this.workflowFormModel.customerUserList = this.sysbrijUserListModel;
+    this.workflowFormModel.senderEmailData = this.senderEmailDataModel;
+    this.workflowFormModel.batchJobDetails = this.batchJobDetailsModel;
+
+    console.log(this.workflowFormModel);
+
+    this.workflowService.updateWorkflowDetails(this.workflowFormModel).subscribe(
+      (response: any) => {
+
       }
     )
   }

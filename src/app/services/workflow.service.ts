@@ -15,9 +15,13 @@ export class WorkflowService extends BaseService{
         return this.service.post("http://localhost:62770/api/Workflow", obj);
     }
 
-    workflowDetails(companyId) {
+    workflowDetails(workflowId) {
         const params = new HttpParams()
-            .set('companyId', companyId)
+            .set('workflowId', workflowId)
         return this.service.get("http://localhost:62770/api/Workflow", {params: params})
+    }
+
+    updateWorkflowDetails(obj) {
+        return this.service.post("http://localhost:62770/api/updateWorkflow", obj);
     }
 }

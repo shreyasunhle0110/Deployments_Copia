@@ -134,19 +134,19 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Customer Name</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerDataModel.customerName" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Profile ID with Bank</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerDataModel.profileIdWithBank" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Building Number</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerDataModel.buildingNo" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
@@ -154,20 +154,21 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Town Name</label>
-                      <input type="text" class="form-control" />
+                      <input [(ngModel)]="customerDataModel.townName" type="text" class="form-control" />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Postal Code</label>
-                      <input type="text" class="form-control" />
+                      <input [(ngModel)]="customerDataModel.postalCode" type="text" class="form-control" />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Country</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerDataModel.country" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">India</option>
                       </select>
                     </div>
                   </div>
@@ -183,25 +184,25 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Contact Name</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerContatModel.contactName" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Email</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerContatModel.email" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Mobile No</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerContatModel.mobileNo" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Phone No</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerContatModel.phoneNo" type="text" class="form-control" />
                 </div>
               </div>
 
@@ -218,25 +219,25 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Entity Name</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerEntitiesModel.name" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Entity Account Number with Bank </label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerEntitiesModel.accountNoWithBank" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Building Number</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerEntitiesModel.buildingNo" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Town Name</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="customerEntitiesModel.townName" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
@@ -244,14 +245,15 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Postal Code</label>
-                      <input type="text" class="form-control" />
+                      <input [(ngModel)]="customerEntitiesModel.postalCode" type="text" class="form-control" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Country</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerEntitiesModel.country" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">India</option>
                       </select>
                     </div>
                   </div>
@@ -269,13 +271,13 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="">Customer ERP Name / Version</label>
-                      <input type="text" class="form-control" />
+                      <input [(ngModel)]="customerERPDetailsModel.nameOrVersion" type="text" class="form-control" />
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="">Any other ERP Details</label>
-                      <input type="text" class="form-control" />
+                      <input [(ngModel)]="customerERPDetailsModel.erpDetails" type="text" class="form-control" />
                     </div>
                   </div>
                 </div>
@@ -291,24 +293,30 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Input File Mapping</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerRequirnmentsModel.inputFileMapping" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value=true>Yes</option>
+                        <option value=false>No</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Input File Transformation</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerRequirnmentsModel.inputfileTransformation" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value=true>Yes</option>
+                        <option value=false>No</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Input File Type</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerRequirnmentsModel.inputFileType" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">XLS</option>
+                        <option value="2">XLSX</option>
                       </select>
                     </div>
                   </div>
@@ -317,24 +325,30 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">File Encryption</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerRequirnmentsModel.fileEncryption" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">Forward</option>
+                        <option value="2">Reverse</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">H2H Encryption</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerRequirnmentsModel.h2hEncryption" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">Forward</option>
+                        <option value="2">Reverse</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Payment Types ( Forward Flow)</label>
-                      <select class="form-control">
-                        <option value="">Select</option>
+                      <select [(ngModel)]="customerRequirnmentsModel.paymentTypesForDForward" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">NEFT</option>
+                        <option value="2">RTGS</option>
                       </select>
                     </div>
                   </div>
@@ -353,19 +367,19 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Where will SysBRIJ be installed</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Windows</option>
-                    <option value="">Server</option>
-                    <option value="">Laptop</option>
-                    <option value="">Desktop</option>
+                  <select [(ngModel)]="installationMachineDetailsUATModel.whereSysbrijWillInstalled" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Windows</option>
+                    <option value="2">Server</option>
+                    <option value="3">Laptop</option>
+                    <option value="4">Desktop</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">How Many installations needed?</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.noOfInstallation" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -373,18 +387,18 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Server Type</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Windows</option>
-                    <option value="">Linux</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsUATModel.serverType" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Windows</option>
+                    <option value="2">Linux</option>
+                    <option value="3">NA</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">IP Address - Public/ Private</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.ipAddress" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -392,17 +406,17 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Server OS Version</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.serverOsVersion" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Is this Machine connected to Bank System?</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsUATModel.isMachineConnectedToBankSystem" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
@@ -411,13 +425,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Input File Folder Path</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.inputFileFolderPath" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Input File Folder Name</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.inputFileFolderName" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -425,22 +439,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Is This machine Internet Enabled</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsUATModel.isMachineInternateEnabled" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Does It have any firewall restrictions?</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsUATModel.anyFirewallRestriction" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
@@ -449,17 +463,17 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">If YES, then specify</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.firewallRestrictionDetails" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Can we install software remotely on this m/c?</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsUATModel.installSoftwareRemotely" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
@@ -468,13 +482,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Remote Access Method</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.remoteAccessMethod" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Specify any Other </label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsUATModel.moreDetails" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -487,19 +501,19 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Where will SysBRIJ be installed</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Windows</option>
-                    <option value="">Server</option>
-                    <option value="">Laptop</option>
-                    <option value="">Desktop</option>
+                  <select [(ngModel)]="installationMachineDetailsProductionModel.whereSysbrijWillInstalled" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Windows</option>
+                    <option value="2">Server</option>
+                    <option value="3">Laptop</option>
+                    <option value="4">Desktop</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">How Many installations needed?</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.noOfInstallation" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -507,18 +521,18 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Server Type</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Windows</option>
-                    <option value="">Linux</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsProductionModel.serverType" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Windows</option>
+                    <option value="2">Linux</option>
+                    <option value="3">NA</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">IP Address - Public/ Private</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.ipAddress" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -526,17 +540,17 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Server OS Version</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.serverOsVersion" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Is this Machine connected to Bank System?</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsProductionModel.isMachineConnectedToBankSystem" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
@@ -545,13 +559,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Input File Folder Path</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.inputFileFolderPath" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Input File Folder Name</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.inputFileFolderName" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -559,22 +573,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Is This machine Internet Enabled</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsProductionModel.isMachineInternateEnabled" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Does It have any firewall restrictions?</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsProductionModel.anyFirewallRestriction" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
@@ -583,17 +597,17 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">If YES, then specify</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.firewallRestrictionDetails" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Can we install software remotely on this m/c?</label>
-                  <select class="form-control">
-                    <option value="">Select</option>
-                    <option value="">Yes</option>
-                    <option value="">No</option>
-                    <option value="">NA</option>
+                  <select [(ngModel)]="installationMachineDetailsProductionModel.installSoftwareRemotely" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">NA</option>
                   </select>
                 </div>
               </div>
@@ -602,13 +616,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Remote Access Method</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.remoteAccessMethod" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Specify any Other </label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="installationMachineDetailsProductionModel.moreDetails" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -651,7 +665,7 @@
                     <div class="form-group">
                       <label for="">Role</label>
                       <select #userRole class="form-control">
-                        <option value="">Select</option>
+                        <option selected [ngValue]=undefined>Select</option>
                         <option value="1">Admin</option>
                       </select>
                     </div>
@@ -699,31 +713,31 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Email ID</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="senderEmailDataModel.emailId" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Email Password</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="senderEmailDataModel.emailPassword" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">SMTP Host</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="senderEmailDataModel.smtpHost" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">SMTP Port</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="senderEmailDataModel.smtpPort" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Receiver Emails</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="senderEmailDataModel.receiverEmail" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -739,13 +753,17 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Batch Jobs Frequency</label>
-                  <input type="text" class="form-control" />
+                  <input [(ngModel)]="batchJobDetailsModel.frequency" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Can vendor Setup Batch jobs on yoursever?</label>
-                  <input type="text" class="form-control" />
+                  <select [(ngModel)]="batchJobDetailsModel.setupBatchJobOnYourServer" class="form-control">
+                    <option selected [ngValue]=undefined>Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -758,7 +776,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Current Status / Notes</label>
-                  <textarea class="form-control" rows="5"></textarea>
+                  <textarea [(ngModel)]="workflowFormModel.workflowStatusNotes" class="form-control" rows="5"></textarea>
                 </div>
               </div>
             </div>
@@ -768,7 +786,7 @@
       <br>
       <div class="form-submit-container text-right">
         <div class="form-group">
-          <input type="submit" value="Save Only" class="btn btn-success" /> &nbsp;
+          <input type="submit" (click)="workflowSaveOnly()" value="Save Only" class="btn btn-success" /> &nbsp;
           <input type="submit" value="Submit to Deploy" class="btn btn-primary" />
         </div>
       </div>
@@ -784,7 +802,9 @@
               <div class="form-group">
                 <label for="">Workflow Status</label>
                 <select class="form-control">
-                  <option value="">Select</option>
+                  <option selected [ngValue]=undefined>Select</option>
+                  <option value="1">Created</option>
+                  <option value="2">Submitted</option>
                 </select>
               </div>
             </div>
