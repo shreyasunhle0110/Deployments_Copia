@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-sysbrij-page-container',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SysbrijPageContainerComponent implements OnInit {
 
-  constructor() { }
+  private IS_LOGGED_IN = 'isLoggedIn';
+  constructor(private commonService: CommonService) {
+    this.init();
+   }
+  private init() {
+    if (!this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
+      this.commonService.redirectToPath('/sysbrijHome', true);
+    }
+  }
 
   ngOnInit(): void {
   }

@@ -58,7 +58,7 @@ export class CommonService extends BaseService {
     }
     public loggedOut(): void {
         this.clearLocalStorage();
-        this.redirectToPath('/login', true)
+        this.redirectToPath('', true)
 
     }
 
