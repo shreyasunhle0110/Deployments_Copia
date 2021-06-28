@@ -1,6 +1,6 @@
 <h2 class="page-title">My Workflows</h2>
 <div class="report-list-container">
-    <table class="table table-bordered table-striped">
+    <table  class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Workflow No</th>
@@ -12,39 +12,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Active</td>
-                <td>Ravi Jadhav</td>
-                <td>9856369854</td>
-                <td>Sachin Sakpal</td>
+            <tr *ngFor="let myworkflow of myworkflowsList">
+                <td>{{myworkflow.WorKFlowNo}}</td>
+                <td>{{myworkflow.WFStatus}}</td>
+                <td>{{myworkflow.CustomerName}}</td>
+                <td>{{myworkflow.CustomerContact}}</td>
+                <td>{{myworkflow.IntegrationManager}}</td>
                 <td>
                     <input type="submit" class="btn-success" value="edit" />&nbsp;
                     <input type="submit" class="btn-warning" value="view" />
                 </td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Active</td>
-                <td>Ravi Jadhav</td>
-                <td>9856369854</td>
-                <td>Sachin Sakpal</td>
-                <td>
-                    <input type="submit" class="btn-success" value="edit" />&nbsp;
-                    <input type="submit" class="btn-warning" value="view" />
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Active</td>
-                <td>Ravi Jadhav</td>
-                <td>9856369854</td>
-                <td>Sachin Sakpal</td>
-                <td>
-                    <input type="submit" class="btn-success" value="edit" />&nbsp;
-                    <input type="submit" class="btn-warning" value="view" />
-                </td>
-            </tr>
+        
         </tbody>
     </table>
 </div>
