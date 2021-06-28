@@ -18,24 +18,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Help File 1</td>
-                            <td>
-                                <a class="btn btn-success" href="">Download</a>
-                            </td>
+                        <tr *ngFor="let HelpFile of HelpFileList">
+                            <td>{{HelpFile.FileName}}</td>
+                            <td> <a (click)="downloadHelpFile(HelpFile.FileName)" class="btn btn-success" >Download</a> </td>
                         </tr>
-                        <tr>
-                            <td>Help File 2</td>
-                            <td>
-                                <a class="btn btn-success" href="">Download</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Help File 3</td>
-                            <td>
-                                <a class="btn btn-success" href="">Download</a>
-                            </td>
-                        </tr>
+                       
                     </tbody>
                 </table>
             </div>
@@ -59,23 +46,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Test File 1</td>
-                            <td>
-                                <a class="btn btn-success" href="">Download</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Test File 2</td>
-                            <td>
-                                <a class="btn btn-success" href="">Download</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Test File 3</td>
-                            <td>
-                                <a class="btn btn-success" href="">Download</a>
-                            </td>
+                        <tr *ngFor="let TestFile of TestFileList">
+                            <td>{{TestFile.FileName}}</td>
+                            <td> <a (click)="downloadTestFile(TestFile.FileName)" class="btn btn-success">Download</a> </td>
                         </tr>
                     </tbody>
                 </table>

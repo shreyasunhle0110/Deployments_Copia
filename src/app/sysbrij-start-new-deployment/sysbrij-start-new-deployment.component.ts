@@ -11,6 +11,7 @@ import { dropdownService } from '../services/dropdown.service';
   styleUrls: ['./sysbrij-start-new-deployment.component.css']
 })
 export class SysbrijStartNewDeploymentComponent implements OnInit {
+  private IS_LOGGED_IN = 'isLoggedIn';
   workflowRegisterModel: WorkflowRegisterModel;
   sysbrijUserListModel: SysbrijUserModel[] = [];
   customerDataModel: customerDataModel;
@@ -57,8 +58,14 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.batchJobDetailsModel = new batchJobDetailsModel();
     this.workflowFormModel = new workflowFormModel();
     this.deploymentModel = new deploymentModel();
+    this.init()
   }
 
+  private init() {
+    if (!this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
+      this.commonService.redirectToPath('/sysbrijHome', true);
+    }
+  }
   ngOnInit(): void {
     var registerDate = new Date();
     this.workflowRegisterModel.date = registerDate.getDate() + " " + this.monthNames[registerDate.getMonth()] + " " + registerDate.getFullYear();

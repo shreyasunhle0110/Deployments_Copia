@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-sysbrij-navigation',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SysbrijNavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private commonService: CommonService) { }
+
+  onLogout() {
+    this.commonService.loggedOut();
+  }
 
   ngOnInit(): void {
   }
