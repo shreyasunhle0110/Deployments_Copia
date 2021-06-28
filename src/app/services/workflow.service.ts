@@ -24,4 +24,8 @@ export class WorkflowService extends BaseService{
     updateWorkflowDetails(obj) {
         return this.service.post("http://localhost:62770/api/updateWorkflow", obj);
     }
+
+    deploymentWorkflow(obj) {
+        return this.service.post("http://localhost:62770/api/workflowDeployment", obj);
+    }
 }

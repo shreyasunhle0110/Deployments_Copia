@@ -115,4 +115,12 @@ export class workflowFormModel {
     modifiedBy: string;
     workflowStatusId: string;
     workflowId: string;
+    buttonStatus: string;
+}
+
+export class deploymentModel {
+    workflowStatusId: string;
+    assignToId: string;
+    assignById: string;
+    workflowId: string;
 }

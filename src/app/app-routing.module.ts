@@ -7,6 +7,7 @@ import { SysbrijPageContainerComponent } from './sysbrij-page-container/sysbrij-
 import { SysbrijStartNewDeploymentComponent } from './sysbrij-start-new-deployment/sysbrij-start-new-deployment.component';
 import { SysbrijHelpFilesComponent } from './sysbrij-help-files/sysbrij-help-files.component';
 import { SysbrijMyWorkflowsComponent } from './sysbrij-my-workflows/sysbrij-my-workflows.component';
+import { WorkflowPdfComponent } from './workflow-pdf/workflow-pdf.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,9 @@ const routes: Routes = [
   },
   {
     path: 'sysbrijHome', component: SysbrijHomeComponent
+  },
+  {
+    path: 'sysbrijWorkflowPDF/:id', component: WorkflowPdfComponent
   },
   {
     path: 'sysbrijMaster', component: SysbrijPageContainerComponent, children: [

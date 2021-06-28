@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkflowService } from '../services/workflow.service';
-import { WorkflowRegisterModel, SysbrijUserModel, customerDataModel, customerContatModel, customerEntitiesModel, customerERPDetailsModel, customerRequirnmentsModel, installationMachineDetailsModel, senderEmailDataModel, batchJobDetailsModel, workflowFormModel } from '../model/workflow.model';
+import { WorkflowRegisterModel, SysbrijUserModel, customerDataModel, customerContatModel, customerEntitiesModel, customerERPDetailsModel, customerRequirnmentsModel, installationMachineDetailsModel, senderEmailDataModel, batchJobDetailsModel, workflowFormModel, deploymentModel } from '../model/workflow.model';
 import { Router } from '../../../node_modules/@angular/router';
 import { CommonService } from '../services/common.service';
+import { dropdownService } from '../services/dropdown.service';
 
 @Component({
   selector: 'app-sysbrij-start-new-deployment',
@@ -22,14 +23,27 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   senderEmailDataModel: senderEmailDataModel;
   batchJobDetailsModel: batchJobDetailsModel;
   workflowFormModel: workflowFormModel;
+  deploymentModel: deploymentModel;
   loaderActive: boolean = false;
+  loaderActiveSaveOnly: boolean = false;
+  loaderActiveSaveDeploy: boolean = false
   workflowId: string = "";
   userId: string = "";
+  inputFileTypeDD: any;
+  encryptionDD: any;
+  paymentTypeDD: any;
+  workflowStatusDD: any;
+  companyUserAutocompleteDD: any;
+  assignToId: string;
+  assignToName: string;
+  assignToEmail: string;
+  keyword = 'name';
   monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   constructor(
     private workflowService: WorkflowService,
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private dropdownService: dropdownService
   ) {
     this.workflowRegisterModel = new WorkflowRegisterModel();
     this.customerDataModel = new customerDataModel();
@@ -42,6 +56,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.senderEmailDataModel = new senderEmailDataModel();
     this.batchJobDetailsModel = new batchJobDetailsModel();
     this.workflowFormModel = new workflowFormModel();
+    this.deploymentModel = new deploymentModel();
   }
 
   ngOnInit(): void {
@@ -49,7 +64,11 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowRegisterModel.date = registerDate.getDate() + " " + this.monthNames[registerDate.getMonth()] + " " + registerDate.getFullYear();
     this.workflowId = this.commonService.getLocalStorageItem("workflowId");
     this.userId = this.commonService.getLocalStorageItem("CompanyId");
-
+    this.inputFileTypeDropdown();
+    this.encryptionDropdown();
+    this.paymentTypeMasterDropdown();
+    this.workflowStausMasterDropdown();
+    this.companyUserAutocomplete();
     if (this.workflowId != "") {
       this.workflowDetails(this.workflowId);
     }
@@ -108,12 +127,14 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
         this.senderEmailDataModel = response.Result.workflowForm2.senderEmailData;
         this.batchJobDetailsModel = response.Result.workflowForm2.batchJobDetails;
         this.workflowFormModel.workflowStatusNotes = response.Result.workflowForm2.workflowStatusNotes;
+        this.sysbrijUserListModel = response.Result.workflowForm2.customerUserList;
       }
     )
   }
 
   workflowSaveOnly() {
     debugger;
+    this.loaderActiveSaveOnly = true;
     this.workflowFormModel.modifiedBy = this.userId;
     this.workflowFormModel.workflowId = this.workflowId;
     this.workflowFormModel.workflowStatusId = "1";
@@ -127,13 +148,111 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowFormModel.customerUserList = this.sysbrijUserListModel;
     this.workflowFormModel.senderEmailData = this.senderEmailDataModel;
     this.workflowFormModel.batchJobDetails = this.batchJobDetailsModel;
+    this.workflowFormModel.buttonStatus = "save only";
 
     console.log(this.workflowFormModel);
 
     this.workflowService.updateWorkflowDetails(this.workflowFormModel).subscribe(
       (response: any) => {
-
+        if(response.Result == true) {
+          this.loaderActiveSaveOnly = false;
+          alert("Workflow data updated successfully");
+          this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
+        }
+        else {
+          this.loaderActiveSaveOnly = false;
+          alert("Something went wrong");
+        }
       }
     )
+  }
+
+  workflowSaveDeploy() {
+    debugger;
+    this.loaderActiveSaveDeploy = true;
+    this.workflowFormModel.modifiedBy = this.userId;
+    this.workflowFormModel.workflowId = this.workflowId;
+    this.workflowFormModel.workflowStatusId = "2";
+    this.workflowFormModel.customerData = this.customerDataModel;
+    this.workflowFormModel.customerContat = this.customerContatModel;
+    this.workflowFormModel.customerEntities = this.customerEntitiesModel;
+    this.workflowFormModel.customerERPDetails = this.customerERPDetailsModel;
+    this.workflowFormModel.customerRequirnments = this.customerRequirnmentsModel;
+    this.workflowFormModel.installationMachineUATDetails = this.installationMachineDetailsUATModel;
+    this.workflowFormModel.installationMachineProductionDetails = this.installationMachineDetailsProductionModel;
+    this.workflowFormModel.customerUserList = this.sysbrijUserListModel;
+    this.workflowFormModel.senderEmailData = this.senderEmailDataModel;
+    this.workflowFormModel.batchJobDetails = this.batchJobDetailsModel;
+    this.workflowFormModel.buttonStatus = "save deploy";
+
+    console.log(this.workflowFormModel);
+
+    this.workflowService.updateWorkflowDetails(this.workflowFormModel).subscribe(
+      (response: any) => {
+        if(response.Result == true) {
+          this.loaderActiveSaveDeploy = false;
+          alert("Workflow data save successfully");
+          this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
+        }
+        else {
+          this.loaderActiveSaveDeploy = false;
+          alert("Something went wrong");
+        }
+      }
+    )
+  }
+
+  inputFileTypeDropdown() {
+    this.dropdownService.inputFileTypeDropdown().subscribe((response: any) => {
+      this.inputFileTypeDD = response.Result;
+    })
+  }
+
+  encryptionDropdown() {
+    this.dropdownService.encryptionDropdown().subscribe((response: any) => {
+      this.encryptionDD = response.Result;
+    }) 
+  }
+
+  paymentTypeMasterDropdown() {
+    this.dropdownService.paymentTypeMasterDropdown().subscribe((response: any) => {
+      this.paymentTypeDD = response.Result;
+      console.log(this.paymentTypeDD);
+    }) 
+  }
+
+  workflowStausMasterDropdown() {
+    this.dropdownService.workflowStatusMasterDropdown().subscribe((response: any) => {
+      this.workflowStatusDD = response.Result;
+    }) 
+  }
+
+  companyUserAutocomplete() {
+    this.dropdownService.companyUserAutocomplete().subscribe((response: any) => {
+      this.companyUserAutocompleteDD = response.Result;
+      console.log(this.companyUserAutocompleteDD);
+    }) 
+  }
+
+  selectEvent(item) {
+    debugger;
+    this.assignToId = item.id;
+    this.assignToEmail = item.email;
+    this.assignToName = item.name;
+  }
+
+  deploymentWorkflow() {
+    this.deploymentModel.assignToId = this.assignToId;
+    this.deploymentModel.assignById = this.userId;
+    this.deploymentModel.workflowId = this.workflowId;
+
+    this.workflowService.deploymentWorkflow(this.deploymentModel).subscribe((response: any) => {
+      if(response.Result == true) {
+        alert("Workflow assigned successful!");
+      }
+      else {
+        alert("Error!");
+      }
+    })
   }
 }
