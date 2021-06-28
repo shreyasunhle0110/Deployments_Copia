@@ -28,4 +28,7 @@ export class WorkflowService extends BaseService{
     deploymentWorkflow(obj) {
         return this.service.post("http://localhost:62770/api/workflowDeployment", obj);
     }
+    getworkflowsList(): Observable<any>{
+        return this.service.get("http://localhost:62770/api/GetWorkFlowList");
+    }
 }

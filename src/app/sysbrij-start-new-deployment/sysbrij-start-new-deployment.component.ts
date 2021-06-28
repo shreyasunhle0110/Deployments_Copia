@@ -13,7 +13,7 @@ import { dropdownService } from '../services/dropdown.service';
 export class SysbrijStartNewDeploymentComponent implements OnInit {
   private IS_LOGGED_IN = 'isLoggedIn';
   workflowRegisterModel: WorkflowRegisterModel;
-  sysbrijUserListModel: SysbrijUserModel[] = [];
+  sysbrijUserListModel: SysbrijUserModel[] = new Array<SysbrijUserModel>();
   customerDataModel: customerDataModel;
   customerContatModel: customerContatModel;
   customerEntitiesModel: customerEntitiesModel;
@@ -102,6 +102,10 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
 
   addSysbrijUser(userName, userEmail, userAddress, userMobile, userRole) {
     debugger;
+    console.log(this.sysbrijUserListModel);
+    if(this.sysbrijUserListModel == null){
+      this.sysbrijUserListModel = new Array<SysbrijUserModel>();
+    }
     this.sysbrijUserListModel.push(
       new SysbrijUserModel(userName.value, userEmail.value, userAddress.value, userMobile.value, userRole.value)
     )

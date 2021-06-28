@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { CommonService } from '../services/common.service';
 import { FileService } from '../services/File.service';
 
@@ -43,7 +42,7 @@ export class SysbrijHelpFilesComponent implements OnInit {
 
   }
 
-  downloadTestFile(fileName:string) {
+  downloadTestFile(fileName:string,check:boolean) {
     debugger;
     var fileUrl = "assets/TestFiles/";
     fileUrl =fileUrl + fileName ;

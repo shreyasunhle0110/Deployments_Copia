@@ -1,1 +1,77 @@
 <h2 class="page-title">Deployment Dashboard</h2>
+<div  class="container-fluid">
+    <div class="block dashboardreport" >
+        <div class="report-list-container">
+            <table class="table table-bordered table-striped ">
+                <thead>
+                    <tr>
+                        <th>Workflow No</th>
+                        <th>Status</th>
+                        <th>Customer Name</th>
+                        <th>Customer Contact</th>
+                        <th>Integration Manager</th>
+                        <th>Created On</th>
+                        <th>Created By</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let myworkflow of myworkflowsList">
+                        <td>{{myworkflow.WorKFlowNo}}</td>
+                        <td>{{myworkflow.WFStatus}}</td>
+                        <td>{{myworkflow.CustomerName}}</td>
+                        <td>{{myworkflow.CustomerContact}}</td>
+                        <td>{{myworkflow.IntegrationManager}}</td>
+                        <td>{{myworkflow.CreatedOn}}</td>
+                        <td>{{myworkflow.CreatedBy}}</td>
+                        <td>
+                            <input type="submit" class="btn-warning" value="view" />
+                        </td>
+                    </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="block deploymentspeed">
+        <div class="report-list-container">
+            <table class="table table-bordered table-striped ">
+                <thead>
+                    <tr>
+                        <th>Workflow No</th>
+                        <th>Status</th>
+                        <th>Customer Name</th>
+                        <th>Customer Contact</th>
+                        <th>Integration Manager</th>
+                        <th>Created On</th>
+                        <th>Create to request Document</th>
+                        <th>request documnent to installation</th>
+                        <th>installation to UAT complete</th>
+                        <th>UAT completion to GoLive</th>
+                        <th>Total Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let myworkflow of myworkflowsList">
+                        <td>{{myworkflow.WorKFlowNo}}</td>
+                        <td>{{myworkflow.WFStatus}}</td>
+                        <td>{{myworkflow.CustomerName}}</td>
+                        <td>{{myworkflow.CustomerContact}}</td>
+                        <td>{{myworkflow.IntegrationManager}}</td>
+                        <td>{{myworkflow.CreatedOn}}</td>
+                        <td>1 Day</td>
+                        <td>3 Days</td>
+                        <td>2 Days</td>
+                        <td>5 Days</td>
+                        <td>11 Days</td>
+                        <td>
+                            <input type="submit" class="btn-warning" value="view" />
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
