@@ -14,9 +14,11 @@ import { SysbrijNavigationComponent } from './sysbrij-navigation/sysbrij-navigat
 import { SysbrijStartNewDeploymentComponent } from './sysbrij-start-new-deployment/sysbrij-start-new-deployment.component';
 import { SysbrijHelpFilesComponent } from './sysbrij-help-files/sysbrij-help-files.component';
 import { SysbrijMyWorkflowsComponent } from './sysbrij-my-workflows/sysbrij-my-workflows.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 //services
 import { LoginService } from './services/login.service';
 import { CommonService } from './services/common.service';
+import { WorkflowPdfComponent } from './workflow-pdf/workflow-pdf.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,8 @@ import { CommonService } from './services/common.service';
     SysbrijNavigationComponent,
     SysbrijStartNewDeploymentComponent, 
     SysbrijHelpFilesComponent,
-    SysbrijMyWorkflowsComponent
+    SysbrijMyWorkflowsComponent,
+    WorkflowPdfComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { CommonService } from './services/common.service';
     AppRoutingModule,
     ReactiveFormsModule,
     DataTablesModule,
-    FormsModule
+    FormsModule,
+    AutocompleteLibModule
   ],
   providers: [CommonService, LoginService],
   bootstrap: [AppComponent]

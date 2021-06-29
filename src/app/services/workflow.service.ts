@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,10 +12,23 @@ export class WorkflowService extends BaseService{
         super();
     }
     workflowRegister(obj): Observable<any> {
-        debugger;
         return this.service.post("http://localhost:62770/api/Workflow", obj);
     }
     getworkflowsList(): Observable<any>{
         return this.service.get("http://localhost:62770/api/GetWorkFlowList");
+    }
+
+    workflowDetails(workflowId) {
+        const params = new HttpParams()
+            .set('workflowId', workflowId)
+        return this.service.get("http://localhost:62770/api/Workflow", {params: params})
+    }
+
+    updateWorkflowDetails(obj) {
+        return this.service.post("http://localhost:62770/api/updateWorkflow", obj);
+    }
+
+    deploymentWorkflow(obj) {
+        return this.service.post("http://localhost:62770/api/workflowDeployment", obj);
     }
 }

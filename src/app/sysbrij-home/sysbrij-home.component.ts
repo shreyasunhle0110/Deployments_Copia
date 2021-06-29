@@ -11,7 +11,6 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./sysbrij-home.component.css']
 })
 export class SysbrijHomeComponent extends BaseComponent implements OnInit {
-
   myusername: string = '';
   authCode: string = '';
   private emailRegEx = '^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$'
@@ -35,21 +34,38 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
   onsubmit() {
     
     debugger
-    this.LoginService.authenticate(this.loginForm.get('userEmail').value, this.loginForm.get('authorizationCode').value).subscribe((response) => {
-      debugger;
-      if(response.Result.LoginStatus == true) {
-        this.commonService.setLocalStorageItem('isLoggedIn', '1');
-        this.commonService.setLocalStorageItem('AccessCode', response.Result.AccessCode);
-        this.commonService.setLocalStorageItem('UserId', response.Result.UserId);
-        this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
-      }
-      else {
-        alert("Invalid Credentials!");
-      }
-    }, 
-    (error) => {
-      debugger;
-      console.log('Server Error - ', error);
-    });
+    if(this.myusername == "" || this.authCode == "") {
+      alert("Please enter username and autherization code!");
+    }
+    else {
+      this.LoginService.authenticate(this.myusername, this.authCode).subscribe((response) => {
+        debugger;
+        if(response.Result.LoginStatus == true) {
+          this.commonService.setLocalStorageItem('isLoggedIn', '1');
+          this.commonService.setLocalStorageItem('AccessCode', response.Result.AccessCode);
+          this.commonService.setLocalStorageItem('CompanyId', response.Result.UserId);
+          this.commonService.setLocalStorageItem('workflowId', response.Result.workflowId);
+          this.commonService.setLocalStorageItem('workflowNo', response.Result.workflowNo);
+          if(response.Result.AccessCode == "70") {
+            this.router.navigate(["/sysbrijMaster/sysbrijStartNewDeployment"]);
+          }
+          else {
+            this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
+          }
+        }
+        else {
+          alert("Invalid Credentials!");
+        }
+      }, 
+      (error) => {
+        debugger;
+        console.log('Server Error - ', error);
+      }); 
+    }
+  }
+
+  clear() {
+    this.myusername = "";
+    this.authCode = "";
   }
 }
