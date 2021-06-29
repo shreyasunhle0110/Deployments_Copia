@@ -28,7 +28,6 @@ export class SysbrijMyWorkflowsComponent implements OnInit {
   private getWorkflowList()
   {
     this.workflow.getworkflowsList().subscribe((response) => {
-      
       debugger;
       this.myworkflowsList = response.Result;
       console.log(this.myworkflowsList);

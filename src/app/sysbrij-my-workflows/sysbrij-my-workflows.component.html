@@ -19,8 +19,8 @@
                 <td>{{myworkflow.CustomerContact}}</td>
                 <td>{{myworkflow.IntegrationManager}}</td>
                 <td>
-                    <input type="submit" class="btn-success" value="edit" />&nbsp;
-                    <input type="submit" class="btn-warning" value="view" />
+                    <a class="btn btn-success" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId ,'edit']">Edit</a>	&nbsp;
+                    <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                 </td>
             </tr>
         

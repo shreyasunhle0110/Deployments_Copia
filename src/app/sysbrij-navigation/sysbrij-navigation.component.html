@@ -11,7 +11,7 @@
                 <a routerLink="sysbrijMyWorkflows">My Workflows</a>
             </li>
             <li routerLinkActive="active">
-                <a routerLink="sysbrijStartNewDeployment">Start New Deployment</a>
+                <a [routerLink]="['sysbrijStartNewDeployment', '','']">Start New Deployment</a>
             </li>
         </ul>
         <button class="btn btn-danger navbar-btn navbar-right" routerLink="LogOut" (click)="onLogout()"><i class="fa fa-sign-out" aria-hidden="true"></i></button>

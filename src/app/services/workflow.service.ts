@@ -11,24 +11,26 @@ export class WorkflowService extends BaseService{
     constructor(private service: HttpClient) {
         super();
     }
+    // baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
+    baseUrl = "http://localhost:62770/api/";
     workflowRegister(obj): Observable<any> {
-        return this.service.post("http://localhost:62770/api/Workflow", obj);
+        return this.service.post(this.baseUrl + "Workflow", obj);
     }
 
     workflowDetails(workflowId) {
         const params = new HttpParams()
             .set('workflowId', workflowId)
-        return this.service.get("http://localhost:62770/api/Workflow", {params: params})
+        return this.service.get(this.baseUrl + "Workflow", {params: params})
     }
 
     updateWorkflowDetails(obj) {
-        return this.service.post("http://localhost:62770/api/updateWorkflow", obj);
+        return this.service.post(this.baseUrl + "updateWorkflow", obj);
     }
 
     deploymentWorkflow(obj) {
-        return this.service.post("http://localhost:62770/api/workflowDeployment", obj);
+        return this.service.post(this.baseUrl + "workflowDeployment", obj);
     }
     getworkflowsList(): Observable<any>{
-        return this.service.get("http://localhost:62770/api/GetWorkFlowList");
+        return this.service.get(this.baseUrl + "GetWorkFlowList");
     }
 }

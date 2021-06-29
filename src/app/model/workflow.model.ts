@@ -11,7 +11,6 @@ export class WorkflowRegisterModel {
     companyEmail: string;
     companyContactNo: string;
     assignWorkflowToCompanyContact: boolean;
-    sendEmailWithAuthCode: boolean;
     AuthorizationCode: string;
 }
 
@@ -54,6 +53,15 @@ export class customerEntitiesModel {
     townName: string;
     postalCode: string;
     country: string;
+
+    constructor(name, accountNoWithBank, buildingNo, townName, postalCode, country) {
+        this.name = name;
+        this.accountNoWithBank = accountNoWithBank;
+        this.buildingNo = buildingNo;
+        this.townName = townName;
+        this.postalCode = postalCode;
+        this.country = country;
+    }
 }
 
 export class customerERPDetailsModel {
@@ -101,16 +109,16 @@ export class batchJobDetailsModel {
 }
 
 export class workflowFormModel {
-    customerData: customerDataModel
-    customerContat: customerContatModel
-    customerEntities: customerEntitiesModel
-    customerERPDetails: customerERPDetailsModel
-    customerRequirnments: customerRequirnmentsModel
-    installationMachineUATDetails: installationMachineDetailsModel
-    installationMachineProductionDetails: installationMachineDetailsModel
+    customerData: customerDataModel;
+    customerContat: customerContatModel;
+    customerEntitiesList: customerEntitiesModel[];
+    customerERPDetails: customerERPDetailsModel;
+    customerRequirnments: customerRequirnmentsModel;
+    installationMachineUATDetails: installationMachineDetailsModel;
+    installationMachineProductionDetails: installationMachineDetailsModel;
     customerUserList: SysbrijUserModel[];
-    senderEmailData: senderEmailDataModel
-    batchJobDetails: batchJobDetailsModel
+    senderEmailData: senderEmailDataModel;
+    batchJobDetails: batchJobDetailsModel;
     workflowStatusNotes: string;
     modifiedBy: string;
     workflowStatusId: string;
