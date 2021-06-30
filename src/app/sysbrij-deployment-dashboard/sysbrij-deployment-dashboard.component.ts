@@ -10,6 +10,7 @@ import { WorkflowService } from '../services/workflow.service';
 export class SysbrijDeploymentDashboardComponent implements OnInit {
   private IS_LOGGED_IN = 'isLoggedIn';
   myworkflowsList: any;
+  deploymentSpeed : any;
   constructor(private workflow: WorkflowService, private commonService: CommonService) {
     this.init();
   }
@@ -18,6 +19,18 @@ export class SysbrijDeploymentDashboardComponent implements OnInit {
       this.commonService.redirectToPath('/sysbrijHome', true);
     }
     this.getWorkflowList();
+    this.getDeploymentspeed();
+    
+  }
+  private getDeploymentspeed()
+  {
+    this.workflow.getdepoymentSpeed().subscribe((response) => {
+
+      debugger;
+      this.deploymentSpeed = response.Result;
+      console.log(this.myworkflowsList);
+    })
+
   }
   private getWorkflowList() {
     this.workflow.getworkflowsList().subscribe((response) => {

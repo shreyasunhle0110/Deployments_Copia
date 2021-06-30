@@ -17,6 +17,9 @@ export class WorkflowService extends BaseService{
     getworkflowsList(): Observable<any>{
         return this.service.get("http://localhost:62770/api/GetWorkFlowList");
     }
+    getdepoymentSpeed(): Observable<any>{
+        return this.service.get("http://localhost:62770/api/GetDeploymentSpeedList");
+    }
 
     workflowDetails(workflowId) {
         const params = new HttpParams()
