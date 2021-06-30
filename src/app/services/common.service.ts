@@ -39,6 +39,7 @@ export class CommonService extends BaseService {
 
     public setLocalStorageItem(key: string, value: string): void {
         localStorage.setItem(key, value);
+        
     }
 
     public removeLocalStorageItem(key: string): void {

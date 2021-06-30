@@ -9,6 +9,8 @@ import { WorkflowService } from '../services/workflow.service';
 })
 export class SysbrijDeploymentDashboardComponent implements OnInit {
   private IS_LOGGED_IN = 'isLoggedIn';
+  private CompanyId = '';
+  private AccessCode = '';
   myworkflowsList: any;
   deploymentSpeed : any;
   constructor(private workflow: WorkflowService, private commonService: CommonService) {
@@ -33,7 +35,10 @@ export class SysbrijDeploymentDashboardComponent implements OnInit {
 
   }
   private getWorkflowList() {
-    this.workflow.getworkflowsList().subscribe((response) => {
+    this.CompanyId = this.commonService.getLocalStorageItem("CompanyId");
+    this.AccessCode = this.commonService.getLocalStorageItem("AccessCode");
+    debugger;
+    this.workflow.getworkflowsList(this.AccessCode, this.CompanyId).subscribe((response) => {
 
       debugger;
       this.myworkflowsList = response.Result;
