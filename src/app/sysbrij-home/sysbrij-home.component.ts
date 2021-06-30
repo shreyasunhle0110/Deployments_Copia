@@ -14,25 +14,21 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
   myusername: string = '';
   authCode: string = '';
   private emailRegEx = '^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$'
-  loginForm = new FormGroup({
-    userEmail: new FormControl(null, [Validators.required, Validators.pattern(this.emailRegEx)]),
-    authorizationCode: new FormControl(null, [Validators.required]),
-  });
+
   constructor(private router: Router, private LoginService: LoginService, private commonService: CommonService) {
     super();
     this.init();
   }
   private init() {
-    if (this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
-      this.commonService.redirectToPath('/sysbrijMaster/sysbrijDeploymentDashboard', true);
-    }
+     if (this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
+       this.commonService.redirectToPath('sysbrijMaster/sysbrijDeploymentDashboard', true);
+     }
   }
-  get getUserFormRef() { return this.loginForm.controls }
+  //get getUserFormRef() { return this.loginForm.controls }
   ngOnInit() {
 
   }
-  onsubmit() {
-    
+  auth() {
     debugger
     if(this.myusername == "" || this.authCode == "") {
       alert("Please enter username and autherization code!");
@@ -47,7 +43,7 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
           this.commonService.setLocalStorageItem('workflowId', response.Result.workflowId);
           this.commonService.setLocalStorageItem('workflowNo', response.Result.workflowNo);
           if(response.Result.AccessCode == "70") {
-            this.router.navigate(["/sysbrijMaster/sysbrijStartNewDeployment"]);
+            this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
           }
           else {
             this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);

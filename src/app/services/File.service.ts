@@ -15,15 +15,19 @@ export class FileService extends BaseService {
     constructor(private service: HttpClient) {
         super();
     }
+
+    // baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
+    baseUrl = "http://localhost:62770/api/";
+    
     GetHelpFileList(): Observable<any> {
   
-        this.userResponse = this.service.get(this.API_URL+"GetHelpFileList")
+        this.userResponse = this.service.get(this.baseUrl+"GetHelpFileList")
         debugger;
         return this.userResponse
     }
     GetTestFileList(): Observable<any> {
 
-        this.userResponse = this.service.get(this.API_URL + "GetTestFileList")
+        this.userResponse = this.service.get(this.baseUrl + "GetTestFileList")
         debugger;
         return this.userResponse
     }

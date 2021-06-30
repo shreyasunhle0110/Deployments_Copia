@@ -1,7 +1,7 @@
 <h2 class="page-title">Start New Deployment</h2>
 <ul>
   <li>
-    <h3 data-toggle="collapse" href="#form-1" class="tab-heading">Form 1</h3>
+    <h3 data-toggle="collapse" href="#form-1" class="tab-heading">Customer Data</h3>
     <div id="form-1">
       <div class="row">
         <div class="col-md-6">
@@ -81,7 +81,7 @@
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-md-5">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Email WF to Customer Contact </label>
                       <select [(ngModel)]="workflowRegisterModel.assignWorkflowToCompanyContact" class="form-control">
@@ -91,17 +91,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">Send Email With Auth Code</label>
-                      <select [(ngModel)]="workflowRegisterModel.sendEmailWithAuthCode" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option value=true>Yes</option>
-                        <option value=false>No</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Authorization Code</label>
                       <input [(ngModel)]="workflowRegisterModel.AuthorizationCode" type="text" class="form-control" />
@@ -124,7 +114,7 @@
     </div>
   </li>
   <li>
-    <h3 data-toggle="collapse" href="#form-2" class="tab-heading">Form 2</h3>
+    <h3 data-toggle="collapse" href="#form-2" class="tab-heading">Requirnment Collection</h3>
     <div class="collapse" id="form-2">
       <div class="row">
         <div class="col-md-6">
@@ -219,25 +209,25 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Entity Name</label>
-                  <input [(ngModel)]="customerEntitiesModel.name" type="text" class="form-control" />
+                  <input #entityName type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Entity Account Number with Bank </label>
-                  <input [(ngModel)]="customerEntitiesModel.accountNoWithBank" type="text" class="form-control" />
+                  <input #entityAccountNo type="text" class="form-control" />
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Building Number</label>
-                  <input [(ngModel)]="customerEntitiesModel.buildingNo" type="text" class="form-control" />
+                  <input #entityBuildingNo type="text" class="form-control" />
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Town Name</label>
-                  <input [(ngModel)]="customerEntitiesModel.townName" type="text" class="form-control" />
+                  <input #entityTownName type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12">
@@ -245,13 +235,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Postal Code</label>
-                      <input [(ngModel)]="customerEntitiesModel.postalCode" type="text" class="form-control" />
+                      <input #entityPostalCode type="text" class="form-control" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Country</label>
-                      <select [(ngModel)]="customerEntitiesModel.country" class="form-control">
+                      <select #entityCountry class="form-control">
                         <option selected [ngValue]=undefined>Select</option>
                         <option value="1">India</option>
                       </select>
@@ -259,7 +249,40 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-12">
+                <div class="form-group text-right">
+                  <input (click)="addCustomerEntities(entityName, entityAccountNo, entityBuildingNo, entityTownName, entityPostalCode, entityCountry)" class="btn btn-primary" value="Add Entity" type="submit">
+                </div>
+              </div>
             </div>
+            <div *ngIf="customerEntitiesListModel && customerEntitiesListModel.length != 0" class="table-responsive">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Account No</th>
+                      <th>Building No</th>
+                      <th>Town Name</th>
+                      <th>Postal Code</th>
+                      <th>Country</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let entity of customerEntitiesListModel; let i = index">
+                      <td>{{entity.name}}</td>
+                      <td>{{entity.accountNoWithBank}}</td>
+                      <td>{{entity.buildingNo}}</td>
+                      <td>{{entity.townName}}</td>
+                      <td>{{entity.postalCode}}</td>
+                      <td>{{entity.country}}</td>
+                      <td>
+                        <button (click)="removeEntity(i)" class="btn-danger">Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
           </div>
         </div>
         <div class="col-md-6">
@@ -277,83 +300,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="">Any other ERP Details</label>
-                      <input [(ngModel)]="customerERPDetailsModel.erpDetails" type="text" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-12">
-              <h4 class="sub-tab-heading">Customer Requiremets</h4>
-              <div class="form-container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">Input File Mapping</label>
-                      <select [(ngModel)]="customerRequirnmentsModel.inputFileMapping" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option value=true>Yes</option>
-                        <option value=false>No</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">Input File Transformation</label>
-                      <select [(ngModel)]="customerRequirnmentsModel.inputfileTransformation" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option value=true>Yes</option>
-                        <option value=false>No</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">Input File Type</label>
-                      <select [(ngModel)]="customerRequirnmentsModel.inputFileType" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option *ngFor="let inputFileType of inputFileTypeDD" value="{{inputFileType.id}}">
-                          {{inputFileType.value}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">File Encryption</label>
-                      <select [(ngModel)]="customerRequirnmentsModel.fileEncryption" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option *ngFor="let encryption of encryptionDD" value="{{encryption.id}}">
-                          {{encryption.value}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">H2H Encryption</label>
-                      <select [(ngModel)]="customerRequirnmentsModel.h2hEncryption" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option *ngFor="let encryption of encryptionDD" value="{{encryption.id}}">
-                          {{encryption.value}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">Payment Types ( Forward Flow)</label>
-                      <select [(ngModel)]="customerRequirnmentsModel.paymentTypesForDForward" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option *ngFor="let paymentType of paymentTypeDD" value="{{paymentType.id}}">
-                          {{paymentType.value}}
-                        </option>
-                      </select>
+                      <textarea [(ngModel)]="customerERPDetailsModel.erpDetails" class="form-control" rows="12"></textarea>
                     </div>
                   </div>
                 </div>
@@ -362,6 +309,82 @@
           </div>
         </div>
       </div>
+      <br>
+      <div class="row">
+          <div class="col-md-12">
+            <h4 class="sub-tab-heading">Customer Requiremets</h4>
+            <div class="form-container">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">Input File Mapping</label>
+                    <select [(ngModel)]="customerRequirnmentsModel.inputFileMapping" class="form-control">
+                      <option selected [ngValue]=undefined>Select</option>
+                      <option value=true>Yes</option>
+                      <option value=false>No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">Input File Transformation</label>
+                    <select [(ngModel)]="customerRequirnmentsModel.inputfileTransformation" class="form-control">
+                      <option selected [ngValue]=undefined>Select</option>
+                      <option value=true>Yes</option>
+                      <option value=false>No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">Input File Type</label>
+                    <select [(ngModel)]="customerRequirnmentsModel.inputFileType" class="form-control">
+                      <option selected [ngValue]=undefined>Select</option>
+                      <option *ngFor="let inputFileType of inputFileTypeDD" value="{{inputFileType.id}}">
+                        {{inputFileType.value}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">File Encryption</label>
+                    <select [(ngModel)]="customerRequirnmentsModel.fileEncryption" class="form-control">
+                      <option selected [ngValue]=undefined>Select</option>
+                      <option *ngFor="let encryption of encryptionDD" value="{{encryption.id}}">
+                        {{encryption.value}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">H2H Encryption</label>
+                    <select [(ngModel)]="customerRequirnmentsModel.h2hEncryption" class="form-control">
+                      <option selected [ngValue]=undefined>Select</option>
+                      <option *ngFor="let encryption of encryptionDD" value="{{encryption.id}}">
+                        {{encryption.value}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">Payment Types ( Forward Flow)</label>
+                    <select [(ngModel)]="customerRequirnmentsModel.paymentTypesForDForward" class="form-control">
+                      <option selected [ngValue]=undefined>Select</option>
+                      <option *ngFor="let paymentType of paymentTypeDD" value="{{paymentType.id}}">
+                        {{paymentType.value}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       <br>
       <div class="row">
         <div class="col-md-6">
@@ -426,20 +449,20 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Input File Folder Path</label>
                   <input [(ngModel)]="installationMachineDetailsUATModel.inputFileFolderPath" type="text" class="form-control" />
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">Input File Folder Name</label>
-                  <input [(ngModel)]="installationMachineDetailsUATModel.inputFileFolderName" type="text" class="form-control" />
-                </div>
-              </div>
             </div>
             <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Input File Folder Name</label>
+                      <input [(ngModel)]="installationMachineDetailsUATModel.inputFileFolderName" type="text" class="form-control" />
+                    </div>
+                  </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Is This machine Internet Enabled</label>
@@ -451,26 +474,28 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-6">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Does It have any firewall restrictions?</label>
+                      <select [(ngModel)]="installationMachineDetailsUATModel.anyFirewallRestriction" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                        <option value="2">NA</option>
+                      </select>
+                    </div>
+                  </div>
+              <div class="col-md-12">
                 <div class="form-group">
-                  <label for="">Does It have any firewall restrictions?</label>
-                  <select [(ngModel)]="installationMachineDetailsUATModel.anyFirewallRestriction" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
-                  </select>
+                  <label for="">If YES, then specify</label>
+                  <textarea [(ngModel)]="installationMachineDetailsUATModel.firewallRestrictionDetails" class="form-control" rows="3"></textarea>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">If YES, then specify</label>
-                  <input [(ngModel)]="installationMachineDetailsUATModel.firewallRestrictionDetails" type="text" class="form-control" />
-                </div>
-              </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Can we install software remotely on this m/c?</label>
                   <select [(ngModel)]="installationMachineDetailsUATModel.installSoftwareRemotely" class="form-control">
@@ -481,18 +506,16 @@
                   </select>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Remote Access Method</label>
-                  <input [(ngModel)]="installationMachineDetailsUATModel.remoteAccessMethod" type="text" class="form-control" />
+                  <textarea [(ngModel)]="installationMachineDetailsUATModel.remoteAccessMethod" class="form-control" rows="3"></textarea>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Specify any Other </label>
-                  <input [(ngModel)]="installationMachineDetailsUATModel.moreDetails" type="text" class="form-control" />
+                  <textarea [(ngModel)]="installationMachineDetailsUATModel.moreDetails" class="form-control" rows="3"></textarea>
                 </div>
               </div>
             </div>
@@ -560,20 +583,20 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Input File Folder Path</label>
                   <input [(ngModel)]="installationMachineDetailsProductionModel.inputFileFolderPath" type="text" class="form-control" />
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">Input File Folder Name</label>
-                  <input [(ngModel)]="installationMachineDetailsProductionModel.inputFileFolderName" type="text" class="form-control" />
-                </div>
-              </div>
             </div>
             <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Input File Folder Name</label>
+                      <input [(ngModel)]="installationMachineDetailsProductionModel.inputFileFolderName" type="text" class="form-control" />
+                    </div>
+                  </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Is This machine Internet Enabled</label>
@@ -585,49 +608,48 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">Does It have any firewall restrictions?</label>
-                  <select [(ngModel)]="installationMachineDetailsProductionModel.anyFirewallRestriction" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
-                  </select>
-                </div>
-              </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Does It have any firewall restrictions?</label>
+                      <select [(ngModel)]="installationMachineDetailsProductionModel.anyFirewallRestriction" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                        <option value="2">NA</option>
+                      </select>
+                    </div>
+                  </div>
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">If YES, then specify</label>
-                  <input [(ngModel)]="installationMachineDetailsProductionModel.firewallRestrictionDetails" type="text" class="form-control"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">Can we install software remotely on this m/c?</label>
-                  <select [(ngModel)]="installationMachineDetailsProductionModel.installSoftwareRemotely" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
-                  </select>
+                  <textarea [(ngModel)]="installationMachineDetailsProductionModel.firewallRestrictionDetails" class="form-control" rows="3"></textarea>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Can we install software remotely on this m/c?</label>
+                      <select [(ngModel)]="installationMachineDetailsProductionModel.installSoftwareRemotely" class="form-control">
+                        <option selected [ngValue]=undefined>Select</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                        <option value="2">NA</option>
+                      </select>
+                    </div>
+                  </div>
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Remote Access Method</label>
-                  <input [(ngModel)]="installationMachineDetailsProductionModel.remoteAccessMethod" type="text" class="form-control" />
+                  <textarea [(ngModel)]="installationMachineDetailsProductionModel.remoteAccessMethod" class="form-control" rows="3"></textarea>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Specify any Other </label>
-                  <input [(ngModel)]="installationMachineDetailsProductionModel.moreDetails" type="text" class="form-control" />
+                  <textarea [(ngModel)]="installationMachineDetailsProductionModel.moreDetails" class="form-control" rows="3"></textarea>
                 </div>
               </div>
             </div>
@@ -684,7 +706,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="sysbrijUserListModel.length != 0" class="table-responsive">
+            <div *ngIf="sysbrijUserListModel && sysbrijUserListModel.length != 0" class="table-responsive">
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>

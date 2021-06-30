@@ -3,34 +3,24 @@
         <h1 class="sysbrij-auth-container-title">Sysbrij Deployment</h1>
         <div class="sysbrij-auth-sub-container">
             <div class="row">
-                <form [formGroup]="loginForm" (ngSubmit) = "onsubmit()">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Email Address</label>
-                        <input formControlName="userEmail" type="email"   [ngClass]="{'form-control': true,'is-invalid':!getUserFormRef.userEmail.valid && getUserFormRef.userEmail.touched,
-                              'is-valid': getUserFormRef.userEmail.valid}" />
-                        <p *ngIf="getUserFormRef.userEmail.errors?.required && getUserFormRef.userEmail.touched" class="text-danger">
-                            Email field
-                            is required</p>
-                        <p *ngIf="getUserFormRef.userEmail.errors?.pattern && getUserFormRef.userEmail.touched" class="text-danger">
-                            Enter valid
-                            email address
-                        </p>
+                        <input  type="text" [(ngModel)]="myusername" [ngClass]="{'form-control': true}" />
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Authorization Code</label>
-                        <input formControlName="authorizationCode"  type="number" class="form-control" />
+                        <input [(ngModel)]="authCode" type="number" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>;
-                        <input type="button" class="btn btn-danger" value="Cancel" />
+                        <button type="submit" (click)="auth()" class="btn btn-success">Login</button>&nbsp;
+                        <button type="submit" (click)="clear()" class="btn btn-danger">Clear</button>
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </div>

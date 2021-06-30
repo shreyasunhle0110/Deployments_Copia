@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkflowService } from '../services/workflow.service';
 import { WorkflowRegisterModel, SysbrijUserModel, customerDataModel, customerContatModel, customerEntitiesModel, customerERPDetailsModel, customerRequirnmentsModel, installationMachineDetailsModel, senderEmailDataModel, batchJobDetailsModel, workflowFormModel, deploymentModel } from '../model/workflow.model';
-import { Router } from '../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import { CommonService } from '../services/common.service';
 import { dropdownService } from '../services/dropdown.service';
 
@@ -13,10 +13,10 @@ import { dropdownService } from '../services/dropdown.service';
 export class SysbrijStartNewDeploymentComponent implements OnInit {
   private IS_LOGGED_IN = 'isLoggedIn';
   workflowRegisterModel: WorkflowRegisterModel;
-  sysbrijUserListModel: SysbrijUserModel[] = [];
+  sysbrijUserListModel: SysbrijUserModel[] = new Array<SysbrijUserModel>();
   customerDataModel: customerDataModel;
   customerContatModel: customerContatModel;
-  customerEntitiesModel: customerEntitiesModel;
+  customerEntitiesListModel: customerEntitiesModel[] = new Array<customerEntitiesModel>();
   customerERPDetailsModel: customerERPDetailsModel;
   customerRequirnmentsModel: customerRequirnmentsModel;
   installationMachineDetailsUATModel: installationMachineDetailsModel;
@@ -43,13 +43,13 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   constructor(
     private workflowService: WorkflowService,
     private router: Router,
+    private route: ActivatedRoute,
     private commonService: CommonService,
     private dropdownService: dropdownService
   ) {
     this.workflowRegisterModel = new WorkflowRegisterModel();
     this.customerDataModel = new customerDataModel();
     this.customerContatModel = new customerContatModel();
-    this.customerEntitiesModel = new customerEntitiesModel();
     this.customerERPDetailsModel = new customerERPDetailsModel();
     this.customerRequirnmentsModel = new customerRequirnmentsModel();
     this.installationMachineDetailsUATModel = new installationMachineDetailsModel();
@@ -58,12 +58,21 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.batchJobDetailsModel = new batchJobDetailsModel();
     this.workflowFormModel = new workflowFormModel();
     this.deploymentModel = new deploymentModel();
+    this.route.params.subscribe(params => {
+      this.workflowId = params.id;
+    })
+    this.init()
   }
 
+  private init() {
+    if (!this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
+      this.commonService.redirectToPath('/sysbrijHome', true);
+    }
+  }
   ngOnInit(): void {
     var registerDate = new Date();
     this.workflowRegisterModel.date = registerDate.getDate() + " " + this.monthNames[registerDate.getMonth()] + " " + registerDate.getFullYear();
-    this.workflowId = this.commonService.getLocalStorageItem("workflowId");
+    // this.workflowId = this.commonService.getLocalStorageItem("workflowId");
     this.userId = this.commonService.getLocalStorageItem("CompanyId");
     this.inputFileTypeDropdown();
     this.encryptionDropdown();
@@ -96,8 +105,17 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
 
   addSysbrijUser(userName, userEmail, userAddress, userMobile, userRole) {
     debugger;
+    console.log(this.sysbrijUserListModel);
+    if(this.sysbrijUserListModel == null){
+      this.sysbrijUserListModel = new Array<SysbrijUserModel>();
+    }
     this.sysbrijUserListModel.push(
-      new SysbrijUserModel(userName.value, userEmail.value, userAddress.value, userMobile.value, userRole.value)
+      new SysbrijUserModel(
+        userName.value, 
+        userEmail.value, 
+        userAddress.value, 
+        userMobile.value, 
+        userRole.value)
     )
 
     userName.value = "";
@@ -107,8 +125,29 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     userRole.value = "";
   }
 
+  addCustomerEntities(entityName, entityAccountNo, entityBuildingNo, entityTownName, entityPostalCode, entityCountry) {
+    debugger;
+    if(this.customerEntitiesListModel == null){
+      this.customerEntitiesListModel = new Array<customerEntitiesModel>();
+    }
+    this.customerEntitiesListModel.push(
+      new customerEntitiesModel(
+        entityName.value,
+        entityAccountNo.value,
+        entityBuildingNo.value,
+        entityTownName.value,
+        entityPostalCode.value,
+        entityCountry.value
+      )
+    )
+  }
+
   removeUser(index) {
     this.sysbrijUserListModel.splice(index, 1);
+  }
+
+  removeEntity(index) {
+    this.customerEntitiesListModel.splice(index, 1);
   }
 
   workflowDetails(workflowId) {
@@ -120,7 +159,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
         this.workflowRegisterModel = response.Result.workflowForm1;
         this.customerDataModel = response.Result.workflowForm2.customerData;
         this.customerContatModel = response.Result.workflowForm2.customerContat;
-        this.customerEntitiesModel = response.Result.workflowForm2.customerEntities;
+        this.customerEntitiesListModel = response.Result.workflowForm2.customerEntitiesList;
         this.customerERPDetailsModel = response.Result.workflowForm2.customerERPDetails;
         this.customerRequirnmentsModel = response.Result.workflowForm2.customerRequirnments;
         this.installationMachineDetailsUATModel = response.Result.workflowForm2.installationMachineUATDetails;
@@ -141,7 +180,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowFormModel.workflowStatusId = "1";
     this.workflowFormModel.customerData = this.customerDataModel;
     this.workflowFormModel.customerContat = this.customerContatModel;
-    this.workflowFormModel.customerEntities = this.customerEntitiesModel;
+    this.workflowFormModel.customerEntitiesList = this.customerEntitiesListModel;
     this.workflowFormModel.customerERPDetails = this.customerERPDetailsModel;
     this.workflowFormModel.customerRequirnments = this.customerRequirnmentsModel;
     this.workflowFormModel.installationMachineUATDetails = this.installationMachineDetailsUATModel;
@@ -176,7 +215,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowFormModel.workflowStatusId = "2";
     this.workflowFormModel.customerData = this.customerDataModel;
     this.workflowFormModel.customerContat = this.customerContatModel;
-    this.workflowFormModel.customerEntities = this.customerEntitiesModel;
+    this.workflowFormModel.customerEntitiesList = this.customerEntitiesListModel;
     this.workflowFormModel.customerERPDetails = this.customerERPDetailsModel;
     this.workflowFormModel.customerRequirnments = this.customerRequirnmentsModel;
     this.workflowFormModel.installationMachineUATDetails = this.installationMachineDetailsUATModel;

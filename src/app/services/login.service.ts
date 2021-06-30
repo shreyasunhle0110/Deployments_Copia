@@ -13,13 +13,15 @@ export class LoginService extends BaseService{
     constructor(private service: HttpClient) {
         super();
     }
+    // baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
+    baseUrl = "http://localhost:62770/api/";
     authenticate(userEmail: string, AuthCode: string): Observable<any> {
         const params = new HttpParams()
             .set('UserEmail', userEmail)
             .set('AuthCode',AuthCode)
         // let params1 = new HttpParams().set('UserEmail',userEmail)
         // let params2 = new HttpParams().set('AuthCode',AuthCode)
-        this.userResponse = this.service.get("http://localhost:62770/api/GetUserDetails",{params:params})
+        this.userResponse = this.service.get(this.baseUrl + "GetUserDetails",{params:params})
         debugger;
         return this.userResponse
     }

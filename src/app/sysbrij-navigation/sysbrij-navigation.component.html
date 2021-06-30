@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-left">
             <li routerLinkActive="active">
                 <a routerLink="sysbrijDeploymentDashboard">Deployment Dashboard</a>
             </li>
@@ -11,11 +11,9 @@
                 <a routerLink="sysbrijMyWorkflows">My Workflows</a>
             </li>
             <li routerLinkActive="active">
-                <a routerLink="sysbrijStartNewDeployment">Start New Deployment</a>
-            </li>
-            <li routerLinkActive="active">
-                <button routerLink="LogOut" (click)="onLogout()"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                <a [routerLink]="['sysbrijStartNewDeployment', '','']">Start New Deployment</a>
             </li>
         </ul>
+        <button class="btn btn-danger navbar-btn navbar-right" routerLink="LogOut" (click)="onLogout()"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
     </div>
 </nav>

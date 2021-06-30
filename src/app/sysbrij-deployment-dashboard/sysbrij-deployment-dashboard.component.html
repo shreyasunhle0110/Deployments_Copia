@@ -1,4 +1,5 @@
-<div  class="container">
+<h2 class="page-title">Deployment Dashboard</h2>
+<div  class="container-fluid">
     <div class="block dashboardreport" >
         <div class="report-list-container">
             <table class="table table-bordered table-striped ">
@@ -24,7 +25,7 @@
                         <td>{{myworkflow.CreatedOn}}</td>
                         <td>{{myworkflow.CreatedBy}}</td>
                         <td>
-                            <input type="submit" class="btn-warning" value="view" />
+                            <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                         </td>
                     </tr>
         
@@ -65,7 +66,7 @@
                         <td>{{myworkflow.UATCompletetoGoLive}}</td>
                         <td>{{myworkflow.TotalTime}}</td>
                         <td>
-                            <input type="submit" class="btn-warning" value="view" />
+                            <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                         </td>
                     </tr>
     

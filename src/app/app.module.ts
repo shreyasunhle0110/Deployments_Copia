@@ -36,10 +36,10 @@ import { WorkflowPdfComponent } from './workflow-pdf/workflow-pdf.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    DataTablesModule,
     FormsModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   providers: [CommonService, LoginService],
   bootstrap: [AppComponent]

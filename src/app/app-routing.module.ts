@@ -25,7 +25,7 @@ const routes: Routes = [
         path: 'sysbrijDeploymentDashboard', component: SysbrijDeploymentDashboardComponent
       },
       {
-        path: 'sysbrijStartNewDeployment', component: SysbrijStartNewDeploymentComponent
+        path: 'sysbrijStartNewDeployment/:id/:pageStatus', component: SysbrijStartNewDeploymentComponent
       },
       {
         path: 'sysbrijHelpFiles', component: SysbrijHelpFilesComponent
