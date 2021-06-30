@@ -16,8 +16,12 @@ export class WorkflowService extends BaseService{
     workflowRegister(obj): Observable<any> {
         return this.service.post(this.baseUrl + "Workflow", obj);
     }
-    getworkflowsList(): Observable<any>{
-        return this.service.get("http://localhost:62770/api/GetWorkFlowList");
+    getworkflowsList(AccessCode,CompanyId): Observable<any>{
+        const params = new HttpParams()
+                .set('AccessCode',AccessCode)
+                .set('CompanyId',CompanyId)
+
+        return this.service.get("http://localhost:62770/api/GetWorkFlowList",{params:params});
     }
     getdepoymentSpeed(): Observable<any>{
         return this.service.get("http://localhost:62770/api/GetDeploymentSpeedList");

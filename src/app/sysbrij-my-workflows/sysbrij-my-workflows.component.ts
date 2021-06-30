@@ -8,6 +8,8 @@ import { WorkflowService } from '../services/workflow.service';
 })
 export class SysbrijMyWorkflowsComponent implements OnInit {
 
+  private CompanyId = '';
+  private AccessCode = '';
   myworkflowsList: any;
   private IS_LOGGED_IN = 'isLoggedIn';
   dtOptions: DataTables.Settings = {};
@@ -27,7 +29,9 @@ export class SysbrijMyWorkflowsComponent implements OnInit {
   }
   private getWorkflowList()
   {
-    this.workflow.getworkflowsList().subscribe((response) => {
+    this.CompanyId=this.commonService.getLocalStorageItem("CompanyId");
+    this.AccessCode=this.commonService.getLocalStorageItem("AccessCode");
+    this.workflow.getworkflowsList(this.AccessCode,this.CompanyId).subscribe((response) => {
       debugger;
       this.myworkflowsList = response.Result;
       console.log(this.myworkflowsList);
