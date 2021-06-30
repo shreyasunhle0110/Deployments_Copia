@@ -16,6 +16,12 @@ export class WorkflowService extends BaseService{
     workflowRegister(obj): Observable<any> {
         return this.service.post(this.baseUrl + "Workflow", obj);
     }
+    getworkflowsList(): Observable<any>{
+        return this.service.get("http://localhost:62770/api/GetWorkFlowList");
+    }
+    getdepoymentSpeed(): Observable<any>{
+        return this.service.get("http://localhost:62770/api/GetDeploymentSpeedList");
+    }
 
     workflowDetails(workflowId) {
         const params = new HttpParams()
@@ -28,9 +34,8 @@ export class WorkflowService extends BaseService{
     }
 
     deploymentWorkflow(obj) {
+        return this.service.post("http://localhost:62770/api/workflowDeployment", obj);
         return this.service.post(this.baseUrl + "workflowDeployment", obj);
     }
-    getworkflowsList(): Observable<any>{
-        return this.service.get(this.baseUrl + "GetWorkFlowList");
-    }
+
 }

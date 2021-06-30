@@ -20,9 +20,9 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
     this.init();
   }
   private init() {
-    // if (this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
-    //   this.commonService.redirectToPath('/sysbrijDeploymentDashboard', true);
-    // }
+     if (this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
+       this.commonService.redirectToPath('sysbrijMaster/sysbrijDeploymentDashboard', true);
+     }
   }
   //get getUserFormRef() { return this.loginForm.controls }
   ngOnInit() {

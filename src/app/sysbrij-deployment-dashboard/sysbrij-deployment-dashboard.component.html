@@ -25,7 +25,7 @@
                         <td>{{myworkflow.CreatedOn}}</td>
                         <td>{{myworkflow.CreatedBy}}</td>
                         <td>
-                            <input type="submit" class="btn-warning" value="view" />
+                            <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                         </td>
                     </tr>
         
@@ -53,20 +53,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let myworkflow of myworkflowsList">
+                    <tr *ngFor="let myworkflow of deploymentSpeed">
                         <td>{{myworkflow.WorKFlowNo}}</td>
                         <td>{{myworkflow.WFStatus}}</td>
                         <td>{{myworkflow.CustomerName}}</td>
                         <td>{{myworkflow.CustomerContact}}</td>
                         <td>{{myworkflow.IntegrationManager}}</td>
                         <td>{{myworkflow.CreatedOn}}</td>
-                        <td>1 Day</td>
-                        <td>3 Days</td>
-                        <td>2 Days</td>
-                        <td>5 Days</td>
-                        <td>11 Days</td>
+                        <td>{{myworkflow.CreateToReqDocument}}</td>
+                        <td>{{myworkflow.RequestDocumentToInstallation}}</td>
+                        <td>{{myworkflow.InstallationToUATComplete}}</td>
+                        <td>{{myworkflow.UATCompletetoGoLive}}</td>
+                        <td>{{myworkflow.TotalTime}}</td>
                         <td>
-                            <input type="submit" class="btn-warning" value="view" />
+                            <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                         </td>
                     </tr>
     
