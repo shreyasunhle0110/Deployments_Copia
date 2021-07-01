@@ -7,7 +7,7 @@ import { CommonService } from '../services/common.service';
   styleUrls: ['./sysbrij-navigation.component.css']
 })
 export class SysbrijNavigationComponent implements OnInit {
-
+  accessCode: string;
   constructor(private commonService: CommonService) { }
 
   onLogout() {
@@ -15,6 +15,7 @@ export class SysbrijNavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accessCode = this.commonService.getLocalStorageItem("AccessCode");
   }
 
 }

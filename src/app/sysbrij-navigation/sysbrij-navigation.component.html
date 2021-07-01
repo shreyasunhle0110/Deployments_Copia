@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
-            <li routerLinkActive="active">
+            <li *ngIf="accessCode == '99' || accessCode == '90'" routerLinkActive="active">
                 <a routerLink="sysbrijDeploymentDashboard">Deployment Dashboard</a>
             </li>
             <li routerLinkActive="active">
@@ -10,7 +10,7 @@
             <li routerLinkActive="active">
                 <a routerLink="sysbrijMyWorkflows">My Workflows</a>
             </li>
-            <li routerLinkActive="active">
+            <li *ngIf="accessCode == '99' || accessCode == '90' || accessCode == '80'" routerLinkActive="active">
                 <a [routerLink]="['sysbrijStartNewDeployment', '','']">Start New Deployment</a>
             </li>
         </ul>

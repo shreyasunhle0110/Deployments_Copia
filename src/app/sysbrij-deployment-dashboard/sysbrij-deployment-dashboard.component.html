@@ -1,6 +1,7 @@
 <h2 class="page-title">Deployment Dashboard</h2>
-<div  class="container-fluid">
-    <div class="block dashboardreport" >
+<div class="container-fluid">
+    <div class="block dashboardreport">
+        <h4>My Workflow</h4>
         <div class="report-list-container">
             <table class="table table-bordered table-striped ">
                 <thead>
@@ -28,12 +29,13 @@
                             <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                         </td>
                     </tr>
-        
+
                 </tbody>
             </table>
         </div>
     </div>
     <div class="block deploymentspeed">
+        <h4>Deployment Speed</h4>
         <div class="report-list-container">
             <table class="table table-bordered table-striped ">
                 <thead>
@@ -69,7 +71,7 @@
                             <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                         </td>
                     </tr>
-    
+
                 </tbody>
             </table>
         </div>

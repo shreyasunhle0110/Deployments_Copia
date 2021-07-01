@@ -38,6 +38,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   assignToId: string;
   assignToName: string;
   assignToEmail: string;
+  accessCode: string;
   keyword = 'name';
   monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   constructor(
@@ -68,11 +69,12 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     if (!this.commonService.isUserLoggedIn(this.IS_LOGGED_IN)) {
       this.commonService.redirectToPath('/sysbrijHome', true);
     }
+    this.workflowRegisterModel.AuthorizationCode = (Math.floor(Math.random() * 10000000)).toString();
   }
   ngOnInit(): void {
     var registerDate = new Date();
     this.workflowRegisterModel.date = registerDate.getDate() + " " + this.monthNames[registerDate.getMonth()] + " " + registerDate.getFullYear();
-    // this.workflowId = this.commonService.getLocalStorageItem("workflowId");
+    this.accessCode = this.commonService.getLocalStorageItem("AccessCode");
     this.userId = this.commonService.getLocalStorageItem("CompanyId");
     this.inputFileTypeDropdown();
     this.encryptionDropdown();
@@ -87,7 +89,8 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   workflowRegister() {
     this.loaderActive = true;
     this.workflowRegisterModel.status = "1";
-    this.workflowRegisterModel.createdBy = "1";
+    this.workflowRegisterModel.createdBy = this.userId;
+    this.workflowRegisterModel.workflowId = this.workflowId;
     this.workflowService.workflowRegister(this.workflowRegisterModel).subscribe(
       (response: any) => {
         debugger;
@@ -106,15 +109,15 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   addSysbrijUser(userName, userEmail, userAddress, userMobile, userRole) {
     debugger;
     console.log(this.sysbrijUserListModel);
-    if(this.sysbrijUserListModel == null){
+    if (this.sysbrijUserListModel == null) {
       this.sysbrijUserListModel = new Array<SysbrijUserModel>();
     }
     this.sysbrijUserListModel.push(
       new SysbrijUserModel(
-        userName.value, 
-        userEmail.value, 
-        userAddress.value, 
-        userMobile.value, 
+        userName.value,
+        userEmail.value,
+        userAddress.value,
+        userMobile.value,
         userRole.value)
     )
 
@@ -127,7 +130,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
 
   addCustomerEntities(entityName, entityAccountNo, entityBuildingNo, entityTownName, entityPostalCode, entityCountry) {
     debugger;
-    if(this.customerEntitiesListModel == null){
+    if (this.customerEntitiesListModel == null) {
       this.customerEntitiesListModel = new Array<customerEntitiesModel>();
     }
     this.customerEntitiesListModel.push(
@@ -140,6 +143,13 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
         entityCountry.value
       )
     )
+
+    entityName.value = ""
+    entityAccountNo.value = ""
+    entityBuildingNo.value = ""
+    entityTownName.value = ""
+    entityPostalCode.value = ""
+    entityCountry.value = ""
   }
 
   removeUser(index) {
@@ -194,7 +204,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
 
     this.workflowService.updateWorkflowDetails(this.workflowFormModel).subscribe(
       (response: any) => {
-        if(response.Result == true) {
+        if (response.Result == true) {
           this.loaderActiveSaveOnly = false;
           alert("Workflow data updated successfully");
           this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
@@ -229,7 +239,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
 
     this.workflowService.updateWorkflowDetails(this.workflowFormModel).subscribe(
       (response: any) => {
-        if(response.Result == true) {
+        if (response.Result == true) {
           this.loaderActiveSaveDeploy = false;
           alert("Workflow data save successfully");
           this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
@@ -251,27 +261,27 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   encryptionDropdown() {
     this.dropdownService.encryptionDropdown().subscribe((response: any) => {
       this.encryptionDD = response.Result;
-    }) 
+    })
   }
 
   paymentTypeMasterDropdown() {
     this.dropdownService.paymentTypeMasterDropdown().subscribe((response: any) => {
       this.paymentTypeDD = response.Result;
       console.log(this.paymentTypeDD);
-    }) 
+    })
   }
 
   workflowStausMasterDropdown() {
     this.dropdownService.workflowStatusMasterDropdown().subscribe((response: any) => {
       this.workflowStatusDD = response.Result;
-    }) 
+    })
   }
 
   companyUserAutocomplete() {
     this.dropdownService.companyUserAutocomplete().subscribe((response: any) => {
       this.companyUserAutocompleteDD = response.Result;
       console.log(this.companyUserAutocompleteDD);
-    }) 
+    })
   }
 
   selectEvent(item) {
@@ -287,12 +297,165 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.deploymentModel.workflowId = this.workflowId;
 
     this.workflowService.deploymentWorkflow(this.deploymentModel).subscribe((response: any) => {
-      if(response.Result == true) {
+      if (response.Result == true) {
         alert("Workflow assigned successful!");
       }
       else {
         alert("Error!");
       }
     })
+  }
+
+  saveDeployButtonCheck() {
+    debugger;
+    var disabledCheck = true;
+    var customerDataCheck = true;
+    var customerContactCheck = true;
+    var customerEntitiesListCheck = true;
+    var csutomerERPDetailCheck = true;
+    var customerRequirnmentCheck = true;
+    var uatMachineCheck = true;
+    var productionMachineCheck = true;
+    var customerUserListCheck = true;
+    var senderEmailCheck = true;
+    var batchJobDetailCheck = true;
+    var workflowStatusCheck = true;
+    // Customer Data Check
+    for (var key in this.customerDataModel) {
+      var value = this.customerDataModel[key];
+      if (value == "" || value == undefined) {
+        customerDataCheck = true
+        break
+      }
+      else {
+        customerDataCheck = false
+      }
+    }
+
+    // Customer Contact Check
+    for (var key in this.customerContatModel) {
+      var value = this.customerContatModel[key];
+      if (value == "" || value == undefined) {
+        customerContactCheck = true
+        break
+      }
+      else {
+        customerContactCheck = false
+      }
+    }
+
+    // Customer Entities List Check
+    if (this.customerEntitiesListModel.length == 0) {
+      customerEntitiesListCheck = true;
+    }
+    else {
+      customerEntitiesListCheck = false
+    }
+
+    // Customer ERP Detail Check
+    for (var key in this.customerERPDetailsModel) {
+      var value = this.customerERPDetailsModel[key];
+      if (value == "" || value == undefined) {
+        csutomerERPDetailCheck = true
+        break
+      }
+      else {
+        csutomerERPDetailCheck = false
+      }
+    }
+
+    // Customer Requirnment Check
+    for (var key in this.customerRequirnmentsModel) {
+      var value = this.customerRequirnmentsModel[key];
+      if (value == "" || value == undefined) {
+        customerRequirnmentCheck = true
+        break
+      }
+      else {
+        customerRequirnmentCheck = false
+      }
+    };
+
+    // UAT Machine Check
+    for (var key in this.installationMachineDetailsUATModel) {
+      var value = this.installationMachineDetailsUATModel[key];
+      if (value == "" || value == undefined) {
+        uatMachineCheck = true
+        break
+      }
+      else {
+        uatMachineCheck = false
+      }
+    }
+
+    // Production Machine Check
+    for (var key in this.installationMachineDetailsProductionModel) {
+      var value = this.installationMachineDetailsProductionModel[key];
+      if (value == "" || value == undefined) {
+        productionMachineCheck = true
+        break
+      }
+      else {
+        productionMachineCheck = false
+      }
+    }
+
+    // Customer User List Check
+    if (this.sysbrijUserListModel.length == 0) {
+      customerUserListCheck = true;
+    }
+    else {
+      customerUserListCheck = false
+    }
+
+    // Sender Email Check
+    for (var key in this.senderEmailDataModel) {
+      var value = this.senderEmailDataModel[key];
+      if (value == "" || value == undefined) {
+        senderEmailCheck = true
+        break
+      }
+      else {
+        senderEmailCheck = false
+      }
+    }
+
+    // Batch Job Detail Check
+    for (var key in this.batchJobDetailsModel) {
+      var value = this.batchJobDetailsModel[key];
+      if (value == "" || value == undefined) {
+        batchJobDetailCheck = true
+        break
+      }
+      else {
+        batchJobDetailCheck = false
+      }
+    }
+
+    if (this.workflowFormModel.workflowStatusNotes == "" || this.workflowFormModel.workflowStatusNotes == undefined) {
+      workflowStatusCheck = true;
+    } else {
+      workflowStatusCheck = false;
+    }
+
+    if (customerDataCheck == true ||
+      customerContactCheck == true ||
+      customerEntitiesListCheck == true ||
+      csutomerERPDetailCheck == true ||
+      customerRequirnmentCheck == true ||
+      uatMachineCheck == true ||
+      productionMachineCheck == true ||
+      customerUserListCheck == true ||
+      senderEmailCheck == true ||
+      batchJobDetailCheck == true ||
+      workflowStatusCheck == true
+    ) {
+      disabledCheck = true;
+    }
+    else {
+      disabledCheck = false;
+    }
+
+    return disabledCheck;
   }
 }

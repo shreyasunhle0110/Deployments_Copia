@@ -10,8 +10,9 @@ export class WorkflowRegisterModel {
     companyContactName: string;
     companyEmail: string;
     companyContactNo: string;
-    assignWorkflowToCompanyContact: boolean;
+    assignWorkflowToCompanyContact: number;
     AuthorizationCode: string;
+    workflowId: string;
 }
 
 export class SysbrijUserModel {
@@ -31,19 +32,19 @@ export class SysbrijUserModel {
 }
 
 export class customerDataModel {
-    customerName: string;
-    profileIdWithBank: string;
-    buildingNo: string;
-    townName: string;
-    postalCode: string;
-    country: string;
+    customerName: string = "";
+    profileIdWithBank: string = "";
+    buildingNo: string = "";
+    townName: string = "";
+    postalCode: string = "";
+    country: number = 0;
 }
 
 export class customerContatModel {
-    contactName: string;
-    email: string;
-    mobileNo: string;
-    phoneNo: string;
+    contactName: string = "";
+    email: string = "";
+    mobileNo: string = "";
+    phoneNo: string = "";
 }
 
 export class customerEntitiesModel {
@@ -65,47 +66,47 @@ export class customerEntitiesModel {
 }
 
 export class customerERPDetailsModel {
-    nameOrVersion: string;
-    erpDetails: string;
+    nameOrVersion: string = "";
+    erpDetails: string = "";
 }
 
 export class customerRequirnmentsModel {
-    inputFileMapping: number;
-    inputfileTransformation: number;
-    inputFileType: number;
-    fileEncryption: number;
-    h2hEncryption: number;
-    paymentTypesForDForward: number;
+    inputFileMapping: number = 0;
+    inputfileTransformation: number = 0;
+    inputFileType: number = 0;
+    fileEncryption: number = 0;
+    h2hEncryption: number = 0;
+    paymentTypesForDForward: number = 0;
 }
 
 export class installationMachineDetailsModel {
-    whereSysbrijWillInstalled: number;
-    noOfInstallation: string;
-    serverType: string;
-    ipAddress: string;
-    serverOsVersion: string;
-    isMachineConnectedToBankSystem: number;
-    inputFileFolderPath: string;
-    inputFileFolderName: string;
-    isMachineInternateEnabled: number;
-    anyFirewallRestriction: number;
-    firewallRestrictionDetails: string;
-    installSoftwareRemotely: number;
-    remoteAccessMethod: string;
-    moreDetails: string;
+    whereSysbrijWillInstalled: number = 0;
+    noOfInstallation: string = "";
+    serverType: number = 0;
+    ipAddress: string = "";
+    serverOsVersion: string = "";
+    isMachineConnectedToBankSystem: number = 0;
+    inputFileFolderPath: string = "";
+    inputFileFolderName: string = "";
+    isMachineInternateEnabled: number = 0;
+    anyFirewallRestriction: number = 0;
+    firewallRestrictionDetails: string = "";
+    installSoftwareRemotely: number = 0;
+    remoteAccessMethod: string = "";
+    moreDetails: string = "";
 }
 
 export class senderEmailDataModel {
-    emailId: string;
-    emailPassword: string;
-    smtpHost: string;
-    smtpPort: string;
-    receiverEmail: string;
+    emailId: string = "";
+    emailPassword: string = "";
+    smtpHost: string = "";
+    smtpPort: string = "";
+    receiverEmail: string = "";
 }
 
 export class batchJobDetailsModel {
-    frequency: string;
-    setupBatchJobOnYourServer: number;
+    frequency: string = "";
+    setupBatchJobOnYourServer: number = 0;
 }
 
 export class workflowFormModel {

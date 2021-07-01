@@ -85,16 +85,16 @@
                     <div class="form-group">
                       <label for="">Email WF to Customer Contact </label>
                       <select [(ngModel)]="workflowRegisterModel.assignWorkflowToCompanyContact" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
-                        <option value=true>Yes</option>
-                        <option value=false>No</option>
+                        <option selected [ngValue]=0>Select</option>
+                        <option value=1>Yes</option>
+                        <option value=2>No</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Authorization Code</label>
-                      <input [(ngModel)]="workflowRegisterModel.AuthorizationCode" type="text" class="form-control" />
+                      <input [(ngModel)]="workflowRegisterModel.AuthorizationCode" type="text" class="form-control" disabled/>
                     </div>
                   </div>
                 </div>
@@ -113,7 +113,7 @@
       </div>
     </div>
   </li>
-  <li>
+  <li *ngIf = "workflowId != ''">
     <h3 data-toggle="collapse" href="#form-2" class="tab-heading">Requirnment Collection</h3>
     <div class="collapse" id="form-2">
       <div class="row">
@@ -157,7 +157,7 @@
                     <div class="form-group">
                       <label for="">Country</label>
                       <select [(ngModel)]="customerDataModel.country" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
+                        <option selected [ngValue]=0>Select</option>
                         <option value="1">India</option>
                       </select>
                     </div>
@@ -242,7 +242,7 @@
                     <div class="form-group">
                       <label for="">Country</label>
                       <select #entityCountry class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
+                        <option selected [ngValue]=0>Select</option>
                         <option value="1">India</option>
                       </select>
                     </div>
@@ -319,9 +319,9 @@
                   <div class="form-group">
                     <label for="">Input File Mapping</label>
                     <select [(ngModel)]="customerRequirnmentsModel.inputFileMapping" class="form-control">
-                      <option selected [ngValue]=undefined>Select</option>
-                      <option value=true>Yes</option>
-                      <option value=false>No</option>
+                      <option selected [ngValue]=0>Select</option>
+                      <option value=1>Yes</option>
+                      <option value=2>No</option>
                     </select>
                   </div>
                 </div>
@@ -329,9 +329,9 @@
                   <div class="form-group">
                     <label for="">Input File Transformation</label>
                     <select [(ngModel)]="customerRequirnmentsModel.inputfileTransformation" class="form-control">
-                      <option selected [ngValue]=undefined>Select</option>
-                      <option value=true>Yes</option>
-                      <option value=false>No</option>
+                      <option selected [ngValue]=0>Select</option>
+                      <option value=1>Yes</option>
+                      <option value=2>No</option>
                     </select>
                   </div>
                 </div>
@@ -339,7 +339,7 @@
                   <div class="form-group">
                     <label for="">Input File Type</label>
                     <select [(ngModel)]="customerRequirnmentsModel.inputFileType" class="form-control">
-                      <option selected [ngValue]=undefined>Select</option>
+                      <option selected [ngValue]=0>Select</option>
                       <option *ngFor="let inputFileType of inputFileTypeDD" value="{{inputFileType.id}}">
                         {{inputFileType.value}}
                       </option>
@@ -352,7 +352,7 @@
                   <div class="form-group">
                     <label for="">File Encryption</label>
                     <select [(ngModel)]="customerRequirnmentsModel.fileEncryption" class="form-control">
-                      <option selected [ngValue]=undefined>Select</option>
+                      <option selected [ngValue]=0>Select</option>
                       <option *ngFor="let encryption of encryptionDD" value="{{encryption.id}}">
                         {{encryption.value}}
                       </option>
@@ -363,7 +363,7 @@
                   <div class="form-group">
                     <label for="">H2H Encryption</label>
                     <select [(ngModel)]="customerRequirnmentsModel.h2hEncryption" class="form-control">
-                      <option selected [ngValue]=undefined>Select</option>
+                      <option selected [ngValue]=0>Select</option>
                       <option *ngFor="let encryption of encryptionDD" value="{{encryption.id}}">
                         {{encryption.value}}
                       </option>
@@ -374,7 +374,7 @@
                   <div class="form-group">
                     <label for="">Payment Types ( Forward Flow)</label>
                     <select [(ngModel)]="customerRequirnmentsModel.paymentTypesForDForward" class="form-control">
-                      <option selected [ngValue]=undefined>Select</option>
+                      <option selected [ngValue]=0>Select</option>
                       <option *ngFor="let paymentType of paymentTypeDD" value="{{paymentType.id}}">
                         {{paymentType.value}}
                       </option>
@@ -395,7 +395,7 @@
                 <div class="form-group">
                   <label for="">Where will SysBRIJ be installed</label>
                   <select [(ngModel)]="installationMachineDetailsUATModel.whereSysbrijWillInstalled" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Windows</option>
                     <option value="2">Server</option>
                     <option value="3">Laptop</option>
@@ -415,7 +415,7 @@
                 <div class="form-group">
                   <label for="">Server Type</label>
                   <select [(ngModel)]="installationMachineDetailsUATModel.serverType" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Windows</option>
                     <option value="2">Linux</option>
                     <option value="3">NA</option>
@@ -440,10 +440,10 @@
                 <div class="form-group">
                   <label for="">Is this Machine connected to Bank System?</label>
                   <select [(ngModel)]="installationMachineDetailsUATModel.isMachineConnectedToBankSystem" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
+                    <option value="2">No</option>
+                    <option value="3">NA</option>
                   </select>
                 </div>
               </div>
@@ -467,10 +467,10 @@
                 <div class="form-group">
                   <label for="">Is This machine Internet Enabled</label>
                   <select [(ngModel)]="installationMachineDetailsUATModel.isMachineInternateEnabled" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
+                    <option value="2">No</option>
+                    <option value="3">NA</option>
                   </select>
                 </div>
               </div>
@@ -480,10 +480,10 @@
                     <div class="form-group">
                       <label for="">Does It have any firewall restrictions?</label>
                       <select [(ngModel)]="installationMachineDetailsUATModel.anyFirewallRestriction" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
+                        <option selected [ngValue]=0>Select</option>
                         <option value="1">Yes</option>
-                        <option value="0">No</option>
-                        <option value="2">NA</option>
+                        <option value="2">No</option>
+                        <option value="3">NA</option>
                       </select>
                     </div>
                   </div>
@@ -499,10 +499,10 @@
                 <div class="form-group">
                   <label for="">Can we install software remotely on this m/c?</label>
                   <select [(ngModel)]="installationMachineDetailsUATModel.installSoftwareRemotely" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
+                    <option value="2">No</option>
+                    <option value="3">NA</option>
                   </select>
                 </div>
               </div>
@@ -529,7 +529,7 @@
                 <div class="form-group">
                   <label for="">Where will SysBRIJ be installed</label>
                   <select [(ngModel)]="installationMachineDetailsProductionModel.whereSysbrijWillInstalled" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Windows</option>
                     <option value="2">Server</option>
                     <option value="3">Laptop</option>
@@ -549,7 +549,7 @@
                 <div class="form-group">
                   <label for="">Server Type</label>
                   <select [(ngModel)]="installationMachineDetailsProductionModel.serverType" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Windows</option>
                     <option value="2">Linux</option>
                     <option value="3">NA</option>
@@ -574,10 +574,10 @@
                 <div class="form-group">
                   <label for="">Is this Machine connected to Bank System?</label>
                   <select [(ngModel)]="installationMachineDetailsProductionModel.isMachineConnectedToBankSystem" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
+                    <option value="2">No</option>
+                    <option value="3">NA</option>
                   </select>
                 </div>
               </div>
@@ -601,10 +601,10 @@
                 <div class="form-group">
                   <label for="">Is This machine Internet Enabled</label>
                   <select [(ngModel)]="installationMachineDetailsProductionModel.isMachineInternateEnabled" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Yes</option>
-                    <option value="0">No</option>
-                    <option value="2">NA</option>
+                    <option value="2">No</option>
+                    <option value="3">NA</option>
                   </select>
                 </div>
               </div>
@@ -614,10 +614,10 @@
                     <div class="form-group">
                       <label for="">Does It have any firewall restrictions?</label>
                       <select [(ngModel)]="installationMachineDetailsProductionModel.anyFirewallRestriction" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
+                        <option selected [ngValue]=0>Select</option>
                         <option value="1">Yes</option>
-                        <option value="0">No</option>
-                        <option value="2">NA</option>
+                        <option value="2">No</option>
+                        <option value="3">NA</option>
                       </select>
                     </div>
                   </div>
@@ -633,10 +633,10 @@
                     <div class="form-group">
                       <label for="">Can we install software remotely on this m/c?</label>
                       <select [(ngModel)]="installationMachineDetailsProductionModel.installSoftwareRemotely" class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
+                        <option selected [ngValue]=0>Select</option>
                         <option value="1">Yes</option>
-                        <option value="0">No</option>
-                        <option value="2">NA</option>
+                        <option value="2">No</option>
+                        <option value="3">NA</option>
                       </select>
                     </div>
                   </div>
@@ -692,7 +692,7 @@
                     <div class="form-group">
                       <label for="">Role</label>
                       <select #userRole class="form-control">
-                        <option selected [ngValue]=undefined>Select</option>
+                        <option selected [ngValue]=0>Select</option>
                         <option value="1">Admin</option>
                       </select>
                     </div>
@@ -788,9 +788,9 @@
                 <div class="form-group">
                   <label for="">Can vendor Setup Batch jobs on yoursever?</label>
                   <select [(ngModel)]="batchJobDetailsModel.setupBatchJobOnYourServer" class="form-control">
-                    <option selected [ngValue]=undefined>Select</option>
+                    <option selected [ngValue]=0>Select</option>
                     <option value="1">Yes</option>
-                    <option value="0">No</option>
+                    <option value="2">No</option>
                   </select>
                 </div>
               </div>
@@ -818,13 +818,18 @@
           <input *ngIf="loaderActiveSaveOnly != true" type="submit" (click)="workflowSaveOnly()" value="Save Only" class="btn btn-success"
           /> &nbsp;
           <button *ngIf="loaderActiveSaveDeploy == true" class="btn btn-primary" disabled>Please Wait...</button> &nbsp;
-          <input *ngIf="loaderActiveSaveDeploy != true" type="submit" (click)="workflowSaveDeploy()" value="Submit to Deploy" class="btn btn-primary"
+          <input 
+          *ngIf="loaderActiveSaveDeploy != true" 
+          type="submit" (click)="workflowSaveDeploy()" 
+          value="Submit to Deploy" 
+          class="btn btn-primary"
+          [disabled]=saveDeployButtonCheck()
           />
         </div>
       </div>
     </div>
   </li>
-  <li>
+  <li *ngIf="accessCode == '99' && workflowId != ''">
     <h3 data-toggle="collapse" href="#form-3" class="tab-heading">Deployment Section</h3>
     <div class="collapse" id="form-3">
       <div class="form-container">
@@ -833,7 +838,7 @@
             <div class="form-group">
               <label for="">Workflow Status</label>
               <select [(ngModel)]="deploymentModel.workflowStatusId" class="form-control">
-                <option selected [ngValue]=undefined>Select</option>
+                <option selected [ngValue]=0>Select</option>
                 <option *ngFor="let workflow of workflowStatusDD" value="{{workflow.id}}">
                   {{workflow.value}}
                 </option>
