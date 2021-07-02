@@ -89,23 +89,40 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   }
 
   workflowRegister() {
+    debugger;
     this.loaderActive = true;
-    this.workflowRegisterModel.status = "1";
-    this.workflowRegisterModel.createdBy = this.userId;
-    this.workflowRegisterModel.workflowId = this.workflowId;
-    this.workflowService.workflowRegister(this.workflowRegisterModel).subscribe(
-      (response: any) => {
-        debugger;
-        if (response.Result == true) {
-          this.loaderActive = false;
-          alert("Company Register Successfull!");
-          this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
-        }
-        else {
-          this.loaderActive = false;
-          alert("Error!");
-        }
-      })
+    if (
+      this.workflowRegisterModel.hsbcPersonName != undefined
+      && this.workflowRegisterModel.hsbcIntegrationManagerName != undefined
+      && this.workflowRegisterModel.hsbcIntegrationManagerEmail != undefined
+      && this.workflowRegisterModel.hsbcmobileNo != undefined
+      && this.workflowRegisterModel.companyName != undefined
+      && this.workflowRegisterModel.companyContactName != undefined
+      && this.workflowRegisterModel.companyEmail != undefined
+      && this.workflowRegisterModel.companyContactNo != undefined
+      && this.workflowRegisterModel.assignWorkflowToCompanyContact != 0
+      && this.workflowRegisterModel.assignWorkflowToCompanyContact != undefined) {
+      this.workflowRegisterModel.status = "1";
+      this.workflowRegisterModel.createdBy = this.userId;
+      this.workflowRegisterModel.workflowId = this.workflowId;
+      this.workflowService.workflowRegister(this.workflowRegisterModel).subscribe(
+        (response: any) => {
+          debugger;
+          if (response.Result == true) {
+            this.loaderActive = false;
+            alert("Company Register Successfull!");
+            this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
+          }
+          else {
+            this.loaderActive = false;
+            alert("Error!");
+          }
+        })
+    }
+    else {
+      alert("Please fill all the fields");
+      this.loaderActive = false;
+    }
   }
 
   addSysbrijUser(userName, userEmail, userAddress, userMobile, userRole) {
@@ -191,12 +208,12 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.loaderActiveSaveOnly = true;
     this.workflowFormModel.modifiedBy = this.userId;
     this.workflowFormModel.workflowId = this.workflowId;
-    if(this.saveDeployCheck != "1") {
+    if (this.saveDeployCheck != "1") {
       this.workflowFormModel.workflowStatusId = "1";
     } else {
       this.workflowFormModel.workflowStatusId = "2";
     }
-    
+
     this.workflowFormModel.customerData = this.customerDataModel;
     this.workflowFormModel.customerContat = this.customerContatModel;
     this.workflowFormModel.customerEntitiesList = this.customerEntitiesListModel;
@@ -208,8 +225,6 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowFormModel.senderEmailData = this.senderEmailDataModel;
     this.workflowFormModel.batchJobDetails = this.batchJobDetailsModel;
     this.workflowFormModel.buttonStatus = "save only";
-
-    console.log(this.workflowFormModel);
 
     this.workflowService.updateWorkflowDetails(this.workflowFormModel).subscribe(
       (response: any) => {
