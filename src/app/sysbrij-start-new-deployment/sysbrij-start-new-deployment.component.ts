@@ -39,7 +39,9 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   assignToName: string;
   assignToEmail: string;
   accessCode: string;
+  saveDeployCheck: string;
   keyword = 'name';
+  workflowHistory = [];
   monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   constructor(
     private workflowService: WorkflowService,
@@ -166,6 +168,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
         debugger;
         console.log("The result is - ");
         console.log(response);
+        this.saveDeployCheck = response.Result.saveDeployCheck;
         this.workflowRegisterModel = response.Result.workflowForm1;
         this.customerDataModel = response.Result.workflowForm2.customerData;
         this.customerContatModel = response.Result.workflowForm2.customerContat;
@@ -178,6 +181,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
         this.batchJobDetailsModel = response.Result.workflowForm2.batchJobDetails;
         this.workflowFormModel.workflowStatusNotes = response.Result.workflowForm2.workflowStatusNotes;
         this.sysbrijUserListModel = response.Result.workflowForm2.customerUserList;
+        this.workflowHistory = response.Result.workflowHistory;
       }
     )
   }
@@ -187,7 +191,12 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.loaderActiveSaveOnly = true;
     this.workflowFormModel.modifiedBy = this.userId;
     this.workflowFormModel.workflowId = this.workflowId;
-    this.workflowFormModel.workflowStatusId = "1";
+    if(this.saveDeployCheck != "1") {
+      this.workflowFormModel.workflowStatusId = "1";
+    } else {
+      this.workflowFormModel.workflowStatusId = "2";
+    }
+    
     this.workflowFormModel.customerData = this.customerDataModel;
     this.workflowFormModel.customerContat = this.customerContatModel;
     this.workflowFormModel.customerEntitiesList = this.customerEntitiesListModel;
@@ -307,7 +316,6 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   }
 
   saveDeployButtonCheck() {
-    debugger;
     var disabledCheck = true;
     var customerDataCheck = true;
     var customerContactCheck = true;
@@ -438,7 +446,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
       workflowStatusCheck = false;
     }
 
-    if (customerDataCheck == true ||
+    if ((customerDataCheck == true ||
       customerContactCheck == true ||
       customerEntitiesListCheck == true ||
       csutomerERPDetailCheck == true ||
@@ -448,7 +456,8 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
       customerUserListCheck == true ||
       senderEmailCheck == true ||
       batchJobDetailCheck == true ||
-      workflowStatusCheck == true
+      workflowStatusCheck == true) ||
+      (this.saveDeployCheck == "1" && this.accessCode != '99')
     ) {
       disabledCheck = true;
     }

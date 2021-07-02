@@ -40,3 +40,13 @@ ul, li {
     color: #fff;
     font-size: 16px;
 }
+
+.disabled-container {
+    background: #fff;
+    opacity: .3;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
