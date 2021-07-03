@@ -12,6 +12,7 @@ import { dropdownService } from '../services/dropdown.service';
 })
 export class SysbrijStartNewDeploymentComponent implements OnInit {
   private IS_LOGGED_IN = 'isLoggedIn';
+  pageStatus: string = "";
   workflowRegisterModel: WorkflowRegisterModel;
   sysbrijUserListModel: SysbrijUserModel[] = new Array<SysbrijUserModel>();
   customerDataModel: customerDataModel;
@@ -27,7 +28,8 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   deploymentModel: deploymentModel;
   loaderActive: boolean = false;
   loaderActiveSaveOnly: boolean = false;
-  loaderActiveSaveDeploy: boolean = false
+  loaderActiveSaveDeploy: boolean = false;
+  loaderActiveSave: boolean = false;
   workflowId: string = "";
   userId: string = "";
   inputFileTypeDD: any;
@@ -41,6 +43,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   accessCode: string;
   saveDeployCheck: string;
   keyword = 'name';
+  initialValue: any;
   workflowHistory = [];
   monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   constructor(
@@ -63,6 +66,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.deploymentModel = new deploymentModel();
     this.route.params.subscribe(params => {
       this.workflowId = params.id;
+      this.pageStatus = params.pageStatus;
     })
     this.init()
   }
@@ -183,8 +187,15 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowService.workflowDetails(workflowId).subscribe(
       (response: any) => {
         debugger;
-        console.log("The result is - ");
-        console.log(response);
+        this.deploymentModel.assignToId = response.Result.deploymentDetails.assignToId;
+        this.deploymentModel.workflowStatusId = response.Result.deploymentDetails.workflowStatusId;
+        for(var i = 0; i<this.companyUserAutocompleteDD.length; i++) {
+          if(this.companyUserAutocompleteDD[i].id == this.deploymentModel.assignToId) {
+            this.initialValue = this.companyUserAutocompleteDD[i];
+            // this.selectEvent(this.companyUserAutocompleteDD[i]);
+            break;
+          }
+        }
         this.saveDeployCheck = response.Result.saveDeployCheck;
         this.workflowRegisterModel = response.Result.workflowForm1;
         this.customerDataModel = response.Result.workflowForm2.customerData;
@@ -316,6 +327,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   }
 
   deploymentWorkflow() {
+    this.loaderActiveSave = true;
     this.deploymentModel.assignToId = this.assignToId;
     this.deploymentModel.assignById = this.userId;
     this.deploymentModel.workflowId = this.workflowId;
@@ -323,9 +335,12 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowService.deploymentWorkflow(this.deploymentModel).subscribe((response: any) => {
       if (response.Result == true) {
         alert("Workflow assigned successful!");
+        this.loaderActiveSave = false;
+        this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
       }
       else {
         alert("Error!");
+        this.loaderActiveSave = false;
       }
     })
   }
