@@ -20,7 +20,8 @@
                 <td>{{myworkflow.IntegrationManager}}</td>
                 <td>
                     <a class="btn btn-success" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId ,'edit']">Edit</a>	&nbsp;
-                    <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
+                    <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>&nbsp;
+                    <a class="btn btn-default" [routerLink]="['../../sysbrijWorkflowPDF', myworkflow.WorkflowId]">PDF</a>
                 </td>
             </tr>
         </tbody>

@@ -189,11 +189,12 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
         debugger;
         this.deploymentModel.assignToId = response.Result.deploymentDetails.assignToId;
         this.deploymentModel.workflowStatusId = response.Result.deploymentDetails.workflowStatusId;
-        for(var i = 0; i<this.companyUserAutocompleteDD.length; i++) {
-          if(this.companyUserAutocompleteDD[i].id == this.deploymentModel.assignToId) {
-            this.initialValue = this.companyUserAutocompleteDD[i];
-            // this.selectEvent(this.companyUserAutocompleteDD[i]);
-            break;
+        if(this.companyUserAutocompleteDD != undefined) {
+          for(var i = 0; i<this.companyUserAutocompleteDD.length; i++) {
+            if(this.companyUserAutocompleteDD[i].id == this.deploymentModel.assignToId) {
+              this.initialValue = this.companyUserAutocompleteDD[i];
+              break;
+            }
           }
         }
         this.saveDeployCheck = response.Result.saveDeployCheck;
@@ -497,4 +498,14 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
 
     return disabledCheck;
   }
+
+  handleUpload(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        console.log(reader.result);
+        this.workflowFormModel.attachment = reader.result.toString().split(",").pop();
+    };
+}
 }

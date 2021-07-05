@@ -2,7 +2,9 @@
 <ul>
   <li style="position: relative;">
     <h3 data-toggle="collapse" href="#form-1" class="tab-heading">Customer Data</h3>
-    <button class="btn-info" data-toggle="modal" data-target="#customerDataDetails"><i class="fa fa-info-circle" aria-hidden="true"></i></button> 
+    <button class="btn-info" data-toggle="modal" data-target="#customerDataDetails">
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+    </button>
     <div id="form-1">
       <div class="row">
         <div class="col-md-6">
@@ -828,20 +830,7 @@
       </div>
       <br>
       <div class="row">
-        <div class="col-md-6">
-          <h4 class="sub-tab-heading">Current Status / Notes</h4>
-          <div class="form-container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="">Current Status / Notes</label>
-                  <textarea [(ngModel)]="workflowFormModel.workflowStatusNotes" class="form-control" rows="5"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <h4 class="sub-tab-heading">Workflow Log</h4>
           <div class="form-container">
             <table class="table table-bordered table-striped">
@@ -862,6 +851,36 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <h4 class="sub-tab-heading">Current Status / Notes</h4>
+          <div class="form-container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="">Current Status / Notes</label>
+                  <textarea [(ngModel)]="workflowFormModel.workflowStatusNotes" class="form-control" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h4 class="sub-tab-heading">Attachment</h4>
+          <div class="form-container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="">Current Status / Notes</label>
+                  <input type="file" (change)="handleUpload($event)" class="form-control">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -898,8 +917,8 @@
             <div class="form-group">
               <label for="">Assign To</label>
               <div class="ng-autocomplete" style="width: 100%">
-                <ng-autocomplete [data]="companyUserAutocompleteDD"  [initialValue]="initialValue" [searchKeyword]="keyword" (selected)='selectEvent($event)' [itemTemplate]="itemTemplate"
-                  [notFoundTemplate]="notFoundTemplate">
+                <ng-autocomplete [data]="companyUserAutocompleteDD" [initialValue]="initialValue" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+                  [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
                 </ng-autocomplete>
                 <ng-template #itemTemplate let-item>
                   <a [innerHTML]="item.name"></a>
@@ -925,7 +944,8 @@
         </div>
         <div *ngIf="pageStatus != 'view'" class="form-submit-container text-right">
           <div class="form-group">
-            <input *ngIf="loaderActiveSave == false" (click)="deploymentWorkflow()" type="submit" value="Save" class="btn btn-success" />
+            <input *ngIf="loaderActiveSave == false" (click)="deploymentWorkflow()" type="submit" value="Save" class="btn btn-success"
+            />
             <button *ngIf="loaderActiveSave == true" class="btn btn-success" disabled>Please Wait...</button> &nbsp;
           </div>
         </div>
@@ -936,21 +956,21 @@
 
 <!-- Modal -->
 <div id="customerDataDetails" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-  
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
       </div>
-  
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
+
   </div>
+</div>

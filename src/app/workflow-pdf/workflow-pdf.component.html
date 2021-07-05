@@ -1,7 +1,7 @@
 <br>
 <div class="container-fluid">
     <div class="pdf-container">
-        <h3 class="text-center">Workflow Details</h3>
+        <h3 class="text-center">Workflow Details <span style="font-size: 16px">[ Workflow No - {{workflowDetailObject.workflowNo}} ]</span></h3>
         <div class="row">
             <div class="col-xs-12">
                 <h4 class="sub-tab-heading">Customer Data</h4>
@@ -51,7 +51,7 @@
                             <label for="">Country</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerData.country}}</p>
+                            <p *ngIf = "workflowDetailObject.workflowForm2.customerData.country == '1'">India</p>
                         </div>
                     </div>
                 </div>
@@ -96,54 +96,28 @@
             <div class="col-xs-12">
                 <h4 class="sub-tab-heading">Customer Entities</h4>
                 <div class="form-container">
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <label for="">Entity Name</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerEntities.name}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <label for="">Entity Account No with Bank</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerEntities.accountNoWithBank}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <label for="">Building No</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerEntities.buildingNo}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <label for="">Town Name</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerEntities.townName}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <label for="">Postal Code</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerEntities.postalCode}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <label for="">Country</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerEntities.country}}</p>
-                        </div>
-                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Account No</th>
+                                <th>Building No</th>
+                                <th>Town Name</th>
+                                <th>Postal Code</th>
+                                <th>Country</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let entity of workflowDetailObject.workflowForm2.customerEntitiesList">
+                                <td>{{entity.name}}</td>
+                                <td>{{entity.accountNoWithBank}}</td>
+                                <td>{{entity.buildingNo}}</td>
+                                <td>{{entity.townName}}</td>
+                                <td>{{entity.postalCode}}</td>
+                                <td>{{entity.country}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="col-xs-12">
@@ -175,7 +149,8 @@
                             <label for="">Input File Mapping</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerRequirnments.inputFileMapping}}</p>
+                            <p *ngIf="workflowDetailObject.workflowForm2.customerRequirnments.inputFileMapping == 1 else ifm">Yes</p>
+                            <ng-template #ifm>No</ng-template>
                         </div>
                     </div>
                     <div class="row">
@@ -183,7 +158,8 @@
                             <label for="">Input File Transformation</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerRequirnments.inputfileTransformation}}</p>
+                            <p *ngIf="workflowDetailObject.workflowForm2.customerRequirnments.inputfileTransformation == 1 else ift">Yes</p>
+                            <ng-template #ift>No</ng-template>
                         </div>
                     </div>
                     <div class="row">
@@ -191,7 +167,13 @@
                             <label for="">Input File Type</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerRequirnments.inputFileType}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.customerRequirnments.inputFileType">
+                                <p *ngSwitchCase="1">XLS</p>
+                                <p *ngSwitchCase="2">XLSX</p>
+                                <p *ngSwitchCase="3">TXT</p>
+                                <p *ngSwitchCase="4">XML</p>
+                                <p *ngSwitchCase="5">BANK Approved XML Format</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -199,7 +181,12 @@
                             <label for="">File Encryption</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerRequirnments.fileEncryption}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.customerRequirnments.fileEncryption">
+                                <p *ngSwitchCase="1">Forward</p>
+                                <p *ngSwitchCase="2">Reverse</p>
+                                <p *ngSwitchCase="3">Both</p>
+                                <p *ngSwitchCase="4">Not Required</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -207,7 +194,12 @@
                             <label for="">H2H Encryption</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerRequirnments.h2hEncryption}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.customerRequirnments.h2hEncryption">
+                                <p *ngSwitchCase="1">Forward</p>
+                                <p *ngSwitchCase="2">Reverse</p>
+                                <p *ngSwitchCase="3">Both</p>
+                                <p *ngSwitchCase="4">Not Required</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -215,7 +207,12 @@
                             <label for="">Payment Types ( Forward Flow)</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.customerRequirnments.paymentTypesForDForward}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.customerRequirnments.paymentTypesForDForward">
+                                <p *ngSwitchCase="1">NEFT</p>
+                                <p *ngSwitchCase="2">RTGS</p>
+                                <p *ngSwitchCase="3">Bulkpay</p>
+                                <p *ngSwitchCase="4">IMPS</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +225,12 @@
                             <label for="">Where will SysBRIJ be installed</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineUATDetails.whereSysbrijWillInstalled}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineUATDetails.whereSysbrijWillInstalled">
+                                <p *ngSwitchCase="1">Windows</p>
+                                <p *ngSwitchCase="2">Server</p>
+                                <p *ngSwitchCase="3">Laptop</p>
+                                <p *ngSwitchCase="4">Desktop</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -244,7 +246,11 @@
                             <label for="">Server Type</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineUATDetails.serverType}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineUATDetails.serverType">
+                                <p *ngSwitchCase="1">Windows</p>
+                                <p *ngSwitchCase="2">Linux</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -268,7 +274,11 @@
                             <label for="">Is this Machine connected to Bank System?</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineUATDetails.isMachineConnectedToBankSystem}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineUATDetails.isMachineConnectedToBankSystem">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -292,7 +302,11 @@
                             <label for="">Is This machine Internet Enabled</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineUATDetails.isMachineInternateEnabled}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineUATDetails.isMachineInternateEnabled">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -300,7 +314,11 @@
                             <label for="">Does It have any firewall restrictions?</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineUATDetails.anyFirewallRestriction}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineUATDetails.anyFirewallRestriction">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -316,7 +334,11 @@
                             <label for="">Can we install software remotely on this m/c?</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineUATDetails.installSoftwareRemotely}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineUATDetails.installSoftwareRemotely">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -345,7 +367,12 @@
                             <label for="">Where will SysBRIJ be installed</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineProductionDetails.whereSysbrijWillInstalled}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineProductionDetails.whereSysbrijWillInstalled">
+                                <p *ngSwitchCase="1">Windows</p>
+                                <p *ngSwitchCase="2">Server</p>
+                                <p *ngSwitchCase="3">Laptop</p>
+                                <p *ngSwitchCase="4">Desktop</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -361,7 +388,11 @@
                             <label for="">Server Type</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineProductionDetails.serverType}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineProductionDetails.serverType">
+                                <p *ngSwitchCase="1">Windows</p>
+                                <p *ngSwitchCase="2">Linux</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -385,7 +416,11 @@
                             <label for="">Is this Machine connected to Bank System?</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineProductionDetails.isMachineConnectedToBankSystem}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineProductionDetails.isMachineConnectedToBankSystem">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -409,7 +444,11 @@
                             <label for="">Is This machine Internet Enabled</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineProductionDetails.isMachineInternateEnabled}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineProductionDetails.isMachineInternateEnabled">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -417,7 +456,11 @@
                             <label for="">Does It have any firewall restrictions?</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineProductionDetails.anyFirewallRestriction}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineProductionDetails.anyFirewallRestriction">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -433,7 +476,11 @@
                             <label for="">Can we install software remotely on this m/c?</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.installationMachineProductionDetails.installSoftwareRemotely}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.installationMachineProductionDetails.installSoftwareRemotely">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                                <p *ngSwitchCase="3">NA</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -468,7 +515,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor = "let user of workflowDetailObject.workflowForm2.customerUserList;">
+                            <tr *ngFor="let user of workflowDetailObject.workflowForm2.customerUserList;">
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
                                 <td>{{user.address}}</td>
@@ -522,7 +569,7 @@
                             <p>{{workflowDetailObject.workflowForm2.senderEmailData.receiverEmail}}</p>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-xs-12">
@@ -541,7 +588,10 @@
                             <label for="">Can vendor Setup Batch jobs on yoursever?</label>
                         </div>
                         <div class="col-xs-7">
-                            <p>{{workflowDetailObject.workflowForm2.batchJobDetails.setupBatchJobOnYourServer}}</p>
+                            <div [ngSwitch]="workflowDetailObject.workflowForm2.batchJobDetails.setupBatchJobOnYourServer">
+                                <p *ngSwitchCase="1">Yes</p>
+                                <p *ngSwitchCase="2">No</p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -21,10 +21,10 @@ export class WorkflowService extends BaseService{
                 .set('AccessCode',AccessCode)
                 .set('CompanyId',CompanyId)
 
-        return this.service.get("http://localhost:62770/api/GetWorkFlowList",{params:params});
+        return this.service.get(this.baseUrl + "GetWorkFlowList",{params:params});
     }
     getdepoymentSpeed(): Observable<any>{
-        return this.service.get("http://localhost:62770/api/GetDeploymentSpeedList");
+        return this.service.get(this.baseUrl + "GetDeploymentSpeedList");
     }
 
     workflowDetails(workflowId) {
@@ -38,7 +38,7 @@ export class WorkflowService extends BaseService{
     }
 
     deploymentWorkflow(obj) {
-        return this.service.post("http://localhost:62770/api/workflowDeployment", obj);
+        return this.service.post(this.baseUrl + "workflowDeployment", obj);
         return this.service.post(this.baseUrl + "workflowDeployment", obj);
     }
 

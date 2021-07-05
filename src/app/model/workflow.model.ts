@@ -125,6 +125,7 @@ export class workflowFormModel {
     workflowStatusId: string;
     workflowId: string;
     buttonStatus: string;
+    attachment: any;
 }
 
 export class deploymentModel {
