@@ -209,6 +209,7 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
         this.senderEmailDataModel = response.Result.workflowForm2.senderEmailData;
         this.batchJobDetailsModel = response.Result.workflowForm2.batchJobDetails;
         this.workflowFormModel.workflowStatusNotes = response.Result.workflowForm2.workflowStatusNotes;
+        this.workflowFormModel.attachmentFileName = response.Result.workflowForm2.attachmentFileName;
         this.sysbrijUserListModel = response.Result.workflowForm2.customerUserList;
         this.workflowHistory = response.Result.workflowHistory;
       }
@@ -500,7 +501,9 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   }
 
   handleUpload(event) {
+    debugger;
     const file = event.target.files[0];
+    this.workflowFormModel.attachmentFileName = file.name;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
