@@ -127,6 +127,7 @@ export class workflowFormModel {
     buttonStatus: string;
     attachment: any;
     attachmentFileName: string;
+    RequirnmentProvidedDate: string;
 }
 
 export class deploymentModel {

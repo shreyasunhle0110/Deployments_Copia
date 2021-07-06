@@ -829,7 +829,7 @@
         </div>
       </div>
       <br>
-      <div class="row">
+      <div class="row" *ngIf="workflowHistory.length != 0">
         <div class="col-md-12">
           <h4 class="sub-tab-heading">Workflow Log</h4>
           <div class="form-container">
@@ -876,7 +876,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="">Current Status / Notes</label>
+                  <label for="">Select File</label>
                   <input type="file" (change)="handleUpload($event)" class="form-control">
                 </div>
               </div>

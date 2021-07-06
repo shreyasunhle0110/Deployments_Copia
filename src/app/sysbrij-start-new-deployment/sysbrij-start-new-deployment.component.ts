@@ -270,6 +270,8 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
     this.workflowFormModel.customerUserList = this.sysbrijUserListModel;
     this.workflowFormModel.senderEmailData = this.senderEmailDataModel;
     this.workflowFormModel.batchJobDetails = this.batchJobDetailsModel;
+    var requirnmentProvidedDate = new Date();
+    this.workflowFormModel.RequirnmentProvidedDate = requirnmentProvidedDate.getDate() + " " + this.monthNames[requirnmentProvidedDate.getMonth()] + " " + requirnmentProvidedDate.getFullYear();
     this.workflowFormModel.buttonStatus = "save deploy";
 
     console.log(this.workflowFormModel);
