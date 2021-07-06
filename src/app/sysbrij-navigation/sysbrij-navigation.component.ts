@@ -8,6 +8,8 @@ import { CommonService } from '../services/common.service';
 })
 export class SysbrijNavigationComponent implements OnInit {
   accessCode: string;
+  userName: string;
+  userCompany: string;
   constructor(private commonService: CommonService) { }
 
   onLogout() {
@@ -16,6 +18,8 @@ export class SysbrijNavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.accessCode = this.commonService.getLocalStorageItem("AccessCode");
+    this.userName = this.commonService.getLocalStorageItem("userName");
+    this.userCompany = this.commonService.getLocalStorageItem("userCompany");
   }
 
 }

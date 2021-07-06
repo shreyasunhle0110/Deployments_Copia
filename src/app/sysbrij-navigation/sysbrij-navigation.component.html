@@ -14,6 +14,18 @@
                 <a [routerLink]="['sysbrijStartNewDeployment', '','']">Start New Deployment</a>
             </li>
         </ul>
-        <button class="btn btn-danger navbar-btn navbar-right" routerLink="LogOut" (click)="onLogout()"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+        <ul class="nav navbar-nav navbar-right" style="background-color: #333">
+            <li>
+                <p class="navbar-text">User : {{userName}}</p>
+            </li>
+            <li>
+                <p class="navbar-text">Company : {{userCompany}}</p>
+            </li>
+            <li>
+                <button class="btn btn-danger navbar-btn" routerLink="LogOut" (click)="onLogout()">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
     </div>
 </nav>
