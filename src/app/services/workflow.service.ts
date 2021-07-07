@@ -39,7 +39,6 @@ export class WorkflowService extends BaseService{
 
     deploymentWorkflow(obj) {
         return this.service.post(this.baseUrl + "workflowDeployment", obj);
-        return this.service.post(this.baseUrl + "workflowDeployment", obj);
     }
 
 }

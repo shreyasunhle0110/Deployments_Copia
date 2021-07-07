@@ -331,22 +331,33 @@ export class SysbrijStartNewDeploymentComponent implements OnInit {
   }
 
   deploymentWorkflow() {
+    debugger;
     this.loaderActiveSave = true;
     this.deploymentModel.assignToId = this.assignToId;
     this.deploymentModel.assignById = this.userId;
     this.deploymentModel.workflowId = this.workflowId;
+    var workflowStatusDate = new Date();
+    this.deploymentModel.date = workflowStatusDate.getDate() + " " + this.monthNames[workflowStatusDate.getMonth()] + " " + workflowStatusDate.getFullYear();
 
-    this.workflowService.deploymentWorkflow(this.deploymentModel).subscribe((response: any) => {
-      if (response.Result == true) {
-        alert("Workflow assigned successful!");
-        this.loaderActiveSave = false;
-        this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
-      }
-      else {
-        alert("Error!");
-        this.loaderActiveSave = false;
-      }
-    })
+    if(this.deploymentModel.workflowStatusId == "0" || this.deploymentModel.workflowStatusId == undefined) {
+      alert("Please select workflow status");
+    }
+    else if(this.deploymentModel.assignToId == "" || this.deploymentModel.assignToId == undefined) {
+      alert("Please enter assign to name")
+    }
+    else {
+      this.workflowService.deploymentWorkflow(this.deploymentModel).subscribe((response: any) => {
+        if (response.Result == true) {
+          alert("Workflow assigned successful!");
+          this.loaderActiveSave = false;
+          this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
+        }
+        else {
+          alert("Error!");
+          this.loaderActiveSave = false;
+        }
+      })
+    }
   }
 
   saveDeployButtonCheck() {

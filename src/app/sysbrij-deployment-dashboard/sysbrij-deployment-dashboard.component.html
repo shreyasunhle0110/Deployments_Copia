@@ -37,21 +37,22 @@
     <div class="block deploymentspeed">
         <h4>Deployment Speed</h4>
         <div class="report-list-container">
-            <table class="table table-bordered table-striped ">
-                <thead>
+            <table class="table table-bordered table-striped text-center">
+                <thead class="text-center">
                     <tr>
-                        <th>Workflow No</th>
-                        <th>Status</th>
-                        <th>Customer Name</th>
-                        <th>Customer Contact</th>
-                        <th>Integration Manager</th>
-                        <th>Created On</th>
-                        <th>Create to request Document</th>
-                        <th>request documnent to installation</th>
-                        <th>installation to UAT complete</th>
-                        <th>UAT completion to GoLive</th>
-                        <th>Total Time</th>
-                        <th>Action</th>
+                        <th class="text-center">Workflow No</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Customer Name</th>
+                        <th class="text-center">Customer Contact</th>
+                        <th class="text-center">Integration Manager</th>
+                        <th class="text-center">Created<br>To<br>Requirnment Provided</th>
+                        <th class="text-center">Requirnment Provided<br> To<br> Instalation Complete</th>
+                        <th class="text-center">Instalation Complete<br> To<br> UAT Inprocess</th>
+                        <th class="text-center">UAT Inprocess<br> To<br> UAT Complete</th>
+                        <th class="text-center">UAT Complete<br> To<br> Production Installation</th>
+                        <th class="text-center">Production Installation<br> To<br> Go Live</th>
+                        <th class="text-center">Total Time</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,12 +62,13 @@
                         <td>{{myworkflow.CustomerName}}</td>
                         <td>{{myworkflow.CustomerContact}}</td>
                         <td>{{myworkflow.IntegrationManager}}</td>
-                        <td>{{myworkflow.CreatedOn}}</td>
-                        <td>{{myworkflow.CreateToReqDocument}}</td>
-                        <td>{{myworkflow.RequestDocumentToInstallation}}</td>
-                        <td>{{myworkflow.InstallationToUATComplete}}</td>
-                        <td>{{myworkflow.UATCompletetoGoLive}}</td>
-                        <td>{{myworkflow.TotalTime}}</td>
+                        <td>{{myworkflow.CreatedToRequirnmentProvided}} days</td>
+                        <td>{{myworkflow.RequirnmentProvidedToInstallationCompleted}} days</td>
+                        <td>{{myworkflow.InstallationCompletedToUatInprocess}} days</td>
+                        <td>{{myworkflow.UatInprocessToUatCompleteDate}} days</td>
+                        <td>{{myworkflow.UatCompleteDateToProductionInstallation}} days</td>
+                        <td>{{myworkflow.ProductionInstallationToGoLive}} days</td>
+                        <td>{{myworkflow.TotalTime}} days</td>
                         <td>
                             <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
                         </td>

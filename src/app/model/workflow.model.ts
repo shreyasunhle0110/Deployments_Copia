@@ -135,4 +135,5 @@ export class deploymentModel {
     assignToId: string;
     assignById: string;
     workflowId: string;
+    date: string;
 }
