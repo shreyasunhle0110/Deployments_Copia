@@ -11,8 +11,8 @@ export class WorkflowService extends BaseService{
     constructor(private service: HttpClient) {
         super();
     }
-    // baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
-    baseUrl = "http://localhost:62770/api/";
+    baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
+    // baseUrl = "http://localhost:62770/api/";
     workflowRegister(obj): Observable<any> {
         return this.service.post(this.baseUrl + "Workflow", obj);
     }

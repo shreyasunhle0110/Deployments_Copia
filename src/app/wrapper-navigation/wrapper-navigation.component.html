@@ -1,0 +1,56 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+            <li *ngIf="accessCode == '99' || accessCode == '90'">
+                <a routerLink="/sysbrijHome">Home</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="wrapperOverview">Overview</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="wrapperIntegration">Integration</a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test Sites
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="http://java.copiacs.com/" target="_blank">Java</a>
+                    </li>
+                    <li>
+                        <a href="http://dotnet.copiacs.com/" target="_blank">Dot Net</a>
+                    </li>
+                    <li>
+                        <a href="http://angularnode.copiacs.com/" target="_blank">Node Js</a>
+                    </li>
+                    <li>
+                        <a href="http://wordpress.copiacs.com/" target="_blank">Wordpress</a>
+                    </li>
+                    <li>
+                        <a href="http://php.copiacs.com/" target="_blank">Php</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="wrapperMyWorkflows">My Workflows</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="wrapperStartNewDeployment">Start New Deployment</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <p class="navbar-text">User : {{userName}}</p>
+            </li>
+            <li>
+                <p class="navbar-text">Company : {{userCompany}}</p>
+            </li>
+            <li>
+                <button (click)="onLogout()" class="btn btn-danger navbar-btn">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>

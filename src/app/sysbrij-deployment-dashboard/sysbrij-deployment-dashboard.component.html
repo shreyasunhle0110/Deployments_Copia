@@ -52,7 +52,7 @@
                         <th class="text-center">UAT Complete<br> To<br> Production Installation</th>
                         <th class="text-center">Production Installation<br> To<br> Go Live</th>
                         <th class="text-center">Total Time</th>
-                        <th class="text-center">Action</th>
+                        <!-- <th class="text-center">Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -69,9 +69,9 @@
                         <td>{{myworkflow.UatCompleteDateToProductionInstallation}} days</td>
                         <td>{{myworkflow.ProductionInstallationToGoLive}} days</td>
                         <td>{{myworkflow.TotalTime}} days</td>
-                        <td>
+                        <!-- <td>
                             <a class="btn btn-warning" [routerLink]="['../sysbrijStartNewDeployment', myworkflow.WorkflowId,'view']">View</a>
-                        </td>
+                        </td> -->
                     </tr>
 
                 </tbody>

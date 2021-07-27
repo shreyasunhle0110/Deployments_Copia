@@ -1,0 +1,48 @@
+.img-container {
+    width: 30%;
+    margin: 0 auto;
+    padding: 14px 0;
+}
+
+.tile-active {
+    box-shadow: 3px 3px 9px #216b91;
+}
+
+.img-container img { width: 100%; }
+
+.technology-tiles {
+    background: #fff;
+    display: block;
+}
+
+.technology-name {
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
+    font-size: 16px;
+    padding: 12px;
+    margin: 0;
+    text-align: center;
+}
+
+.btn-group a {
+    border-radius: unset;
+    font-size: 15px !important;
+    background-color: #f6f7fa;
+    color: #5d5d5d;
+    border-color: #dadada;
+    padding: 10px 0;
+}
+
+.wordpress .img-container {
+    width: 15%;
+}
+
+.dotnet .img-container {
+    width: 19.5%;
+}
+
+.android .img-container {
+    width: 16.7%;
+}
+
+a { cursor: pointer; }

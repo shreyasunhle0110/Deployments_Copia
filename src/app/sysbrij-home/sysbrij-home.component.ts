@@ -48,7 +48,7 @@ export class SysbrijHomeComponent extends BaseComponent implements OnInit {
             this.router.navigate(["/sysbrijMaster/sysbrijMyWorkflows"]);
           }
           else {
-            this.router.navigate(["/sysbrijMaster/sysbrijDeploymentDashboard"]);
+            this.router.navigate(["/sysbrijHome"]);
           }
         }
         else {

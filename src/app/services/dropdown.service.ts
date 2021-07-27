@@ -10,8 +10,8 @@ export class dropdownService extends BaseService {
         super();
     }
 
-    // baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
-    baseUrl = "http://localhost:62770/api/";
+    baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
+    // baseUrl = "http://localhost:62770/api/";
 
     inputFileTypeDropdown() {
         return this.service.get(this.baseUrl + "inputFileTypeDropdown")

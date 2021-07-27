@@ -1,0 +1,84 @@
+<h2 class="page-title">Integration</h2>
+<div>
+    <div class="row">
+        <div class="col-sm-4">
+            <a routerLink="wrapperNodeDetail" [routerLinkActive]="'tile-active'" fragment="IntegrationDetails" class="technology-tiles nodejs">
+                <div class="img-container">
+                    <img src="../../assets/images/nodejsLogo.png" alt="">
+                </div>
+                <h3 class="technology-name">Node Js</h3>
+                <!-- <div class="btn-group btn-group-justified">
+                    <a href="#" class="btn btn-default">Doc</a>
+                    <a href="#" class="btn btn-default">Download</a>
+                </div> -->
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a routerLink="wrapperPhpDetail" [routerLinkActive]="'tile-active'" fragment="IntegrationDetails" class="technology-tiles php">
+                <div class="img-container">
+                    <img src="../../assets/images/phpLogo.png" alt="">
+                </div>
+                <h3 class="technology-name">Php</h3>
+                <!-- <div class="btn-group btn-group-justified">
+                    <a href="#" class="btn btn-default">Doc</a>
+                    <a href="#" class="btn btn-default">Download</a>
+                </div> -->
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="technology-tiles wordpress">
+                <div class="img-container">
+                    <img src="../../assets/images/wordpressLogo.png" alt="">
+                </div>
+                <h3 class="technology-name">Wordpress</h3>
+                <!-- <div class="btn-group btn-group-justified">
+                    <a href="#" class="btn btn-default">Doc</a>
+                    <a href="#" class="btn btn-default">Download</a>
+                </div> -->
+            </a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="technology-tiles java">
+                <div class="img-container">
+                    <img src="../../assets/images/javaLogo.png" alt="">
+                </div>
+                <h3 class="technology-name">Java</h3>
+                <!-- <div class="btn-group btn-group-justified">
+                    <a href="#" class="btn btn-default">Doc</a>
+                    <a href="#" class="btn btn-default">Download</a>
+                </div> -->
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="technology-tiles dotnet">
+                <div class="img-container">
+                    <img src="../../assets/images/dotNetLogo.png" alt="">
+                </div>
+                <h3 class="technology-name">Dot Net</h3>
+                <!-- <div class="btn-group btn-group-justified">
+                    <a href="#" class="btn btn-default">Doc</a>
+                    <a href="#" class="btn btn-default">Download</a>
+                </div> -->
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="technology-tiles android">
+                <div class="img-container">
+                    <img src="../../assets/images/androidLogo.png" alt="">
+                </div>
+                <h3 class="technology-name">Android</h3>
+                <!-- <div class="btn-group btn-group-justified">
+                    <a href="#" class="btn btn-default">Doc</a>
+                    <a href="#" class="btn btn-default">Download</a>
+                </div> -->
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<div id="IntegrationDetails">
+    <router-outlet></router-outlet>
+</div>

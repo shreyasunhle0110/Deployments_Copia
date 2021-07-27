@@ -16,8 +16,8 @@ export class FileService extends BaseService {
         super();
     }
 
-    // baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
-    baseUrl = "http://localhost:62770/api/";
+    baseUrl = "http://deploymentsiteapi.copiacs.com/api/";
+    // baseUrl = "http://localhost:62770/api/";
     
     GetHelpFileList(): Observable<any> {
   

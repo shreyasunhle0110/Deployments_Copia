@@ -1,6 +1,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
+            <li *ngIf="accessCode == '99' || accessCode == '90'">
+                <a routerLink="/sysbrijHome">Home</a>
+            </li>
             <li *ngIf="accessCode == '99' || accessCode == '90'" routerLinkActive="active">
                 <a routerLink="sysbrijDeploymentDashboard">Deployment Dashboard</a>
             </li>

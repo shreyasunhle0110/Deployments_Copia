@@ -19,6 +19,15 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { LoginService } from './services/login.service';
 import { CommonService } from './services/common.service';
 import { WorkflowPdfComponent } from './workflow-pdf/workflow-pdf.component';
+import { WrapperPageContainerComponent } from './wrapper-page-container/wrapper-page-container.component';
+import { WrapperNavigationComponent } from './wrapper-navigation/wrapper-navigation.component';
+import { WrapperIntegrationDetailComponent } from './wrapper-integration-detail/wrapper-integration-detail.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { WrapperStartNewDeploymentComponent } from './wrapper-start-new-deployment/wrapper-start-new-deployment.component';
+import { WrapperMyWorkflowsComponent } from './wrapper-my-workflows/wrapper-my-workflows.component';
+import { WrapperOverviewComponent } from './wrapper-overview/wrapper-overview.component';
+import { WrapperNodeDetailComponent } from './wrapper-node-detail/wrapper-node-detail.component';
+import { WrapperPhpDetailComponent } from './wrapper-php-detail/wrapper-php-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +39,16 @@ import { WorkflowPdfComponent } from './workflow-pdf/workflow-pdf.component';
     SysbrijStartNewDeploymentComponent, 
     SysbrijHelpFilesComponent,
     SysbrijMyWorkflowsComponent,
-    WorkflowPdfComponent
+    WorkflowPdfComponent,
+    WrapperPageContainerComponent,
+    WrapperNavigationComponent,
+    WrapperIntegrationDetailComponent,
+    PageNotFoundComponent,
+    WrapperStartNewDeploymentComponent,
+    WrapperMyWorkflowsComponent,
+    WrapperOverviewComponent,
+    WrapperNodeDetailComponent,
+    WrapperPhpDetailComponent
   ],
   imports: [
     BrowserModule,
