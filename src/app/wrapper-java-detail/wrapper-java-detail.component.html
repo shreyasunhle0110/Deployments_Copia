@@ -1,6 +1,6 @@
 <div class="document-container container-fluid">
   <h1 class="document-title text-center">Omni Channel Wrapper Code -
-    <span class="language-name">Node Js</span>
+    <span class="language-name">Java</span>
   </h1>
   <div class="row document-content-container">
     <div class="col-md-2">
@@ -13,21 +13,24 @@
             <a>Pre-requisities</a>
           </li>
           <li>
-            <a routerLink="../wrapperNodeDetail" fragment="stepsImplementation">Steps of Implementation</a>
+            <a routerLink="../wrapperJavaDetail" fragment="stepsImplementation">Steps of Implementation</a>
             <ul>
               <li>
-                <a routerLink="../wrapperNodeDetail" fragment="newPayment">newPayment</a>
+                <a routerLink="../wrapperJavaDetail" fragment="newPayment">newPayment</a>
               </li>
               <li>
-                <a routerLink="../wrapperNodeDetail" fragment="paymentEnquiry">paymentEnquiry</a>
+                <a routerLink="../wrapperJavaDetail" fragment="paymentEnquiry">paymentEnquiry</a>
               </li>
               <li>
-                <a routerLink="../wrapperNodeDetail" fragment="paymentCancellation">paymentCancellation</a>
+                <a routerLink="../wrapperJavaDetail" fragment="paymentCancellation">paymentCancellation</a>
+              </li>
+              <li>
+                <a routerLink="../wrapperJavaDetail" fragment="logFile">Log File</a>
+              </li>
+              <li>
+                <a routerLink="../wrapperJavaDetail" fragment="callApi">CallingAPI</a>
               </li>
             </ul>
-          </li>
-          <li>
-            <a routerLink="../wrapperNodeDetail" fragment="codeDetails">Code Level Documentation</a>
           </li>
         </ol>
       </div>
@@ -36,8 +39,8 @@
       <section class="document-section overview-container">
         <h2 class="document-section-title">1. Overview</h2>
         <p>
-          Wrapper code has three functionalities which are submit Online payment, payment enquiry and cancel and refund the payment.
-          One needs to follow below points to implement these functionalities on merchants side.
+          Wrapper code has three functionalities which are submit payment, payment status enquiry and Order cancel and refund the payment.
+          This document describes the steps to be followed to include the Wrapper code in merchant website implementation.
         </p>
       </section>
       <section class="document-section overview-container">
@@ -47,25 +50,44 @@
         </p>
         <div class="pre-requisit-list-container">
           <ul>
-            <li>"^2.2""node-jose": "^2.0.0"</li>
-            <li>"winston": "^3.3.3"</li>
+            <li>apache-commons-lang.jar</li>
+            <li>asm-1.0.2.jar</li>
+            <li>com.fasterxml.jackson.core.jar</li>
+            <li>com.fasterxml.jackson.databind.jar</li>
+            <li>commons-codec-1.11.jar</li>
+            <li>commons-logging-1.2.jar</li>
+            <li>gson-2.8.2.jar</li>
+            <li>httpclient-4.5.13.jar</li>
+            <li>httpcore-4.4.13.jar</li>
+            <li>jackson-annotations-2.1.2.jar</li>
+            <li>java-json.jar</li>
+            <li>javax.annotation.jar</li>
+            <li>javax.servlet.jar</li>
+            <li>json-smart-2.2.1.jar</li>
+            <li>log4j-1.2.17.jar</li>
+            <li>log4j-core-2.8.2.jar</li>
+            <li>nimbus-jose-jwt-5.8.0.wso2v1.jar</li>
+            <li>org.apache.commons.io.jar</li>
+            <li>org.springframework.core-3.0.4.RELEASE.jar</li>
           </ul>
         </div>
       </section>
       <section class="document-section overview-container" id="stepsImplementation">
         <h2 class="document-section-title">3. Steps of Implementation</h2>
         <p>
-          After installation of the packages, one needs to add methods of wrapper code into code of merchant’s website. Merchant just
-          need to copy and paste the methods into his coding files.
+          After installation of the packages, one needs to add methods of wrapper code into merchant’s website code. Merchant just
+          needs to copy and paste the methods into his coding files.
         </p>
         <p>
-          These logical methods are related to the Bank’s API call, encryption, decryption and Payment gateway functionality. Below
-          are the details of every method along with the method call.
+          These logical methods are related to API call, encryption, decryption and Payment gateway functionality. Below are the details
+          of every method along with the method call.
         </p>
         <div class="method-detail" id="newPayment">
           <h3 class="method-title">newPayment</h3>
-          <p>This method is used to submit the payment and it has to be calledfrom merchant’s website code which gets called
-            on click of payment button.</p>
+          <p>
+            This method is used to submit the payment and it has to be called from merchant’s new payment code which gets called on click
+            of payment button.
+          </p>
           <p>This is a parameterized method which requires some arguments to be passed in it.</p>
           <p>Below are the method details with the Method call. The arguments need to be of specific types as mentioned.</p>
           <div class="syntax-container">
@@ -93,8 +115,8 @@
                   Format of this property
                   <div class="code-view">
                     <pre>
-                          <code [innerHTML]="systemObject"></code>
-                        </pre>
+                                <code [innerHTML]="systemObject"></code>
+                              </pre>
                   </div>
                 </li>
               </ul>
@@ -110,8 +132,8 @@
                   Format of this property
                   <div class="code-view">
                     <pre>
-                          <code [innerHTML]="paymentObject"></code>
-                        </pre>
+                                <code [innerHTML]="paymentObject"></code>
+                              </pre>
                   </div>
                 </li>
               </ul>
@@ -134,8 +156,8 @@
                   Format of this property
                   <div class="code-view">
                     <pre>
-                           <code [innerHTML]="customerObject"></code>
-                        </pre>
+                                 <code [innerHTML]="customerObject"></code>
+                              </pre>
                   </div>
                 </li>
               </ul>
@@ -149,8 +171,8 @@
                   Format of this property
                   <div class="code-view">
                     <pre>
-                          <code [innerHTML]="orderObject"></code>
-                        </pre>
+                                <code [innerHTML]="orderObject"></code>
+                              </pre>
                   </div>
                 </li>
               </ul>
@@ -163,8 +185,8 @@
                   Format of this property
                   <div class="code-view">
                     <pre>
-                          <code [innerHTML]="otherObject"></code>
-                        </pre>
+                                <code [innerHTML]="otherObject"></code>
+                              </pre>
                   </div>
                 </li>
               </ul>
@@ -266,134 +288,13 @@
           </div>
           <p>This method returns JSON response.</p>
         </div>
-      </section>
-      <section class="document-section overview-container" id="codeDetails">
-        <h2 class="document-section-title">4. Code Level Documentation</h2>
-        <p>There are seven methods, one API and constant.js file on which the whole wrapper code is dependant.</p>
-        <div class="method-detail">
-          <h3 class="method-title">Method Names</h3>
-          <ul>
-            <li>newPayment(txnRef, system, payment, merchant, customer, order, other)</li>
-            <li>paymentEnquiry(txnRef, merchant)</li>
-            <li>paymentCancellation(refundNotificationURL, txnRef, rfdRef, amount, currency, merId)</li>
-            <li>CallingAPI(message, APILink, merchant)</li>
-            <li>keyStoreData()</li>
-            <li>logMaintainFunction(payload, encyption, response, decryption, errorMsg, label)</li>
-            <li>cleanObject(obj)</li>
-          </ul>
+        <div class="method-detail" id="logFile">
+          <h3 class="method-title">Log Files</h3>
+          <p>Create info.log file in the project and give path in log4j.properties file.</p>
         </div>
-        <div class="method-detail">
-          <h3 class="method-title">API Name</h3>
-          <ul>
-            <li>CallbackNotification</li>
-          </ul>
-        </div>
-        <div class="method-detail">
-          <h3 class="method-title">File Name</h3>
-          <ul>
-            <li>Constant.js</li>
-          </ul>
-        </div>
-        <div class="method-detail">
-          <h3 class="method-title">Details of each Method | API | File</h3>
-          <div class="method-detail">
-            <h3 class="method-title">newPayment</h3>
-            <p>This method uses to make payment</p>
-            <button title='copy code' class="copy-btn" (click)="copyBtn(paymentMethodCode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="paymentMethodCode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">paymentEnquiry</h3>
-            <p>This method helps to do payment enquiry</p>
-            <button title='copy code' class="copy-btn" (click)="copyBtn(paymentEnquiryMethodCode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="paymentEnquiryMethodCode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">paymentCancellation</h3>
-            <p>This method helps to cancel and refund the payment</p>
-            <div class="code-view">
-              <button title='copy code' class="copy-btn" (click)="copyBtn(paymentCancellationMethodCode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-              <pre>
-                <code [innerHTML]="paymentCancellationMethodCode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">callingAPI</h3>
-            <p>This method uses to call the API’s</p>
-            <button title='copy code' class="copy-btn" (click)="copyBtn(callingAPICode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="callingAPICode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">keyStoreData</h3>
-            <p>This method returns the proper format of the keys which helps to encrypt the payload and also returns the key
-              store.</p>
-              <button title='copy code' class="copy-btn" (click)="copyBtn(keystoreDataMethodCode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="keystoreDataMethodCode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">logMaintainFunction</h3>
-            <p>This method maintains the log of each transaction. Just need to mention the log file path in Constant.js file.</p>
-            <button title='copy code' class="copy-btn" (click)="copyBtn(logMaintainFunctionMethodCode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="logMaintainFunctionMethodCode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">cleanObject</h3>
-            <p>
-              This method uses to adjust the optional properties inside the payload. If optional property value is blank or empty then
-              this method removes those properties from payload while sending payload as request parameter to API.
-            </p>
-            <button title='copy code' class="copy-btn" (click)="copyBtn(cleanObjectMethodCode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="cleanObjectMethodCode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">API Name - CallbackNotification</h3>
-            <p>
-              This is an API created at merchant side. HSBC will call this API from their end to send payment status of current transaction to the merchant side and merchant send response in acknowledgment.
-            </p>
-            <button title='copy code' class="copy-btn" (click)="copyBtn(callbackNotificationAPICode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="callbackNotificationAPICode"></code>
-              </pre>
-            </div>
-          </div>
-          <div class="method-detail">
-            <h3 class="method-title">File Name - constant.js</h3>
-            <p>
-              This file contains the all important data related the whole functionality where merchant can replace with their own data. If merchant already have constant file then copy the all properties of this file in their Constant file.
-            </p>
-            <button title='copy code' class="copy-btn" (click)="copyBtn(constantFileCode)"><i class="fa fa-clone" aria-hidden="true"></i></button>
-            <div class="code-view">
-              <pre>
-                <code [innerHTML]="constantFileCode"></code>
-              </pre>
-            </div>
-          </div>
+        <div class="method-detail" id="callApi">
+          <h3 class="method-title">CallingAPI</h3>
+          <p>This method has API calling code which helps to call Bank’s API.</p>
         </div>
       </section>
     </div>

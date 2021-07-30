@@ -1,0 +1,294 @@
+<div class="document-container container-fluid">
+    <h1 class="document-title text-center">Omni Channel Wrapper Code -
+        <span class="language-name">Dot Net</span>
+    </h1>
+    <div class="row document-content-container">
+        <div class="col-md-2">
+            <div class="document-index">
+                <ol>
+                    <li>
+                        <a>Overview</a>
+                    </li>
+                    <li>
+                        <a>Pre-requisities</a>
+                    </li>
+                    <li>
+                        <a routerLink="../wrapperDotnetDetail" fragment="stepsImplementation">Steps of Implementation</a>
+                        <ul>
+                            <li>
+                                <a routerLink="../wrapperDotnetDetail" fragment="newPayment">newPayment</a>
+                            </li>
+                            <li>
+                                <a routerLink="../wrapperDotnetDetail" fragment="paymentEnquiry">paymentEnquiry</a>
+                            </li>
+                            <li>
+                                <a routerLink="../wrapperDotnetDetail" fragment="paymentCancellation">paymentCancellation</a>
+                            </li>
+                            <li>
+                                <a routerLink="../wrapperDotnetDetail" fragment="logFile">Log File</a>
+                            </li>
+                            <li>
+                                <a routerLink="../wrapperDotnetDetail" fragment="callApi">CallingAPI</a>
+                            </li>
+                            <li>
+                                <a routerLink="../wrapperDotnetDetail" fragment="iisSetting">IIS Setting</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-10 document-description-container">
+            <section class="document-section overview-container">
+                <h2 class="document-section-title">1. Overview</h2>
+                <p>
+                    Wrapper code has three functionalities which are submit payment, payment status enquiry and Order cancel and refund the payment.
+                    This document describes the steps to be followed to include the Wrapper code in merchant website implementation.
+                </p>
+            </section>
+            <section class="document-section overview-container">
+                <h2 class="document-section-title">2. Pre-requisities</h2>
+                <p>
+                    Install packages given below inside merchant’s Website code:
+                </p>
+                <div class="pre-requisit-list-container">
+                    <ul>
+                        <li>jose-jwt (v3.1.1): You can get this package from NuGet Package Manager or NuGet Console using command:</li>
+                        <li>Install-Package jose-jwt -Version 3.1.1</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="document-section overview-container" id="stepsImplementation">
+                <h2 class="document-section-title">3. Steps of Implementation</h2>
+                <p>
+                    After installation of the packages, one needs to add methods of wrapper code into merchant’s website code. Merchant just
+                    needs to copy and paste the methods into his coding files.
+                </p>
+                <p>
+                    These logical methods are related to API call, encryption, decryption and Payment gateway functionality. Below are the details
+                    of every method along with the method call.
+                </p>
+                <div class="method-detail" id="newPayment">
+                    <h3 class="method-title">newPayment</h3>
+                    <p>
+                        This method is used to submit the payment and it has to be called from merchant’s new payment code which gets called on click
+                        of payment button.
+                    </p>
+                    <p>This is a parameterized method which requires some arguments to be passed in it.</p>
+                    <p>Below are the method details with the Method call. The arguments need to be of specific types as mentioned.</p>
+                    <div class="syntax-container">
+                        <h4>Method Syntax</h4>
+                        <p>newPayment(txnRef, system, payment, merchant, customer, order, other)</p>
+                    </div>
+                    <div class="arguments-detail-container">
+                        <h4>Arguments Detail</h4>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">txnRef</h5>
+                            <ul>
+                                <li>This is transaction reference number.</li>
+                                <li>It is string data type.</li>
+                                <li>This should be unique.</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">system </h5>
+                            <ul>
+                                <li>Data type of this property is JSON object.</li>
+                                <li>
+                                    This property has four properties name as redirectSuccessUrl, redirectFailUrl, redirectCancelUrl, notificationUrl.
+                                </li>
+                                <li>
+                                    Format of this property
+                                    <div class="code-view">
+                                        <pre>
+                                      <code [innerHTML]="systemObject"></code>
+                                    </pre>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">payment </h5>
+                            <ul>
+                                <li>Data type of this property is JSON object.</li>
+                                <li>
+                                    This property has few properties name as country, currency, amount, payment_option expiry, offers.
+                                </li>
+                                <li>
+                                    Format of this property
+                                    <div class="code-view">
+                                        <pre>
+                                      <code [innerHTML]="paymentObject"></code>
+                                    </pre>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">merchant </h5>
+                            <ul>
+                                <li>Data type of this property is string.</li>
+                                <li>This property is for merchant id.</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">customer </h5>
+                            <ul>
+                                <li>Data type of this property is JSON object</li>
+                                <li>
+                                    This property has four properties which are customer_firstname, customer_lastname, customer_email, customer_phone.
+                                </li>
+                                <li>
+                                    Format of this property
+                                    <div class="code-view">
+                                        <pre>
+                                       <code [innerHTML]="customerObject"></code>
+                                    </pre>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">order </h5>
+                            <ul>
+                                <li>Data type of this property is JSON object.</li>
+                                <li>This property has two properties named as description and descriptions.</li>
+                                <li>
+                                    Format of this property
+                                    <div class="code-view">
+                                        <pre>
+                                      <code [innerHTML]="orderObject"></code>
+                                    </pre>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">other </h5>
+                            <ul>
+                                <li>Data type of this property is JSON object.</li>
+                                <li>
+                                    Format of this property
+                                    <div class="code-view">
+                                        <pre>
+                                      <code [innerHTML]="otherObject"></code>
+                                    </pre>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>The method uses these arguments and set the payload which is required by the Payment Page Redirect API
+                        of the Bank.
+                    </p>
+                    <p>This method returns a specific code, based on merchant id. If merchant uses gateway 1 then it returns
+                        code which help to redirect to the PayU page and if merchant uses gateway 2 then it returns code
+                        which help to redirect Razorpay page.
+                    </p>
+                </div>
+                <div class="method-detail" id="paymentEnquiry">
+                    <h3 class="method-title">paymentEnquiry</h3>
+                    <p>This method is used to do payment enquiry of all payment transactions.</p>
+                    <p>It has to be called from merchant’s code of payment status enquiry which gets called on click of ‘Status
+                        Enquiry’ button.
+                    </p>
+                    <p>This is a parameterized method. Arguments should be of specific types as mentioned below.</p>
+                    <div class="syntax-container">
+                        <h4>Method Syntax</h4>
+                        <p>paymentEnquiry(txnRef, merchant)</p>
+                    </div>
+                    <div class="arguments-detail-container">
+                        <h4>Arguments Detail</h4>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">txnRef</h5>
+                            <ul>
+                                <li>This is transaction reference number.</li>
+                                <li>It is string data type.</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">merchant </h5>
+                            <ul>
+                                <li>This property is for merchant id.</li>
+                                <li>Data type of this property is string</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>This method returns payment details in JSON format against requested transaction reference number.</p>
+                </div>
+                <div class="method-detail" id="paymentCancellation">
+                    <h3 class="method-title">paymentCancellation</h3>
+                    <p>
+                        This method is used to cancel and refund the submitted payment and It has to be called from merchant’s code fororder cancel
+                        and refund which gets called on click of ‘Order cancel’ or ‘Refund’ button.
+                    </p>
+                    <p>
+                        This is parameterized methodArguments should be of specific types as mentioned below.
+                    </p>
+                    <div class="syntax-container">
+                        <h4>Method Syntax</h4>
+                        <p>paymentCancellation(refundNotificationURL, txnRef, rfdRef, amount, currency, merId)</p>
+                    </div>
+                    <div class="arguments-detail-container">
+                        <h4>Arguments Detail</h4>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">refundNotificationURL </h5>
+                            <ul>
+                                <li>This property data type is string</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">txnRef </h5>
+                            <ul>
+                                <li>This property data type is string</li>
+                                <li>Property value should be transaction reference number.</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">rfdRef</h5>
+                            <ul>
+                                <li>This property data type is string</li>
+                                <li>This is refund number and it must be unique against every refund transaction.</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">amount</h5>
+                            <ul>
+                                <li>This property data type is number</li>
+                                <li>Value of this property should be refund amount</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">currency </h5>
+                            <ul>
+                                <li>This property data type is string</li>
+                                <li>Mentioned currency type against this property.</li>
+                            </ul>
+                        </div>
+                        <div class="arguments-detail">
+                            <h5 class="argument-name">merId</h5>
+                            <ul>
+                                <li>This property data type is string</li>
+                                <li>Value should be merchant id.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>This method returns JSON response.</p>
+                </div>
+                <div class="method-detail" id="logFile">
+                    <h3 class="method-title">Log Files</h3>
+                    <p>Create ErrorLog folder in the project and give path in CreateLogFiles method.</p>
+                </div>
+                <div class="method-detail" id="callApi">
+                    <h3 class="method-title">CallingAPI</h3>
+                    <p>This method has API calling code which helps to call Bank’s API.</p>
+                </div>
+                <div class="method-detail" id="iisSetting">
+                    <h3 class="method-title">IIS Setting</h3>
+                    <p>In IIS 7 and above go to Application Pools and right click on your project and go to advanced settings.</p>
+                    <P>In Advanced Settings pop up set Identity as NetworkService.</P>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

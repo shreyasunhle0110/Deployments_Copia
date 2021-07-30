@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-wrapper-integration-detail',
@@ -8,8 +8,12 @@ import { ActivatedRoute } from '../../../node_modules/@angular/router';
 })
 export class WrapperIntegrationDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+  }
+
+  scrollTop() {
+    this.router.navigate(['wrapperangularNodejsDetail'], { relativeTo: this.route, fragment: 'IntegrationDetails' })
   }
 }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wrapper-php-detail',
-  templateUrl: './wrapper-php-detail.component.html',
-  styleUrls: ['./wrapper-php-detail.component.css']
+  selector: 'app-wrapper-dotnet-detail',
+  templateUrl: './wrapper-dotnet-detail.component.html',
+  styleUrls: ['./wrapper-dotnet-detail.component.css']
 })
-export class WrapperPhpDetailComponent implements OnInit {
+export class WrapperDotnetDetailComponent implements OnInit {
   systemObject: string = '';
   paymentObject: string = '';
   customerObject: string = '';
@@ -78,5 +78,4 @@ export class WrapperPhpDetailComponent implements OnInit {
       ]
     }`
   }
-
 }

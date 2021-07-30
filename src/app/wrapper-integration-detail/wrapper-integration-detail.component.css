@@ -5,7 +5,8 @@
 }
 
 .tile-active {
-    box-shadow: 3px 3px 9px #216b91;
+    background: #a5c736;
+    color: #fff;
 }
 
 .img-container img { width: 100%; }
@@ -43,6 +44,14 @@
 
 .android .img-container {
     width: 16.7%;
+}
+
+.angular-dotnet .img-container {
+    width: 34.5%;
+}
+
+.angular-nodejs .img-container {
+    width: 27.2%;
 }
 
 a { cursor: pointer; }

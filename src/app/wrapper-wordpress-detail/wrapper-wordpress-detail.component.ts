@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wrapper-php-detail',
-  templateUrl: './wrapper-php-detail.component.html',
-  styleUrls: ['./wrapper-php-detail.component.css']
+  selector: 'app-wrapper-wordpress-detail',
+  templateUrl: './wrapper-wordpress-detail.component.html',
+  styleUrls: ['./wrapper-wordpress-detail.component.css']
 })
-export class WrapperPhpDetailComponent implements OnInit {
+export class WrapperWordpressDetailComponent implements OnInit {
+
   systemObject: string = '';
   paymentObject: string = '';
   customerObject: string = '';

@@ -16,6 +16,12 @@ import { WrapperStartNewDeploymentComponent } from './wrapper-start-new-deployme
 import { WrapperMyWorkflowsComponent } from './wrapper-my-workflows/wrapper-my-workflows.component';
 import { WrapperNodeDetailComponent } from './wrapper-node-detail/wrapper-node-detail.component';
 import { WrapperPhpDetailComponent } from './wrapper-php-detail/wrapper-php-detail.component';
+import { WrapperWordpressDetailComponent } from './wrapper-wordpress-detail/wrapper-wordpress-detail.component';
+import { WrapperJavaDetailComponent } from './wrapper-java-detail/wrapper-java-detail.component';
+import { WrapperDotnetDetailComponent } from './wrapper-dotnet-detail/wrapper-dotnet-detail.component';
+import { WrapperAndroidDetailComponent } from './wrapper-android-detail/wrapper-android-detail.component';
+import { WrapperAngularnodejsDetailComponent } from './wrapper-angularnodejs-detail/wrapper-angularnodejs-detail.component';
+import { WrapperAngulardotnetDetailComponent } from './wrapper-angulardotnet-detail/wrapper-angulardotnet-detail.component';
 
 const routes: Routes = [
   {
@@ -52,6 +58,24 @@ const routes: Routes = [
           },
           {
             path:"wrapperPhpDetail", component: WrapperPhpDetailComponent
+          },
+          {
+            path:"wrapperWordpressDetail", component: WrapperWordpressDetailComponent
+          },
+          {
+            path:"wrapperJavaDetail", component: WrapperJavaDetailComponent
+          },
+          {
+            path:"wrapperDotnetDetail", component: WrapperDotnetDetailComponent
+          },
+          {
+            path:"wrapperAndroidDetail", component: WrapperAndroidDetailComponent
+          },
+          {
+            path:"wrapperangularNodejsDetail", component: WrapperAngularnodejsDetailComponent
+          },
+          {
+            path:"wrapperangularDotnetDetail", component: WrapperAngulardotnetDetailComponent
           }
         ]
       },

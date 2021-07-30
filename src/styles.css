@@ -82,3 +82,14 @@ ul, li {
     background-color: #fff;
 }
 /* Document Styling */
+
+.copy-btn {
+    position: absolute;
+    right: 15px;
+}
+
+.scroll-top-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 20px;
+}

@@ -28,6 +28,12 @@ import { WrapperMyWorkflowsComponent } from './wrapper-my-workflows/wrapper-my-w
 import { WrapperOverviewComponent } from './wrapper-overview/wrapper-overview.component';
 import { WrapperNodeDetailComponent } from './wrapper-node-detail/wrapper-node-detail.component';
 import { WrapperPhpDetailComponent } from './wrapper-php-detail/wrapper-php-detail.component';
+import { WrapperWordpressDetailComponent } from './wrapper-wordpress-detail/wrapper-wordpress-detail.component';
+import { WrapperJavaDetailComponent } from './wrapper-java-detail/wrapper-java-detail.component';
+import { WrapperDotnetDetailComponent } from './wrapper-dotnet-detail/wrapper-dotnet-detail.component';
+import { WrapperAndroidDetailComponent } from './wrapper-android-detail/wrapper-android-detail.component';
+import { WrapperAngularnodejsDetailComponent } from './wrapper-angularnodejs-detail/wrapper-angularnodejs-detail.component';
+import { WrapperAngulardotnetDetailComponent } from './wrapper-angulardotnet-detail/wrapper-angulardotnet-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +54,13 @@ import { WrapperPhpDetailComponent } from './wrapper-php-detail/wrapper-php-deta
     WrapperMyWorkflowsComponent,
     WrapperOverviewComponent,
     WrapperNodeDetailComponent,
-    WrapperPhpDetailComponent
+    WrapperPhpDetailComponent,
+    WrapperWordpressDetailComponent,
+    WrapperJavaDetailComponent,
+    WrapperDotnetDetailComponent,
+    WrapperAndroidDetailComponent,
+    WrapperAngularnodejsDetailComponent,
+    WrapperAngulardotnetDetailComponent
   ],
   imports: [
     BrowserModule,

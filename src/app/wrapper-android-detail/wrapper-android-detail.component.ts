@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wrapper-php-detail',
-  templateUrl: './wrapper-php-detail.component.html',
-  styleUrls: ['./wrapper-php-detail.component.css']
+  selector: 'app-wrapper-android-detail',
+  templateUrl: './wrapper-android-detail.component.html',
+  styleUrls: ['./wrapper-android-detail.component.css']
 })
-export class WrapperPhpDetailComponent implements OnInit {
+export class WrapperAndroidDetailComponent implements OnInit {
   systemObject: string = '';
   paymentObject: string = '';
   customerObject: string = '';
