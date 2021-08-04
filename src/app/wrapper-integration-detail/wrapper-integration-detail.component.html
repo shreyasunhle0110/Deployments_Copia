@@ -81,7 +81,7 @@
     </div>
 </div>
 <br>
-<div id="IntegrationDetails">
+<div id="IntegrationDetails" #startPoint>
     <router-outlet></router-outlet>
 </div>
-<button (click)="scrollTop()" class="scroll-top-btn"><i class="fa fa-arrow-up"></i></button>
+<button *ngIf="activateGoTop" (click)="scrollToElement(startPoint)" class="scroll-top-btn"><i class="fa fa-arrow-up"></i></button>

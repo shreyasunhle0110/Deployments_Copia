@@ -1,0 +1,9 @@
+ul, li, .document-index ol li ul li {
+    list-style-type: disc;
+}
+
+ol li {
+    list-style-type: auto;
+}
+
+.img-container { width: 50%; }

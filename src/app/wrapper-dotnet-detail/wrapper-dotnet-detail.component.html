@@ -35,6 +35,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a routerLink="../wrapperDotnetDetail" fragment="codeDetails">Code Level Documentation</a>
+                    </li>
                 </ol>
             </div>
         </div>
@@ -287,6 +290,97 @@
                     <h3 class="method-title">IIS Setting</h3>
                     <p>In IIS 7 and above go to Application Pools and right click on your project and go to advanced settings.</p>
                     <P>In Advanced Settings pop up set Identity as NetworkService.</P>
+                </div>
+            </section>
+            <section class="document-section overview-container" id="codeDetails">
+                <h2 class="document-section-title">4. Code Level Documentation</h2>
+                <p>There are four classes and CommonRepository.cs file on which the whole wrapper code is dependant.</p>
+                <div class="method-detail">
+                    <h3 class="method-title">Class Names</h3>
+                    <ul>
+                        <li>newPayment(PaymentPageRedirectDTOdto)</li>
+                        <li>paymentEnquiry(PaymentEnquiryDTOdto)</li>
+                        <li>paymentCancellation(PaymentCancellationDTOdto)</li>
+                    </ul>
+                </div>
+                <div class="method-detail">
+                    <h3 class="method-title">Callback Notification</h3>
+                    <ul>
+                        <li>CallbackPaymentNotification</li>
+                    </ul>
+                </div>
+                <div class="method-detail">
+                    <h3 class="method-title">File Name</h3>
+                    <ul>
+                        <li>CommonRepository.cs</li>
+                    </ul>
+                </div>
+                <div class="method-detail">
+                    <h3 class="method-title">Details of each Method</h3>
+                    <div class="method-detail">
+                        <h3 class="method-title">newPayment</h3>
+                        <p>This method uses to make payment</p>
+                        <button title='copy code' class="copy-btn" (click)="copyBtn(paymentMethodCode)">
+                            <i class="fa fa-clone" aria-hidden="true"></i>
+                        </button>
+                        <div class="code-view">
+                            <pre>
+                        <code [innerHTML]="paymentMethodCode"></code>
+                      </pre>
+                        </div>
+                    </div>
+                    <div class="method-detail">
+                        <h3 class="method-title">paymentEnquiry</h3>
+                        <p>This method helps to do payment enquiry</p>
+                        <button title='copy code' class="copy-btn" (click)="copyBtn(paymentEnquiryMethodCode)">
+                            <i class="fa fa-clone" aria-hidden="true"></i>
+                        </button>
+                        <div class="code-view">
+                            <pre>
+                        <code [innerHTML]="paymentEnquiryMethodCode"></code>
+                      </pre>
+                        </div>
+                    </div>
+                    <div class="method-detail">
+                        <h3 class="method-title">paymentCancellation</h3>
+                        <p>This method helps to cancel and refund the payment</p>
+                        <div class="code-view">
+                            <button title='copy code' class="copy-btn" (click)="copyBtn(paymentCancellationMethodCode)">
+                                <i class="fa fa-clone" aria-hidden="true"></i>
+                            </button>
+                            <pre>
+                        <code [innerHTML]="paymentCancellationMethodCode"></code>
+                      </pre>
+                        </div>
+                    </div>
+                    <div class="method-detail">
+                        <h3 class="method-title">API Name</h3>
+                        <p>CallbackNotification</p>
+                        <p>This is an API created at merchant side. HSBC will call this API from their end to send payment status of current transaction to the merchant side and merchant send response in acknowledgment.</p>
+                        <button title='copy code' class="copy-btn" (click)="copyBtn(callingAPICode)">
+                            <i class="fa fa-clone" aria-hidden="true"></i>
+                        </button>
+                        <div class="code-view">
+                            <pre>
+                        <code [innerHTML]="callingAPICode"></code>
+                      </pre>
+                        </div>
+                    </div>
+                    <div class="method-detail">
+                        <h3 class="method-title">File Name</h3>
+                        <p>CommonRepository.cs</p>
+                        <p>
+                            This file contains the all important data related the whole functionality where merchant can replace with their own data. If merchant already have constant file then copy the all properties of this file in their Constant file.
+                        </p>
+                        <button title='copy code' class="copy-btn" (click)="copyBtn(commonRepositoryCode)">
+                            <i class="fa fa-clone" aria-hidden="true"></i>
+                        </button>
+                        <div class="code-view">
+                            <pre>
+                        <code [innerHTML]="commonRepositoryCode"></code>
+                      </pre>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

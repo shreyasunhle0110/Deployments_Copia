@@ -22,6 +22,7 @@ import { WrapperDotnetDetailComponent } from './wrapper-dotnet-detail/wrapper-do
 import { WrapperAndroidDetailComponent } from './wrapper-android-detail/wrapper-android-detail.component';
 import { WrapperAngularnodejsDetailComponent } from './wrapper-angularnodejs-detail/wrapper-angularnodejs-detail.component';
 import { WrapperAngulardotnetDetailComponent } from './wrapper-angulardotnet-detail/wrapper-angulardotnet-detail.component';
+import { WrapperKeyGenerationDetailComponent } from './wrapper-key-generation-detail/wrapper-key-generation-detail.component';
 
 const routes: Routes = [
   {
@@ -87,6 +88,9 @@ const routes: Routes = [
       },
       {
         path: "wrapperMyWorkflows", component: WrapperMyWorkflowsComponent
+      },
+      {
+        path: "wrapperKeyGenerationDetail", component:WrapperKeyGenerationDetailComponent
       }
     ]
   },

@@ -1,0 +1,519 @@
+<div #startPoint class="document-container container-fluid">
+    <h1 class="document-title text-center">
+        Encryption Key Generation Guid
+    </h1>
+    <div class="row document-content-container">
+        <div class="col-md-2">
+            <div class="document-index">
+                <ol>
+                    <li>
+                        <a routerLink="../wrapperKeyGenerationDetail" fragment="overview">Overview</a>
+                    </li>
+                    <li>
+                        <a routerLink="../wrapperKeyGenerationDetail" fragment="softwares">Softwares to be installed</a>
+                    </li>
+                    <li>
+                        <a routerLink="../wrapperKeyGenerationDetail" fragment="keysGeneration">Generating Keys</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-10 document-description-container">
+            <section id="overview" class="document-section overview-container">
+                <h2 class="document-section-title">1. Overview</h2>
+                <p>
+                    This document describes the process /steps to generate Merchant Key pair i.e. Merchant’s Private Key and Public Key.
+                </p>
+            </section>
+            <section id="softwares" class="document-section overview-container">
+                <h2 class="document-section-title">2. Softwares to be installed</h2>
+                <div class="document-sub-section">
+                    <h3 class="document-sub-section-title">Software’s to be installed for generation and conversion of keys: </h3>
+                    <div class="pre-requisit-list-container">
+                        <ol>
+                            <li>OpenSSL (For all technologies)</li>
+                            <li>Java JDK (For “.jks” key conversion)</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="document-sub-section">
+                    <h3 class="document-sub-section-title">Downloading and installing OpenSSL:</h3>
+                    <p>
+                        To download OpenSSLchoose the version that applies to your PC from the link given below. As example, I chose the Win64 OpenSSL
+                        v1.1.1k MSI (not the light version) from the table:
+                    </p>
+                    <a target="_blank" href="https://slproweb.com/products/Win32OpenSSL.html">https://slproweb.com/products/Win32OpenSSL.html</a>
+                    <div class="thumbnail">
+                        <div>
+                            <img src="../../assets/images/Figure1.png" alt="Download OpenSSL" style="width:100%">
+                            <div class="caption">
+                                <h4 class="caption-title">Download OpenSSL</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Run the EXE or MSI with default settings till completion and that should take care of installing OpenSSL!</p>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure2.png" alt="Figure 2: Setup- OpenSSL 1" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Setup- OpenSSL 1</h4>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure3.png" alt="Figure 3: Setup- OpenSSL 1" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Setup- OpenSSL 1</h4>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure4.png" alt="Figure 4: Setup- OpenSSL 2" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Setup- OpenSSL 1</h4>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure5.png" alt="Figure 5: Setup- OpenSSL 3" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Setup- OpenSSL 1</h4>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure6.png" alt="Figure 6: Setup- OpenSSL 4" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Setup- OpenSSL 1</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-sub-section">
+                    <h3 class="document-sub-section-title">Add OpenSSL to your PATH: </h3>
+                    <p>
+                        Why do we want to do this? First off, it’s not a necessity, it just makes it more convenient to use OpenSSL from the command
+                        line in the directory of your choice. After the initial install, the openssl.exe is only available
+                        from the directory where it resides, namely:
+                    </p>
+                    <p class="highlight">
+                        C:\Program Files\OpenSSL-Win64\bin
+                    </p>
+                    <p>
+                        You could open a command prompt from here and perform the operations you want, but as we are using this to create a Certificate
+                        Signing Request (CSR) for a specific purpose, we should create that from the directory where we want
+                        to keep that CSR. To do that, lets add it to our PATH, which we can find in the Environment Variables.
+                        <br> Here we go:
+                    </p>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure7.png" alt="Figure 7: Edit System Environment Variables" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Edit System Environment Variables</h4>
+                            <p class="caption-description">
+                                Hit the Windows button on your keyboard or click it in the task bar, then search for “Environment Variables
+                            </p>
+                            <p>Select the “Edit the system environment variables”</p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure8.png" alt="Figure 8: Edit Environment Variables" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Edit Environment Variables</h4>
+                            <p class="caption-description">In the following screen, click “Environment Variables”.</p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure9.png" alt="Figure 9: Edit Environment Variable" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Edit Environment Variable</h4>
+                            <p class="caption-description">A screen will pop up showing User variables and System variables. In the User variables section,
+                                select Path and click Edit.</p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure10.png" alt="Figure 10: Set Path in Environment Variable" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Set Path in Environment Variable</h4>
+                            <p class="caption-description">Click on Browse.</p>
+                            <p class="caption-description">This will already have some automatically added paths for other applications, don’t worry about
+                                those.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure12.png" alt="Figure 12: Edit Environment Variable" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Edit Environment Variable</h4>
+                            <p class="caption-description">
+                                Go to where the openssl.exe is, which should be at “This PC > Windows (C:) > Program Files > OpenSSL - Win64 > bin” and select
+                                that folder. Click OK.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure13.png" alt="Figure 13: Edit Environment Variable" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Edit Environment Variable</h4>
+                            <p class="caption-description">
+                                You should see it added at the top. Make sure to click OK on this screen and the subsequent screens.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure14.png" alt="Figure 14: Check OpenSSL" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Check OpenSSL</h4>
+                            <p class="caption-description">
+                                Let’s verify that OpenSSL is now accessible from outside its own directory by opening a Command Prompt in an arbitrary location
+                                (I just opened the Command Prompt and left it at its default directory). Enter openssl version
+                                and see the result.
+                            </p>
+                        </div>
+                    </div>
+                    <p class="note">
+                        Important note: if you already had a command prompt open, you will need to close and reopen in order for this to work.
+                    </p>
+                    <p>And that’s it! You should now be able to use OpenSSL from the directory you desire.</p>
+                </div>
+                <div class="document-sub-section">
+                    <h3 class="document-sub-section-title">Download JDK (For JDK Key)</h3>
+                    <div class="pre-requisit-list-container">
+                        <p>Download JDK 15 from the link given below. </p>
+                        <a href="https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html">
+                            https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html
+                        </a>
+                        <p>
+                            Accept the License Agreement and click on the link to download the installer. It will start downloading JDK 15 installer
+                            for Windows.
+                        </p>
+                    </div>
+                </div>
+                <div class="document-sub-section">
+                    <h3 class="document-sub-section-title">Install JDK</h3>
+                    <div class="pre-requisit-list-container">
+                        <p>Now execute the JDK installer by double-clicking it. It might ask system permission before starting
+                            the installation. Click on yes to allow the installer to execute itself.</p>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure15.png" alt="Figure 15:Start JDK Installation" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Start JDK Installation</h4>
+                                <p class="caption-description">
+                                    Click the Next Button to initiate the installation process. The next screen shows options to change the installation path.
+                                    We can change the installation location on this screen if required.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure16.png" alt="Figure 16: Install Java" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Install Java</h4>
+                                <p class="caption-description">
+                                    Now click the Next Button to start the installation. It shows the success screen after completing the installation.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure17.png" alt="Figure 17: Install Java Completion" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Install Java Completion</h4>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure18.png" alt="Figure 18: Verification of Java Installation" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Verification of Java Installation</h4>
+                                <p>Now open the Command Prompt and type the command java -version to confirm whether it's installed
+                                    successfully.
+                                </p>
+                            </div>
+                        </div>
+                        <p>
+                            It might show the message - java is not recognized as an internal or external command or show the previously installed version.
+                            In order to start using the JDK installed by us from the command prompt, we might be required
+                            to set the environment variable. You can follow the below-mentioned steps to do so.
+                        </p>
+                        <p>Right Click -> My Computer(This PC) -> Properties -> Advanced System Settings</p>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure19.png" alt="Figure 19: Edit Environment Variable" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Edit Environment Variable</h4>
+                                <p>Hit the Windows button on your keyboard or click it in the task bar, then search for “Environment
+                                    Variables”.
+                                </p>
+                                <p>Select the “Edit the system environment variables”</p>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure20.png" alt="Figure 20: Edit Environment Variable" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Edit Environment Variable</h4>
+                                <p>In the following screen, click “Environment Variables”.</p>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure21.png" alt="Figure 21:Set Java Class path" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Set Java Class path</h4>
+                                <p>A screen will pop up showing User variables and System variables. In the System variables
+                                    section, select CLASSPATH and click Edit.</p>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div>
+                                <img src="../../assets/images/Figure22.png" alt="Figure 22: Edit System Variable" style="width:100%">
+                                <div class="caption">
+                                    <h4 class="caption-title">Edit System Variable</h4>
+                                    <p>A screen will pop up showing User variables and System variables. In the System variables
+                                        section, select CLASSPATH and click Edit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="keysGeneration" class="document-section overview-container">
+                <h2 class="document-section-title">3. Generating Keys:</h2>
+                <div class="document-sub-section">
+                    <h3 class="document-sub-section-title">Steps to generate the Merchant’s Private Key in “.pem” format: </h3>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure23.png" alt="Figure 23:OpenSSL Command to generate key" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">OpenSSL Command to generate key</h4>
+                            <p>Write the command given below in the desired path where you need to generate key in Command Prompt.
+                            </p>
+                            <p>opensslgenrsa -out ./merchant_private_key.pem 2048</p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure24.png" alt="Figure 24: Save the key" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Save the key</h4>
+                            <p>This will generate the key in “.pem” format. You can now convert this key in any format as required
+                                for specific technology.</p>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure25.png" alt="Figure 25:Generate .pem" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Generate .pem</h4>
+                            <p>You can open this key in command prompt using the command given below. The characteristic of
+                                the “.pem” private key is "-----BEGIN RSA PRIVATE KEY-----" at the beginning.</p>
+                            <P>opensslrsa -in merchant_private_key.pem</P>
+                        </div>
+                    </div>
+                    <P>Export the Merchant’s Public Key Certificate of .cer format by the Merchant’s Private Key in “.pem” format
+                        that you just generated.</P>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure26.png" alt="Figure 26: Capture certificate information" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Capture certificate information</h4>
+                            <p>Execute the following command to generate the certificate application file. The program will
+                                ask you for some certificate – related information, just enter it according to your information.
+                                This information is used to generate the certificate and has no actual impact.</p>
+                            <P>openssl req -new -out ./merchant_pubic_cert_req.csr -key ./merchant_private_key.pem</P>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div>
+                            <img src="../../assets/images/Figure27.png" alt="Figure 27: Self Sign the certificate" style="width:100%">
+                            <div class="caption">
+                                <h4 class="caption-title">Self Sign the certificate</h4>
+                                <p>Execute the command to self-sign the certificate application file.</p>
+                                <P>openssl x509 -req -in ./merchant_pubic_cert_req.csr -out ./merchant_public_cer.cer -signkey
+                                    ./merchant_private_key.pem -days 3650</P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure28.png" alt="Figure 28: Key Generated" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">Key Generated</h4>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div class="img-container">
+                            <img src="../../assets/images/Figure29.png" alt="Figure 29: open .cer Key" style="width:100%">
+                        </div>
+                        <div class="caption">
+                            <h4 class="caption-title">open .cer Key</h4>
+                            <P>You can open this key in command prompt using the command given below. The characteristic of
+                                the “.cer” key is "-----BEGIN CERTIFICATE-----" at the beginning.</P>
+                            <P>openssl x509 -in merchant_public_cer.cer</P>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-sub-section">
+                    <h3 class="document-sub-section-title">Convert Merchant’s Private Key in “.pem” format to other format.</h3>
+                    <p>Now you can convert the Merchant’s Private Key in “.pem” format to other format.</p>
+                    <div class="key-conversion-section">
+                        <h4 class="key-conversion-title">.p12</h4>
+                        <p>
+                            Execute the following command to put the Merchant’s Private Key into the “.p12” key store. The program will ask you a password
+                            for the “.p12” keystore. Please remember the password you entered, you will need it when you
+                            use the “.p12” key in code or to import it into “.jks” key format.
+                        </p>
+                        <p>openssl pkcs12 -export -clcerts -in ./merchant_public_cer.cer -inkey ./merchant_private_key.pem -out
+                            ./merchant_private.p12
+                        </p>
+                        <div class="thumbnail">
+                            <div>
+                                <img src="../../assets/images/Figure30.png" alt="Figure 30:Generation of .p12" style="width:100%">
+                                <div class="caption">
+                                    <h4 class="caption-title">Generation of .p12</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure31.png" alt="Figure 31:Save .p12 key" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Save .p12 key</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="key-conversion-section">
+                        <h4 class="key-conversion-title">.jks</h4>
+                        <p>
+                            You can import the keys from “.p12” format for “.jks” format using the password we set for “.p12” key in previous step. The
+                            command is given below
+                        </p>
+                        <p>keytool -importkeystore -deststorepass [jks password] -destkeypass [jks password] -destkeystore ./merchant.jks
+                            -srckeystore ./merchant_private.p12 -srcstoretype PKCS12 -srcstorepass [.p12 password]</p>
+                        <p>Enter required password in [jks password] for your new key and password set in “.p12” key in [.p12
+                            password]. New key is created in “.jks” format. </p>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure32.png" alt="Figure 32: Set .jks Password" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Set .jks Password</h4>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure33.png" alt="Figure 33: Save .jks key" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Save .jks key</h4>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure34.png" alt="Figure 34: Check alias of the generated key" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Check alias of the generated key</h4>
+                                <p>To check the alias of the key that you just imported use the below command.</p>
+                                <p>keytool -v -list -keystore ./merchant.jks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="key-conversion-section">
+                        <h4 class="key-conversion-title">.key</h4>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure35.png" alt="Figure 35: Generate. .key private key" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Generate. .key private key</h4>
+                                <p>Please execute command below to generate the private key.</p>
+                                <p>opensslgenrsa -out ./merchant_private_key.key2048</p>
+                            </div>
+                        </div>
+                        <p>After you execute the command, corresponding private key will appear in the path you specified.</p>
+                    </div>
+                    <div class="key-conversion-section">
+                        <h4 class="key-conversion-title">GENERATE .CER (To be sent to the Bank)</h4>
+                        <p>Execute the following command to obtain a public certificate with the private key you just generated.</p>
+                        <p>opensslreq -new -x509 -key ./merchant_private_key.key-days 3650 -out ./merchant_public_cert.cer</p>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure36.png" alt="Figure 36: Generate .CER" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Generate .CER</h4>
+                                <p>
+                                    When you execute this command, the program will ask you some questions. This information is used to generate the certificate
+                                    and has no actual impact. After you enter the information, the corresponding public certificate
+                                    will appear in the path you specified.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="key-conversion-section">
+                        <h4 class="key-conversion-title">.bks</h4>
+                        <p>Download Bouncy Castle Provider from the link given below and store it in a folder.</p>
+                        <a href="https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on/1.69">https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on/1.69</a>
+                        <p>Execute following command to convert p12 key to bks format</p>
+                        <p>keytool -importkeystore -deststorepass Wrapper@2021 -destkeystore D:\Keys\merchantnewgenprim.bks
+                            -srckeystore D:\Keys\merchant_private.p12 -srcstoretype PKCS12 -srcstorepass Wrapper@2021 -deststoretype
+                            bks -providerclassorg.bouncycastle.jce.provider.BouncyCastleProvider -providerpath D:\Keys\bcprov-jdk15on-1.69.jar</p>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure37.png" alt="Figure 37: Convert from .12 to .bks" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Convert from .12 to .bks</h4>
+                                <p>
+                                    Enter correct path where your p12 file is stored and also the path of your bouncy castle jar file
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="img-container">
+                                <img src="../../assets/images/Figure38.png" alt="Figure 38: Save .bks key" style="width:100%">
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">Save .bks key</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<button *ngIf="activateGoTop" (click)="scrollToElement(startPoint)" class="scroll-top-btn"><i class="fa fa-arrow-up"></i></button>

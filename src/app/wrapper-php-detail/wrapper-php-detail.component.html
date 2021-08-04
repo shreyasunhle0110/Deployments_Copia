@@ -29,6 +29,9 @@
               </li>
             </ul>
           </li>
+          <li>
+            <a routerLink="../wrapperPhpDetail" fragment="codeDetails">Code Level Documentation</a>
+          </li>
         </ol>
       </div>
     </div>
@@ -257,6 +260,148 @@
                 <li>Value should be merchant id.</li>
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+      <section class="document-section overview-container" id="codeDetails">
+        <h2 class="document-section-title">4. Code Level Documentation</h2>
+        <p>There are five coding files on which the whole wrapper code is dependant.</p>
+        <div class="method-detail">
+          <h3 class="method-title">Files Names</h3>
+          <ul>
+            <li>Wrapper.Php</li>
+            <li>PaymentPage.php</li>
+            <li>PaymentEnquiry.php</li>
+            <li>CancelRefund.php</li>
+            <li>CallbackNotificationAPI.php</li>
+          </ul>
+        </div>
+        <div class="method-detail">
+          <h3 class="method-title">Details of each Coding Page</h3>
+          <div class="method-detail">
+            <h3 class="method-title">Wrapper.php</h3>
+            <p>
+              This file contains some important methods which help to do Payload encryption, calling API’s, Response decryption, Maintain
+              log data, payment submit, payment enquiry and payment cancel refund.
+            </p>
+            <h4>Code Details of each Method : </h4>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>EncryptPayload(string $requestPayloadJSON): string</b>
+              </h5>
+              <p>This method use to do payload encryption.</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(encryptPayloadMethodCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                  <code [innerHTML]="encryptPayloadMethodCode"></code>
+                </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>callingAPI(string $resoucePath,string $requestMsg): string</b>
+              </h5>
+              <p>This method use to call API’s</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(callingApiCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                    <code [innerHTML]="callingApiCode"></code>
+                  </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>DecryptResponse(string $EncryptedResponse)</b>
+              </h5>
+              <p>This method helps to decrypt the response message.</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(decryptResponseCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                      <code [innerHTML]="decryptResponseCode"></code>
+                    </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>newPayment($txnRef, $system, $payment, $merchant, $customer, $order, $other)</b>
+              </h5>
+              <p>This method uses to make payment</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(newPaymentCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                        <code [innerHTML]="newPaymentCode"></code>
+                      </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>paymentEnquiry($txnRef, $merchant)</b>
+              </h5>
+              <p>This method uses to do payment enquiry</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(paymentEnquiryCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                          <code [innerHTML]="paymentEnquiryCode"></code>
+                        </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>paymentCancellation($refundNotificationURL, $txnRef, $rfdRef, $amount, $currency, $merId)</b>
+              </h5>
+              <p>This method helps to cancel and refund the payment.</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(cancelPaymentCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                            <code [innerHTML]="cancelPaymentCode"></code>
+                          </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>logMaintainFunction(string $log_msg)</b>
+              </h5>
+              <p>This method maintain the log of each transaction with time stamp</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(logMaintainCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                              <code [innerHTML]="logMaintainCode"></code>
+                            </pre>
+              </div>
+            </div>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">PaymentPage.php</h3>
+            <p>This file merchant has to call on click of Payment button. It calls newPayment method inside it and returns the
+              response</p>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">PaymentEnquiry.php</h3>
+            <p>This file merchant has to call on click of Payment Enquiry button. It calls paymentEnquiry method inside it and
+              returns the response</p>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">CancelRefund.php</h3>
+            <p>This file merchant has to call on click of Cancel Payment button. It calls paymentCancellation method inside
+              it and resturns the response</p>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">CallbackNotificationAPI.php</h3>
+            <p>This is a callback notification API file. This file contains callback notification API code.</p>
           </div>
         </div>
       </section>

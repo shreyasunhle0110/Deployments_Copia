@@ -1,265 +1,411 @@
 <div class="document-container container-fluid">
-        <h1 class="document-title text-center">Omni Channel Wrapper Code -
-          <span class="language-name">Wordpress</span>
-        </h1>
-        <div class="row document-content-container">
-          <div class="col-md-2">
-            <div class="document-index">
-              <ol>
-                <li>
-                  <a>Overview</a>
-                </li>
-                <li>
-                  <a>Pre-requisities</a>
-                </li>
-                <li>
-                  <a routerLink="../wrapperWordpressDetail" fragment="stepsImplementation">Steps of Implementation</a>
-                  <ul>
-                    <li>
-                      <a routerLink="../wrapperWordpressDetail" fragment="wrapperFile">Wrapper.php</a>
-                    </li>
-                    <li>
-                      <a routerLink="../wrapperWordpressDetail" fragment="paymentPageFile">PaymentPage.php</a>
-                    </li>
-                    <li>
-                      <a routerLink="../wrapperWordpressDetail" fragment="paymentEnquiryFile">PaymentEnquiry.php</a>
-                    </li>
-                    <li>
-                      <a routerLink="../wrapperWordpressDetail" fragment="cancelRefundFile">CancelRefund.php</a>
-                    </li>
-                  </ul>
-                </li>
-              </ol>
-            </div>
+  <h1 class="document-title text-center">Omni Channel Wrapper Code -
+    <span class="language-name">Wordpress</span>
+  </h1>
+  <div class="row document-content-container">
+    <div class="col-md-2">
+      <div class="document-index">
+        <ol>
+          <li>
+            <a>Overview</a>
+          </li>
+          <li>
+            <a>Pre-requisities</a>
+          </li>
+          <li>
+            <a routerLink="../wrapperWordpressDetail" fragment="stepsImplementation">Steps of Implementation</a>
+            <ul>
+              <li>
+                <a routerLink="../wrapperWordpressDetail" fragment="wrapperFile">Wrapper.php</a>
+              </li>
+              <li>
+                <a routerLink="../wrapperWordpressDetail" fragment="paymentPageFile">PaymentPage.php</a>
+              </li>
+              <li>
+                <a routerLink="../wrapperWordpressDetail" fragment="paymentEnquiryFile">PaymentEnquiry.php</a>
+              </li>
+              <li>
+                <a routerLink="../wrapperWordpressDetail" fragment="cancelRefundFile">CancelRefund.php</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a routerLink="../wrapperWordpressDetail" fragment="codeDetails">Code Level Documentation</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="col-md-10 document-description-container">
+      <section class="document-section overview-container">
+        <h2 class="document-section-title">1. Overview</h2>
+        <p>
+          Wrapper code has three functionalities which are submit payment, payment status enquiry and Order cancel and refund the payment.
+          One needs to follow below points to implement these functionalities on merchants side.
+        </p>
+      </section>
+      <section class="document-section overview-container">
+        <h2 class="document-section-title">2. Pre-requisities</h2>
+        <p>
+          Install packages given below inside merchant’s Website code:
+        </p>
+        <div class="pre-requisit-list-container">
+          <ul>
+            <li>"web-token/jwt-framework":"^2.2"</li>
+            <li>"web-token/jwt-key-mgmt": "^2.2"</li>
+          </ul>
+        </div>
+      </section>
+      <section class="document-section overview-container" id="stepsImplementation">
+        <h2 class="document-section-title">3. Steps of Implementation</h2>
+        <p>
+          After installation of the packages, need to add four files into the merchant’s project which are related to the payment gateway
+          functionalities.
+        </p>
+        <div class="method-detail" id="wrapperFile">
+          <h3 class="file-title">wrapper.php</h3>
+          <p>
+            This file is the core file because it contains encryption, decryption, API call and log maintain method functionalities.
+          </p>
+        </div>
+        <div class="method-detail" id="paymentPageFile">
+          <h3 class="file-title">PaymentPage.php</h3>
+          <p>
+            This file use is to submit the payment for that it required some data from merchant which merchant need to pass as argument
+            in the method mentioned in this file and method name is newPayment.
+          </p>
+          <h3 class="method-title">newPayment</h3>
+          <div class="syntax-container">
+            <h4>Method Syntax</h4>
+            <p>newPayment(txnRef, system, payment, merchant, customer, order, other)</p>
           </div>
-          <div class="col-md-10 document-description-container">
-            <section class="document-section overview-container">
-              <h2 class="document-section-title">1. Overview</h2>
-              <p>
-                Wrapper code has three functionalities which are submit payment, payment status enquiry and Order cancel and refund the payment.
-                One needs to follow below points to implement these functionalities on merchants side.
-              </p>
-            </section>
-            <section class="document-section overview-container">
-              <h2 class="document-section-title">2. Pre-requisities</h2>
-              <p>
-                Install packages given below inside merchant’s Website code:
-              </p>
-              <div class="pre-requisit-list-container">
-                <ul>
-                  <li>"web-token/jwt-framework":"^2.2"</li>
-                  <li>"web-token/jwt-key-mgmt": "^2.2"</li>
-                </ul>
-              </div>
-            </section>
-            <section class="document-section overview-container" id="stepsImplementation">
-              <h2 class="document-section-title">3. Steps of Implementation</h2>
-              <p>
-                After installation of the packages, need to add four files into the merchant’s project which are related to the payment gateway
-                functionalities.
-              </p>
-              <div class="method-detail" id="wrapperFile">
-                <h3 class="file-title">wrapper.php</h3>
-                <p>
-                  This file is the core file because it contains encryption, decryption, API call and log maintain method functionalities.
-                </p>
-              </div>
-              <div class="method-detail" id="paymentPageFile">
-                <h3 class="file-title">PaymentPage.php</h3>
-                <p>
-                  This file use is to submit the payment for that it required some data from merchant which merchant need to pass as argument
-                  in the method mentioned in this file and method name is newPayment.
-                </p>
-                <h3 class="method-title">newPayment</h3>
-                <div class="syntax-container">
-                  <h4>Method Syntax</h4>
-                  <p>newPayment(txnRef, system, payment, merchant, customer, order, other)</p>
-                </div>
-                <div class="arguments-detail-container">
-                  <h4>Arguments Detail</h4>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">txnRef</h5>
-                    <ul>
-                      <li>This is transaction reference number.</li>
-                      <li>It is string data type.</li>
-                      <li>This should be unique.</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">system </h5>
-                    <ul>
-                      <li>Data type of this property is JSON object.</li>
-                      <li>
-                        This property has four properties name as redirectSuccessUrl, redirectFailUrl, redirectCancelUrl, notificationUrl.
-                      </li>
-                      <li>
-                        Format of this property
-                        <div class="code-view">
-                          <pre>
+          <div class="arguments-detail-container">
+            <h4>Arguments Detail</h4>
+            <div class="arguments-detail">
+              <h5 class="argument-name">txnRef</h5>
+              <ul>
+                <li>This is transaction reference number.</li>
+                <li>It is string data type.</li>
+                <li>This should be unique.</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">system </h5>
+              <ul>
+                <li>Data type of this property is JSON object.</li>
+                <li>
+                  This property has four properties name as redirectSuccessUrl, redirectFailUrl, redirectCancelUrl, notificationUrl.
+                </li>
+                <li>
+                  Format of this property
+                  <div class="code-view">
+                    <pre>
                             <code [innerHTML]="systemObject"></code>
                           </pre>
-                        </div>
-                      </li>
-                    </ul>
                   </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">payment </h5>
-                    <ul>
-                      <li>Data type of this property is JSON object.</li>
-                      <li>
-                        This property has few properties name as country, currency, amount, payment_option expiry, offers.
-                      </li>
-                      <li>
-                        Format of this property
-                        <div class="code-view">
-                          <pre>
+                </li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">payment </h5>
+              <ul>
+                <li>Data type of this property is JSON object.</li>
+                <li>
+                  This property has few properties name as country, currency, amount, payment_option expiry, offers.
+                </li>
+                <li>
+                  Format of this property
+                  <div class="code-view">
+                    <pre>
                             <code [innerHTML]="paymentObject"></code>
                           </pre>
-                        </div>
-                      </li>
-                    </ul>
                   </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">merchant </h5>
-                    <ul>
-                      <li>Data type of this property is string.</li>
-                      <li>This property is for merchant id.</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">customer </h5>
-                    <ul>
-                      <li>Data type of this property is JSON object</li>
-                      <li>
-                        This property has four properties which are customer_firstname, customer_lastname, customer_email, customer_phone.
-                      </li>
-                      <li>
-                        Format of this property
-                        <div class="code-view">
-                          <pre>
+                </li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">merchant </h5>
+              <ul>
+                <li>Data type of this property is string.</li>
+                <li>This property is for merchant id.</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">customer </h5>
+              <ul>
+                <li>Data type of this property is JSON object</li>
+                <li>
+                  This property has four properties which are customer_firstname, customer_lastname, customer_email, customer_phone.
+                </li>
+                <li>
+                  Format of this property
+                  <div class="code-view">
+                    <pre>
                             <code [innerHTML]="customerObject"></code>
                           </pre>
-                        </div>
-                      </li>
-                    </ul>
                   </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">order </h5>
-                    <ul>
-                      <li>Data type of this property is JSON object.</li>
-                      <li>This property has two properties named as description and descriptions.</li>
-                      <li>
-                        Format of this property
-                        <div class="code-view">
-                          <pre>
+                </li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">order </h5>
+              <ul>
+                <li>Data type of this property is JSON object.</li>
+                <li>This property has two properties named as description and descriptions.</li>
+                <li>
+                  Format of this property
+                  <div class="code-view">
+                    <pre>
                             <code [innerHTML]="orderObject"></code>
                           </pre>
-                        </div>
-                      </li>
-                    </ul>
                   </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">other </h5>
-                    <ul>
-                      <li>Data type of this property is JSON object.</li>
-                      <li>
-                        Format of this property
-                        <div class="code-view">
-                          <pre>
+                </li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">other </h5>
+              <ul>
+                <li>Data type of this property is JSON object.</li>
+                <li>
+                  Format of this property
+                  <div class="code-view">
+                    <pre>
                             <code [innerHTML]="otherObject"></code>
                           </pre>
-                        </div>
-                      </li>
-                    </ul>
                   </div>
-                </div>
-              </div>
-              <div class="method-detail" id="paymentEnquiryFile">
-                <h3 class="file-title">PaymentEnquiry.php</h3>
-                <p>
-                  This file use is to do the payment enquiry and to do payment enquiry merchant need to pass some details as argument to the
-                  method mentioned in this file and method name is paymentEnquiry.
-                </p>
-                <h3 class="method-title">paymentEnquiry</h3>
-                <div class="syntax-container">
-                  <h4>Method Syntax</h4>
-                  <p>paymentEnquiry(txnRef, merchant)</p>
-                </div>
-                <div class="arguments-detail-container">
-                  <h4>Arguments Detail</h4>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">txnRef</h5>
-                    <ul>
-                      <li>This is transaction reference number.</li>
-                      <li>It is string data type.</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">merchant </h5>
-                    <ul>
-                      <li>This property is for merchant id.</li>
-                      <li>Data type of this property is string</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="method-detail" id="cancelRefundFile">
-                <h3 class="file-title">CancelRefund.php</h3>
-                <p>
-                  This file use is to do the payment cancel refund and to do payment cancel merchant need to pass some details as argument
-                  to the method mentioned in this file and method name is paymentCancellation.
-                </p>
-                <h3 class="method-title">paymentCancellation</h3>
-                <div class="syntax-container">
-                  <h4>Method Syntax</h4>
-                  <p>paymentCancellation(refundNotificationURL, txnRef, rfdRef, amount, currency, merId)</p>
-                </div>
-                <div class="arguments-detail-container">
-                  <h4>Arguments Detail</h4>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">refundNotificationURL </h5>
-                    <ul>
-                      <li>This property data type is string</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">txnRef </h5>
-                    <ul>
-                      <li>This property data type is string</li>
-                      <li>Property value should be transaction reference number.</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">rfdRef</h5>
-                    <ul>
-                      <li>This property data type is string</li>
-                      <li>This is refund number and it must be unique against every refund transaction.</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">amount</h5>
-                    <ul>
-                      <li>This property data type is number</li>
-                      <li>Value of this property should be refund amount</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">currency </h5>
-                    <ul>
-                      <li>This property data type is string</li>
-                      <li>Mentioned currency type against this property.</li>
-                    </ul>
-                  </div>
-                  <div class="arguments-detail">
-                    <h5 class="argument-name">merId</h5>
-                    <ul>
-                      <li>This property data type is string</li>
-                      <li>Value should be merchant id.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </section>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="method-detail" id="paymentEnquiryFile">
+          <h3 class="file-title">PaymentEnquiry.php</h3>
+          <p>
+            This file use is to do the payment enquiry and to do payment enquiry merchant need to pass some details as argument to the
+            method mentioned in this file and method name is paymentEnquiry.
+          </p>
+          <h3 class="method-title">paymentEnquiry</h3>
+          <div class="syntax-container">
+            <h4>Method Syntax</h4>
+            <p>paymentEnquiry(txnRef, merchant)</p>
+          </div>
+          <div class="arguments-detail-container">
+            <h4>Arguments Detail</h4>
+            <div class="arguments-detail">
+              <h5 class="argument-name">txnRef</h5>
+              <ul>
+                <li>This is transaction reference number.</li>
+                <li>It is string data type.</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">merchant </h5>
+              <ul>
+                <li>This property is for merchant id.</li>
+                <li>Data type of this property is string</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="method-detail" id="cancelRefundFile">
+          <h3 class="file-title">CancelRefund.php</h3>
+          <p>
+            This file use is to do the payment cancel refund and to do payment cancel merchant need to pass some details as argument
+            to the method mentioned in this file and method name is paymentCancellation.
+          </p>
+          <h3 class="method-title">paymentCancellation</h3>
+          <div class="syntax-container">
+            <h4>Method Syntax</h4>
+            <p>paymentCancellation(refundNotificationURL, txnRef, rfdRef, amount, currency, merId)</p>
+          </div>
+          <div class="arguments-detail-container">
+            <h4>Arguments Detail</h4>
+            <div class="arguments-detail">
+              <h5 class="argument-name">refundNotificationURL </h5>
+              <ul>
+                <li>This property data type is string</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">txnRef </h5>
+              <ul>
+                <li>This property data type is string</li>
+                <li>Property value should be transaction reference number.</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">rfdRef</h5>
+              <ul>
+                <li>This property data type is string</li>
+                <li>This is refund number and it must be unique against every refund transaction.</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">amount</h5>
+              <ul>
+                <li>This property data type is number</li>
+                <li>Value of this property should be refund amount</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">currency </h5>
+              <ul>
+                <li>This property data type is string</li>
+                <li>Mentioned currency type against this property.</li>
+              </ul>
+            </div>
+            <div class="arguments-detail">
+              <h5 class="argument-name">merId</h5>
+              <ul>
+                <li>This property data type is string</li>
+                <li>Value should be merchant id.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="document-section overview-container" id="codeDetails">
+        <h2 class="document-section-title">4. Code Level Documentation</h2>
+        <p>There are five coding files on which the whole wrapper code is dependant.</p>
+        <div class="method-detail">
+          <h3 class="method-title">Files Names</h3>
+          <ul>
+            <li>Wrapper.Php</li>
+            <li>PaymentPage.php</li>
+            <li>PaymentEnquiry.php</li>
+            <li>CancelRefund.php</li>
+            <li>CallbackNotificationAPI.php</li>
+          </ul>
+        </div>
+        <div class="method-detail">
+          <h3 class="method-title">Details of each Coding Page</h3>
+          <div class="method-detail">
+            <h3 class="method-title">Wrapper.php</h3>
+            <p>
+              This file contains some important methods which help to do Payload encryption, calling API’s, Response decryption, Maintain
+              log data, payment submit, payment enquiry and payment cancel refund.
+            </p>
+            <h4>Code Details of each Method : </h4>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>EncryptPayload(string $requestPayloadJSON): string</b>
+              </h5>
+              <p>This method use to do payload encryption.</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(encryptPayloadMethodCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                    <code [innerHTML]="encryptPayloadMethodCode"></code>
+                  </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>callingAPI(string $resoucePath,string $requestMsg): string</b>
+              </h5>
+              <p>This method use to call API’s</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(callingApiCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                      <code [innerHTML]="callingApiCode"></code>
+                    </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>DecryptResponse(string $EncryptedResponse)</b>
+              </h5>
+              <p>This method helps to decrypt the response message.</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(decryptResponseCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                        <code [innerHTML]="decryptResponseCode"></code>
+                      </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>newPayment($txnRef, $system, $payment, $merchant, $customer, $order, $other)</b>
+              </h5>
+              <p>This method uses to make payment</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(newPaymentCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                          <code [innerHTML]="newPaymentCode"></code>
+                        </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>paymentEnquiry($txnRef, $merchant)</b>
+              </h5>
+              <p>This method uses to do payment enquiry</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(paymentEnquiryCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                            <code [innerHTML]="paymentEnquiryCode"></code>
+                          </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>paymentCancellation($refundNotificationURL, $txnRef, $rfdRef, $amount, $currency, $merId)</b>
+              </h5>
+              <p>This method helps to cancel and refund the payment.</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(cancelPaymentCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                              <code [innerHTML]="cancelPaymentCode"></code>
+                            </pre>
+              </div>
+            </div>
+            <div class="method-detail-sub-container">
+              <h5>
+                <b>logMaintainFunction(string $log_msg)</b>
+              </h5>
+              <p>This method maintain the log of each transaction with time stamp</p>
+              <button title='copy code' class="copy-btn" (click)="copyBtn(logMaintainCode)">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+              </button>
+              <div class="code-view">
+                <pre>
+                                <code [innerHTML]="logMaintainCode"></code>
+                              </pre>
+              </div>
+            </div>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">PaymentPage.php</h3>
+            <p>This file merchant has to call on click of Payment button. It calls newPayment method inside it and returns the
+              response
+            </p>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">PaymentEnquiry.php</h3>
+            <p>This file merchant has to call on click of Payment Enquiry button. It calls paymentEnquiry method inside it and
+              returns the response</p>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">CancelRefund.php</h3>
+            <p>This file merchant has to call on click of Cancel Payment button. It calls paymentCancellation method inside
+              it and resturns the response</p>
+          </div>
+          <div class="method-detail">
+            <h3 class="method-title">CallbackNotificationAPI.php</h3>
+            <p>This is a callback notification API file. This file contains callback notification API code.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-wrapper-integration-detail',
@@ -7,13 +6,23 @@ import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
   styleUrls: ['./wrapper-integration-detail.component.css']
 })
 export class WrapperIntegrationDetailComponent implements OnInit {
-
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  activateGoTop: boolean = false;
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  scrollTop() {
-    this.router.navigate(['wrapperangularNodejsDetail'], { relativeTo: this.route, fragment: 'IntegrationDetails' })
+  scrollToElement(element): void {
+    console.log(element);
+    element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    if (window.scrollY > 500) {
+      this.activateGoTop = true;
+    } else {
+      this.activateGoTop = false;
+    }
   }
 }
